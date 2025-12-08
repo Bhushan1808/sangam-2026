@@ -12,27 +12,37 @@
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root {
-  --background-color: #0e0e0e; /* Background color for the entire website, including individual sections */
-  --default-color: #f8f8ff; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #f8f8ff; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #e2001a; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #0e0e0e; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --background-color: #0e0e0e;
+  /* Background color for the entire website, including individual sections */
+  --default-color: #f8f8ff;
+  /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #f8f8ff;
+  /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #e2001a;
+  /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #0e0e0e;
+  /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff;
+  /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: rgba(
-    255,
-    255,
-    255,
-    0.65
-  ); /* The default color of the main navmenu links */
-  --nav-hover-color: #ffffff; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #212529; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #f82249; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-color: rgba(255,
+      255,
+      255,
+      0.65);
+  /* The default color of the main navmenu links */
+  --nav-hover-color: #ffffff;
+  /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff;
+  /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff;
+  /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #212529;
+  /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #f82249;
+  /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -62,6 +72,10 @@
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
+main{
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--background-color);
   font-family: var(--default-font);
@@ -73,8 +87,15 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Ensures this div is behind other content */
-  pointer-events: none; /* Ensures interactions pass through to other content */
+  z-index: -1;
+  /* Ensures this div is behind other content */
+  pointer-events: none;
+  /* Ensures interactions pass through to other content */
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
 }
 
 a {
@@ -103,10 +124,8 @@ h6 {
 .pulsating-play-btn {
   width: 94px;
   height: 94px;
-  background: radial-gradient(
-    var(--accent-color) 50%,
-    color-mix(in srgb, var(--accent-color), transparent 75%) 52%
-  );
+  background: radial-gradient(var(--accent-color) 50%,
+      color-mix(in srgb, var(--accent-color), transparent 75%) 52%);
   border-radius: 50%;
   display: block;
   position: relative;
@@ -188,7 +207,6 @@ h6 {
   --heading-color: #ffffff;
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 20px 0;
   transition: all 0.5s;
   z-index: 997;
 }
@@ -243,14 +261,22 @@ h6 {
 }
 
 .scrolled .header {
-  box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(180deg, var(--glass-bg), var(--glass-bg-2));
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
 }
 
-/* Global Header on Scroll
-------------------------------*/
-.scrolled .header {
-  --background-color: rgba(1, 8, 33, 0.82);
+/* Remove heavy translucent glass effect on small screens to improve
+   performance and avoid visual noise on mobile devices. */
+@media (max-width: 768px) {
+  .scrolled .header {
+    background: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    /* Provide a simple solid fallback so the header stays visible */
+  }
 }
+
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -273,12 +299,12 @@ h6 {
     position: relative;
   }
 
-  .navmenu > ul > li {
+  .navmenu>ul>li {
     white-space: nowrap;
     padding: 15px 14px;
   }
 
-  .navmenu > ul > li:last-child {
+  .navmenu>ul>li:last-child {
     padding-right: 0;
   }
 
@@ -294,6 +320,7 @@ h6 {
     justify-content: space-between;
     white-space: nowrap;
     transition: 0.3s;
+    transform: translateY(0);
     position: relative;
   }
 
@@ -305,26 +332,38 @@ h6 {
     transition: 0.3s;
   }
 
-  .navmenu > ul > li > a:before {
+  /* Animated underline using transform for smoother, GPU-accelerated animation */
+  .navmenu>ul>li>a::after {
     content: "";
     position: absolute;
     height: 2px;
     bottom: -6px;
     left: 0;
-    background-color: var(--accent-color);
-    visibility: hidden;
-    width: 0px;
-    transition: all 0.3s ease-in-out 0s;
+    right: 0;
+    background: linear-gradient(90deg, var(--accent-color), color-mix(in srgb, var(--accent-color), black 12%));
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 260ms cubic-bezier(.2,.9,.2,1);
+    will-change: transform;
+    opacity: .98;
   }
 
-  .navmenu a:hover:before,
-  .navmenu li:hover > a:before,
-  .navmenu .active:before {
-    visibility: visible;
-    width: 100%;
+  .navmenu a:hover::after,
+  .navmenu li:hover>a::after,
+  .navmenu .active::after {
+    transform: scaleX(1);
   }
 
-  .navmenu li:hover > a,
+  /* Small lift for active/hover state for a subtle 3D feel */
+  .navmenu li:hover>a,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--nav-hover-color);
+    transform: translateY(-3px);
+    transition: color 220ms ease, transform 220ms cubic-bezier(.2,.9,.2,1);
+  }
+
+  .navmenu li:hover>a,
   .navmenu .active,
   .navmenu .active:focus {
     color: var(--nav-hover-color);
@@ -363,11 +402,11 @@ h6 {
 
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
-  .navmenu .dropdown ul li:hover > a {
+  .navmenu .dropdown ul li:hover>a {
     color: var(--nav-dropdown-hover-color);
   }
 
-  .navmenu .dropdown:hover > ul {
+  .navmenu .dropdown:hover>ul {
     opacity: 1;
     top: 100%;
     visibility: visible;
@@ -379,7 +418,7 @@ h6 {
     visibility: hidden;
   }
 
-  .navmenu .dropdown .dropdown:hover > ul {
+  .navmenu .dropdown .dropdown:hover>ul {
     opacity: 1;
     top: 0;
     left: -100%;
@@ -393,9 +432,57 @@ h6 {
     color: var(--nav-color);
     font-size: 28px;
     line-height: 0;
-    margin-right: 10px;
     cursor: pointer;
     transition: color 0.3s;
+    top: 6px
+  }
+
+  /* Animated hamburger icon: create 3 bars using pseudo-elements and
+     animate into an X when `is-active` is present. We hide the icon font
+     glyph (Bootstrap Icons) and draw our own bars for a smooth CSS-only
+     transition. */
+  .mobile-nav-toggle {
+    position: relative;
+    width: 42px;
+    height: 28px;
+    display: inline-block;
+    color: transparent; /* hide the default icon glyph */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-nav-toggle::before,
+  .mobile-nav-toggle::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    height: 3px;
+    background: var(--nav-color, #fff);
+    border-radius: 3px;
+    transition: transform 360ms cubic-bezier(.2,.9,.2,1), opacity 260ms ease, box-shadow 260ms ease;
+    transform-origin: center;
+    top: 50%;
+  }
+
+  /* Use box-shadow on ::before to draw the third (middle) bar and the top/bottom */
+  .mobile-nav-toggle::before {
+    box-shadow: 0 -9px 0 0 var(--nav-color, #fff), 0 9px 0 0 var(--nav-color, #fff);
+  }
+
+  .mobile-nav-toggle::after {
+    opacity: 0;
+    transform: translateY(-50%) scaleX(1) rotate(0deg);
+  }
+
+  /* Active state: rotate one bar and show the other to form an X */
+  .mobile-nav-toggle.is-active::before {
+    transform: rotate(45deg) translateY(-0.5px);
+    box-shadow: none;
+  }
+
+  .mobile-nav-toggle.is-active::after {
+    opacity: 1;
+    transform: rotate(-45deg) translateY(-0.5px);
   }
 
   .navmenu {
@@ -407,21 +494,27 @@ h6 {
     display: none;
     list-style: none;
     position: absolute;
-    inset: 60px 20px 20px 20px;
+    inset: 40px 20px 20px 20px;
     padding: 10px 0;
     margin: 0;
-    border-radius: 6px;
-    background-color: var(--nav-dropdown-background-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-    box-shadow: none;
+    border-radius: 10px;
+    /* Frosted glass background */
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border: 1px solid var(--glass-border, rgba(255,255,255,0.06));
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
+    height: 345px;
+
   }
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-dropdown-color);
+    flex-direction: row-reverse;
+    color: white;
     padding: 10px 20px;
     font-family: var(--nav-font);
     font-size: 17px;
@@ -431,6 +524,7 @@ h6 {
     justify-content: space-between;
     white-space: nowrap;
     transition: 0.3s;
+    transform: translateY(0);
   }
 
   .navmenu a i,
@@ -481,7 +575,7 @@ h6 {
     background-color: rgba(33, 37, 41, 0.1);
   }
 
-  .navmenu .dropdown > .dropdown-active {
+  .navmenu .dropdown>.dropdown-active {
     display: block;
     background-color: rgba(33, 37, 41, 0.03);
   }
@@ -494,8 +588,7 @@ h6 {
     color: #fff;
     position: absolute;
     font-size: 32px;
-    top: 15px;
-    right: 15px;
+    right: 14px;
     margin-right: 0;
     z-index: 9999;
   }
@@ -508,7 +601,7 @@ h6 {
     transition: 0.3s;
   }
 
-  .mobile-nav-active .navmenu > ul {
+  .mobile-nav-active .navmenu>ul {
     display: block;
   }
 }
@@ -517,8 +610,10 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-  color: var(--default-color);
-  background-color: var(--background-color);
+  color: white;
+  background: linear-gradient(180deg, var(--glass-bg), var(--glass-bg-2));
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
   font-size: 14px;
   position: relative;
 }
@@ -720,11 +815,9 @@ h6 {
 
 .page-title:before {
   content: "";
-  background-color: color-mix(
-    in srgb,
-    var(--background-color),
-    transparent 50%
-  );
+  background-color: color-mix(in srgb,
+      var(--background-color),
+      transparent 50%);
   position: absolute;
   inset: 0;
 }
@@ -746,11 +839,11 @@ h6 {
   font-weight: 400;
 }
 
-.page-title .breadcrumbs ol li + li {
+.page-title .breadcrumbs ol li+li {
   padding-left: 10px;
 }
 
-.page-title .breadcrumbs ol li + li::before {
+.page-title .breadcrumbs ol li+li::before {
   content: "/";
   display: inline-block;
   padding-right: 10px;
@@ -770,6 +863,7 @@ section,
 }
 
 @media (max-width: 1199px) {
+
   section,
   .section {
     scroll-margin-top: 76px;
@@ -793,11 +887,52 @@ section,
   position: relative;
 }
 
+/* Glass-style heading: places a small frosted 'glass' panel behind the text
+   so the title appears as a glass label. Apply by adding `class="glass"`
+   to the heading: `<h2 class="glass">Title</h2>` */
+.section-title h2.glass {
+  display: inline-block;
+  position: relative;
+  padding: 8px 18px;
+  border-radius: 12px;
+  color: var(--heading-color);
+  z-index: 2;
+  background-clip: padding-box;
+  isolation: isolate;
+  -webkit-font-smoothing: antialiased;
+  /* keep text crisp on top of the glass */
+  text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+}
+
+.section-title h2.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 0;
+  top: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  /* gentler blur so the text remains legible */
+  backdrop-filter: blur(4px) saturate(120%);
+  -webkit-backdrop-filter: blur(4px) saturate(120%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* On small screens prefer a simpler solid background for readability */
+@media (max-width: 768px) {
+  .section-title h2.glass::before {
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
 .section-title h2:after {
   content: "";
   position: absolute;
   display: block;
-  width: 60px;
+  width: 120px;
   height: 3px;
   background: var(--accent-color);
   left: 0;
@@ -949,23 +1084,30 @@ section,
   padding: 5%;
   margin-bottom: 40px;
   display: flex;
-  flex-direction: column; /* Ensures the heading appears on top */
+  flex-direction: column;
+  /* Ensures the heading appears on top */
   align-items: center;
 }
 
 .md-note-container {
   display: flex;
-  flex-wrap: wrap; /* Ensures responsiveness */
+  flex-wrap: wrap;
+  /* Ensures responsiveness */
   width: 100%;
   max-width: 1200px;
   position: relative;
   align-items: center;
-  background-color: #101215d9;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 12px 40px rgba(6,10,20,0.45);
+  border-radius: 14px;
+  padding: 18px;
 }
 
 .md-image {
   flex: 1;
-  max-width: 50%; /* Limits width to 50% */
+  max-width: 50%;
+  /* Limits width to 50% */
   clip-path: polygon(0 0, 90% 0, 80% 100%, 0% 100%);
   overflow: hidden;
   position: relative;
@@ -974,16 +1116,19 @@ section,
 .md-image img {
   width: 100%;
   height: auto;
-  object-fit: cover; /* Maintains aspect ratio */
+  object-fit: cover;
+  /* Maintains aspect ratio */
 }
 
 .md-note {
   flex: 1;
-  max-width: 50%; /* Limits width to 50% */
+  max-width: 50%;
+  /* Limits width to 50% */
   color: white;
   padding: 2rem;
   border-radius: 8px;
-  margin-left: 1rem; /* Adds spacing between image and note */
+  margin-left: 1rem;
+  /* Adds spacing between image and note */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -1014,17 +1159,21 @@ section,
 /* Responsive Design */
 @media (max-width: 768px) {
   .md-note-container {
-    flex-direction: column; /* Stacks the image and note vertically */
+    flex-direction: column;
+    /* Stacks the image and note vertically */
   }
 
   .md-image,
   .md-note {
-    max-width: 100%; /* Full width for both image and note */
-    margin: 0; /* Removes extra spacing for cleaner stack */
+    max-width: 100%;
+    /* Full width for both image and note */
+    margin: 0;
+    /* Removes extra spacing for cleaner stack */
   }
 
   .md-note {
-    margin-top: 1rem; /* Adds spacing between the image and the note */
+    margin-top: 1rem;
+    /* Adds spacing between the image and the note */
   }
 }
 
@@ -1032,11 +1181,7 @@ section,
 # Schedule Section
 --------------------------------------------------------------*/
 .schedule {
-  /* --background-color: color-mix(
-    in srgb,
-    var(--alt-background-color),
-    transparent 95%
-  ); */
+ overflow: hidden;
 }
 
 .schedule .nav-tabs {
@@ -1080,19 +1225,17 @@ section,
 }
 
 .schedule .nav-tabs a.active {
-  /* background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); */
-  background-image: linear-gradient(
-    to top,
-    #3f51b1 0%,
-    #5a55ae 13%,
-    #7b5fac 25%,
-    #8f6aae 38%,
-    #a86aa4 50%,
-    #cc6b8e 62%,
-    #f18271 75%,
-    #f3a469 87%,
-    #f7c978 100%
-  );
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  background-image: linear-gradient(to top,
+      #3f51b1 0%,
+      #5a55ae 13%,
+      #7b5fac 25%,
+      #8f6aae 38%,
+      #a86aa4 50%,
+      #cc6b8e 62%,
+      #f18271 75%,
+      #f3a469 87%,
+      #f7c978 100%);
   color: #000000;
 }
 
@@ -1116,24 +1259,23 @@ section,
 .schedule .schedule-item {
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid
-    color-mix(in srgb, var(--default-color), transparent 85%);
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
   padding-top: 15px;
   padding-bottom: 15px;
   transition: background-color ease-in-out 0.3s;
 }
 
 .schedule .schedule-item:nth-child(odd) {
-  background-color: rgba(255, 255, 255, 0.05); /* Light shade for odd rows */
+  background-color: rgba(255, 255, 255, 0.05);
+  /* Light shade for odd rows */
 }
 
 .schedule .schedule-item:nth-child(even) {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.1
-  ); /* Slightly darker shade for even rows */
+  background-color: rgba(255,
+      255,
+      255,
+      0.1);
+  /* Slightly darker shade for even rows */
 }
 
 .schedule .schedule-item time {
@@ -1185,116 +1327,8 @@ section,
   }
 }
 
-/*--------------------------------------------------------------
-# Venue Section
---------------------------------------------------------------*/
-.venue .container-fluid {
-  margin-bottom: 3px;
-}
 
-.venue .venue-map iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 300px;
-  padding-left: 60px;
-}
-.venue .venue-map iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 300px;
-  padding-left: 60px;
-}
 
-.venue .venue-info {
-  background: url("../img/venue-gallery/taj-dam-dama-main.jpg") top center
-    no-repeat;
-  background-size: contain; /* Ensure the image covers the section */
-  position: relative;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  min-height: 400px; /* Set a minimum height for better visibility */
-}
-
-.venue .venue-info:before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.venue .venue-info h3 {
-  font-size: 36px;
-  font-weight: 700;
-  text-align: center;
-  color: var(--contrast-color);
-}
-
-/* Adjust layout for screens below 1100px */
-@media (max-width: 1100px) {
-  .venue .row {
-    align-items: center; /* Center align the columns */
-  }
-
-  .venue .venue-map,
-  .venue .venue-info {
-    width: 100%; /* Make sections take full width */
-    padding: 1rem; /* Add some spacing */
-  }
-
-  .venue .venue-info {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-size: contain; /* Ensure the image covers the section */
-    min-height: 450px; /* Increase the minimum height for better visibility */
-  }
-
-  .venue .venue-map iframe {
-    padding-left: 0; /* Remove left padding for smaller screens */
-    min-height: 300px; /* Ensure iframe has a minimum height */
-  }
-}
-
-/* Adjust font size and padding for very small screens (mobile) */
-@media (max-width: 574px) {
-  .venue .venue-info h3 {
-    font-size: 24px;
-  }
-
-  .venue {
-    height: auto; /* Allow content to expand on smaller screens */
-  }
-
-  .venue .venue-info {
-    padding: 40px 1rem; /* Adjust padding on mobile */
-    background-size: contain; /* Ensure the image fits the container */
-    min-height: 400px; /* Maintain a minimum height */
-  }
-}
-
-.venue .venue-info p {
-  color: var(--contrast-color);
-  margin-bottom: 0;
-}
-
-.venue .venue-gallery-container {
-  padding-right: 12px;
-}
-
-.venue .venue-gallery {
-  overflow: hidden;
-  border-right: 3px solid var(--background-color);
-  border-bottom: 3px solid var(--background-color);
-}
-
-.venue .venue-gallery img {
-  transition: all ease-in-out 0.4s;
-}
-
-.venue .venue-gallery:hover img {
-  transform: scale(1.1);
-}
 
 /*--------------------------------------------------------------
 # Gallery Section
@@ -1304,11 +1338,9 @@ section,
 }
 
 .gallery {
-  --background-color: color-mix(
-    in srgb,
-    var(--alt-background-color),
-    transparent 95%
-  );
+  --background-color: color-mix(in srgb,
+      var(--alt-background-color),
+      transparent 95%);
 }
 
 .gallery .nav-tabs {
@@ -1328,9 +1360,19 @@ section,
   border: none;
   border-radius: 50px;
   font-weight: 600;
-  background-color: var(--heading-color);
-  color: #000000;
   padding: 10px 100px;
+  /* Use the same frosted "form-card"/MD container background */
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  /* stronger yellow rim so it's visible on dark backgrounds */
+  box-shadow: 0 12px 40px rgba(6,10,20,0.45), 0 0 28px rgba(255,200,80,0.14);
+  color: var(--default-color);
+  transition: transform 180ms ease, box-shadow 220ms ease, backdrop-filter 220ms ease;
+}
+
+.gallery .nav-tabs a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 56px rgba(6,10,20,0.55), 0 0 64px rgba(255,200,80,0.26);
 }
 
 @media (max-width: 991px) {
@@ -1351,21 +1393,41 @@ section,
   }
 }
 
+/* On small screens, avoid heavy backdrop-filter for readability and performance */
+@media (max-width: 768px) {
+  .gallery .nav-tabs a,
+  .gallery .nav-tabs a.active {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
 .gallery .nav-tabs a.active {
-  /* background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); */
-  background-image: linear-gradient(
-    to top,
-    #3f51b1 0%,
-    #5a55ae 13%,
-    #7b5fac 25%,
-    #8f6aae 38%,
-    #a86aa4 50%,
-    #cc6b8e 62%,
-    #f18271 75%,
-    #f3a469 87%,
-    #f7c978 100%
-  );
-  color: #000000;
+  color: red;
+  /* Reddish frosted active state with glowing pulse */
+  background: linear-gradient(180deg, rgba(255,90,90,0.10), rgba(255,50,50,0.05));
+  border: 1px solid rgba(255,90,90,0.16);
+  /* stronger colored glow + base shadow */
+  box-shadow: 0 8px 34px rgba(255,70,70,0.18), 0 22px 64px rgba(6,10,20,0.52), 0 0 48px rgba(255,70,70,0.22);
+  color: var(--default-color);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  transform: translateY(-2px);
+  position: relative;
+  z-index: 3;
+  animation: glow-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0% {
+    box-shadow: 0 8px 34px rgba(255,70,70,0.14), 0 22px 64px rgba(6,10,20,0.48), 0 0 28px rgba(255,70,70,0.14);
+  }
+  50% {
+    box-shadow: 0 12px 44px rgba(255,80,80,0.26), 0 28px 86px rgba(6,10,20,0.6), 0 0 56px rgba(255,80,80,0.36);
+  }
+  100% {
+    box-shadow: 0 8px 34px rgba(255,70,70,0.14), 0 22px 64px rgba(6,10,20,0.48), 0 0 28px rgba(255,70,70,0.14);
+  }
 }
 
 .gallery .swiper-wrapper {
@@ -1415,38 +1477,46 @@ section,
   display: block;
   width: 100%;
 }
+
 .carousel__prev,
 .carousel__next {
   position: absolute;
   bottom: -15%;
   transition: transform 0.25s ease;
 }
+
 .carousel__prev i,
 .carousel__next i {
   font-size: 60px;
   color: var(--box-border);
   cursor: pointer;
 }
+
 .carousel__prev:hover,
 .carousel__next:hover {
   transform: scale(1.25);
 }
+
 .carousel__prev {
   left: 40%;
 }
+
 .carousel__next {
   right: 40%;
 }
+
 .carousel__body {
   width: 100%;
   padding: 20px 0 70px 0;
   overflow: hidden;
 }
+
 .carousel__body .carousel__slider {
   position: relative;
   transition: transform 1s ease-in-out;
   background: var(--crsl-bg);
 }
+
 .carousel__body .carousel__slider__item {
   position: relative;
   display: block;
@@ -1454,6 +1524,7 @@ section,
   margin-left: 20px;
   margin-right: 20px;
 }
+
 .carousel__body .carousel__slider__item .item__3d-frame {
   position: relative;
   width: 100%;
@@ -1462,6 +1533,7 @@ section,
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
+
 .carousel__body .carousel__slider__item .item__3d-frame:after {
   content: "";
   position: absolute;
@@ -1473,6 +1545,7 @@ section,
   transform: rotateX(90deg) translate3d(0px, -20px, 0px);
   opacity: 0.85;
 }
+
 .carousel__body .carousel__slider__item .item__3d-frame__box {
   display: flex;
   align-items: center;
@@ -1485,22 +1558,26 @@ section,
   background: var(--box-bg);
   border-width: 3px;
 }
+
 .carousel__body .carousel__slider__item .item__3d-frame__box h1 {
   font-size: 7em;
   width: 100%;
   color: var(--box-border);
 }
+
 .carousel__body .carousel__slider__item .item__3d-frame__box--right,
 .carousel__body .carousel__slider__item .item__3d-frame__box--left {
   top: 0;
   width: 40px;
   backface-visibility: hidden;
 }
+
 .carousel__body .carousel__slider__item .item__3d-frame__box--left {
   left: 0;
   transform: translate3d(1px, 0, -40px) rotateY(-90deg);
   transform-origin: 0%;
 }
+
 .carousel__body .carousel__slider__item .item__3d-frame__box--right {
   right: 0;
   transform: translate3d(-1px, 0, -40px) rotateY(90deg);
@@ -1536,6 +1613,7 @@ section,
     gap: 10px;
   }
 }
+
 .countdown__data {
   display: flex;
   flex-direction: row;
@@ -1553,6 +1631,7 @@ section,
     margin-bottom: 1rem;
   }
 }
+
 .countdown__input {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1567,6 +1646,7 @@ section,
   border-radius: 10px;
   font-family: Poppins;
 }
+
 .countdown__button {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1583,14 +1663,17 @@ section,
   transition-property: color, background-color;
   transition-duration: 300ms;
 }
+
 .countdown__button:hover {
   background-color: #ffffff;
   color: #000000;
 }
+
 .countdown__item {
   display: flex;
   flex-direction: column;
 }
+
 .countdown__number {
   display: flex;
   justify-content: center;
@@ -1616,92 +1699,61 @@ section,
     height: 60px;
   }
 }
+
 .countdown__info {
   font-size: 24px;
   color: #ffffff;
   text-align: center;
 }
 
-/* Team Member Section */
 
-.team-section {
-  text-align: center;
+.venue-gallery {
+  overflow-x: hidden;
 }
 
-.team-section h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.team-container {
+.venue-gallery-ul {
+  padding-left: 1rem;
+  list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
 }
 
-.team-member {
-  background-color: #101215d9;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  width: calc(25% - 20px);
-  transition: transform 0.3s ease;
+.venue-gallery-li {
+  flex-shrink: 0;
+  width: clamp(500px, 25vw, 800px);
+  padding-right: 1rem;
 }
 
-.team-member:hover {
-  transform: translateY(-10px);
+.venue-img {
+  width: 100%;
+  height: auto;
+  background: #f0f0f0;
 }
 
-.team-member img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-  border: 3px solid #fff;
+.venue-gallery-section:not(.last) {
+  padding-bottom: 1rem;
 }
 
-.team-member h3 {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
+/* Performance mode: reduce visual effects while game is playing to avoid jank */
+.performance-mode {
+  /* reduce paint cost */
+  --reduce-transitions: none !important;
+}
+.performance-mode * {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+.performance-mode .form-card,
+.performance-mode .gallery .nav-tabs a,
+.performance-mode .header.scrolled,
+.performance-mode .score-pill,
+.performance-mode [style*="backdrop-filter"],
+.performance-mode [style*="-webkit-backdrop-filter"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
 }
 
-.team-member p {
-  font-size: 1rem;
-  color: #b0b0b0;
-}
-
-@media (max-width: 1200px) {
-  .team-member {
-    width: calc(25% - 20px);
-  }
-}
-
-@media (max-width: 992px) {
-  .team-member {
-    width: calc(33.33% - 20px);
-  }
-}
-
-@media (max-width: 768px) {
-  .team-member {
-    width: calc(50% - 20px);
-  }
-
-  .team-member img {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-@media (max-width: 480px) {
-  .team-member {
-    width: 100%;
-  }
-
-  .team-member img {
-    width: 80px;
-    height: 80px;
-  }
+/* When in performance mode, we also reduce shadow blurs that can cost GPU */
+.performance-mode * {
+  box-shadow: none !important;
 }

@@ -1,0 +1,92 @@
+/* Modern team member cards */
+.team-section .team-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  align-items: stretch;
+  padding: 20px 10px 40px;
+}
+
+.team-section .team-member {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.04);
+  /* Use flex-basis to avoid conflicts with other stylesheets that set width */
+  width: auto !important;
+  flex: 0 0 220px;
+  padding: 18px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease, background 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-section .team-member img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  transition: transform 0.45s ease;
+  display: block;
+}
+
+.team-section .team-member h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+.team-section .team-member .role {
+  font-size: 0.85rem;
+  color: #cfcfcf;
+  text-align: center;
+}
+
+.team-section .team-member:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+}
+
+.team-section .team-member:hover img {
+  transform: translateY(-4px) scale(1.03);
+}
+
+/* small badge overlay */
+.team-section .team-member .badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 6px 8px;
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+}
+
+@media (max-width: 768px) {
+  .team-section .team-member {
+    width: calc(50% - 20px);
+    padding: 14px;
+  }
+
+  .team-section .team-member img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-section .team-member {
+    width: 100%;
+  }
+}

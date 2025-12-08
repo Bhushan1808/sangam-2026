@@ -1,0 +1,123 @@
+/* Modern schedule/table styles
+   - Card-like rows with a compact time column, agenda center, presenter info on the right
+   - Responsive: stacks on small screens
+   - Hover lift + subtle left accent color
+*/
+
+.schedule-header {
+  margin-bottom: 0.75rem;
+}
+
+.schedule-header h3 {
+  color: #4a4a4a;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Container selector: target rows inside a section that likely wraps schedule */
+.schedule .schedule-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.9rem;
+  box-shadow: 0 6px 18px rgba(12, 20, 34, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  border-left: 6px solid rgba(226, 0, 26, 0.09);
+}
+
+.schedule .schedule-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(12, 20, 34, 0.12);
+}
+
+.schedule .schedule-item time {
+  display: block;
+  font-weight: 700;
+  color: #e2001a;
+  font-size: 0.98rem;
+}
+
+/* Make the left column (time) compact */
+.schedule .schedule-item > .col-3:first-child,
+.schedule .schedule-item > .col-3:nth-child(1) {
+  flex: 0 0 130px;
+  max-width: 130px;
+}
+
+/* Center column (agenda) grows */
+.schedule .schedule-item > .col-5,
+.schedule .schedule-item > .col-md-6 {
+  flex: 1 1 auto;
+}
+
+/* Right column (presenter/location) */
+.schedule .schedule-item .info-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 0 0 220px;
+  max-width: 220px;
+}
+
+.schedule .schedule-item .location-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(12, 20, 34, 0.06);
+}
+
+.schedule .schedule-item .info-section .location {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Small screens: stack and allow full width */
+@media (max-width: 767.98px) {
+  .schedule .schedule-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.85rem;
+  }
+
+  .schedule .schedule-item > .col-3:first-child,
+  .schedule .schedule-item > .col-3:nth-child(1),
+  .schedule .schedule-item .info-section {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .schedule .schedule-item .info-section {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Accessibility: respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .schedule .schedule-item,
+  .schedule .schedule-item:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Slightly style the schedule container for contrast */
+.schedule {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+/* Header row visual tweak */
+.schedule-header {
+  padding: 0.35rem 0.6rem;
+}
+
+.schedule-header .location {
+  text-align: left;
+}

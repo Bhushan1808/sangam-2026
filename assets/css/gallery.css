@@ -1,0 +1,133 @@
+/* Gallery styles: make ThrowBack carousel match Venue gallery horizontal card layout
+   This maps the existing carousel markup to a horizontal scrolling list similar to .venue-gallery.
+*/
+
+/* Make the carousel slider behave like a horizontal gallery */
+.carousel__body .carousel__slider {
+  display: flex;
+  gap: 1rem;
+  padding-left: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel__body .carousel__slider__item {
+  flex: 0 0 clamp(420px, 30vw, 780px);
+  width: clamp(420px, 30vw, 780px);
+  scroll-snap-align: center;
+  margin: 0; /* spacing handled by gap */
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* Simplify the 3D frame to a clean card */
+.carousel__body .carousel__slider__item .item__3d-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(12,20,34,0.08);
+  background: #f7f7f7;
+  transform: none !important;
+}
+
+/* Hide the 3D side boxes (left/right) */
+.carousel__body .carousel__slider__item .item__3d-frame__box--left,
+.carousel__body .carousel__slider__item .item__3d-frame__box--right {
+  display: none !important;
+}
+
+/* Front box holds the image/link */
+.carousel__body .carousel__slider__item .item__3d-frame__box--front {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.carousel__body .carousel__slider__item .item__3d-frame__box--front img,
+.carousel__body .carousel__slider__item .item__3d-frame__box--front a img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Provide a subtle caption overlay if desired */
+.carousel__body .carousel__slider__item .caption {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  right: 12px;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.35));
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  display: none;
+}
+
+/* Hide prev/next big controls on small screens (they were positioned oddly) */
+@media (max-width: 900px) {
+  .carousel__prev, .carousel__next { display: none; }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .carousel__body .carousel__slider { scroll-behavior: auto; }
+  .carousel__body .carousel__slider__item { transition: none !important; }
+}
+
+/* Thin variant of the venue cover used for throwback carousel containers */
+.carousel-container {
+  position: relative;
+  width: 80%;
+  height: 90vh;
+  min-height: 220px;
+  overflow: hidden;
+  display: block;
+}
+
+.carousel-container .vc-slide {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.carousel-container .vc-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.28) 60%, rgba(0,0,0,0.48) 100%);
+  pointer-events: none;
+}
+
+.carousel-container .vc-dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  display: flex;
+  gap: 8px;
+  z-index: 6;
+}
+.carousel-container .vc-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.28);
+  cursor: pointer;
+}
+.carousel-container .vc-dots button.active { background: #fff; }
+
+@media (max-width: 768px) {
+  .carousel-container { height: 40vh; }
+}
+

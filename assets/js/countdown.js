@@ -1,7 +1,7 @@
 let countdownTicRef = null;
 
-// Set the deadline date to 10 January 2025
-const deadlineDate = new Date("2025-01-10T11:00:00").toISOString();
+// Set the deadline date to 9 January 2026
+const deadlineDate = new Date("2026-01-10T11:00:00").toISOString();
 function getTimeRemaining(date) {
   const time = Date.parse(date) - new Date().getTime(),
     days = Math.floor(time / 1000 / 60 / 60 / 24),
@@ -33,10 +33,50 @@ function updateTimer() {
     return;
   }
 
-  document.getElementById("days").textContent = getZero(time.days);
-  document.getElementById("hours").textContent = getZero(time.hours);
-  document.getElementById("minutes").textContent = getZero(time.minutes);
-  document.getElementById("seconds").textContent = getZero(time.seconds);
+  // Animate changes with a simple flip effect
+  updateDigitWithFlip('days', getZero(time.days));
+  updateDigitWithFlip('hours', getZero(time.hours));
+  updateDigitWithFlip('minutes', getZero(time.minutes));
+  updateDigitWithFlip('seconds', getZero(time.seconds));
+}
+
+// Keep previous values to detect change
+const _prev = { days: null, hours: null, minutes: null, seconds: null };
+
+function updateDigitWithFlip(id, newValue) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const parent = el.parentElement; // .countdown__number
+  if (!_prev[id] || _prev[id] !== newValue) {
+    // create a "new" element for the incoming digit
+    const incoming = document.createElement('div');
+    incoming.className = 'new';
+    incoming.textContent = newValue;
+    // for accessibility set aria-live on parent
+    parent.setAttribute('aria-live', 'polite');
+
+    // start flip: add flip class to parent which animates current down
+    parent.classList.add('flip');
+    parent.appendChild(incoming);
+
+    // force reflow then show incoming
+    // eslint-disable-next-line no-unused-expressions
+    incoming.offsetHeight;
+    incoming.classList.add('show');
+
+    // after animation, remove old text and incoming's wrapper
+    setTimeout(() => {
+      // replace the inner (there may be multiple divs, keep only one)
+      el.textContent = newValue;
+      // clean up temporary incoming node(s)
+      const tmp = parent.querySelectorAll('.new');
+      tmp.forEach(n => n.remove());
+      parent.classList.remove('flip');
+    }, 520);
+
+    _prev[id] = newValue;
+  }
+
 }
 
 function handleResize() {

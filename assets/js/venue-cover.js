@@ -1,0 +1,96 @@
+// venue-cover.js
+// Creates a crossfade slideshow inside #venue-cover using GSAP
+(function () {
+  if (typeof gsap === 'undefined') {
+    console.warn('GSAP not found — venue cover will not animate');
+    return;
+  }
+
+  const images = [
+    'assets/img/venue-gallery/venue-1.jpg',
+    'assets/img/venue-gallery/venue-2.jpg',
+    'assets/img/venue-gallery/venue-3.jpg',
+     'assets/img/venue-gallery/venue-4.jpg',
+    'assets/img/venue-gallery/venue-5.jpg',
+    'assets/img/venue-gallery/venue-6.jpg',
+  ];
+
+  const cover = document.getElementById('venue-cover');
+  if (!cover) return;
+
+  // create slides
+  images.forEach((src, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'vc-slide';
+    slide.style.backgroundImage = `url(${src})`;
+    slide.setAttribute('data-index', i);
+    cover.appendChild(slide);
+  });
+
+  // overlay, content, dots
+  const overlay = document.createElement('div');
+  overlay.className = 'vc-overlay';
+  cover.appendChild(overlay);
+
+  const content = document.createElement('div');
+  content.className = 'vc-content';
+  content.innerHTML = `
+    <div class="vc-title">Courtyard by Marriott Aravali Resort</div>
+    <div class="vc-subtitle">Venue for WIN Sangam 2026</div>
+    <a class="vc-cta" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Courtyard+by+Marriott+Aravali+Resort">Visit on map</a>
+  `;
+  cover.appendChild(content);
+
+  const dots = document.createElement('div');
+  dots.className = 'vc-dots';
+  cover.appendChild(dots);
+
+  const slides = Array.from(cover.querySelectorAll('.vc-slide'));
+  slides.forEach((s, idx) => {
+    const btn = document.createElement('button');
+    btn.setAttribute('data-idx', idx);
+    btn.addEventListener('click', () => goto(idx));
+    dots.appendChild(btn);
+  });
+
+  let current = 0;
+  const t = gsap.timeline({ paused: true });
+
+  // initial show
+  gsap.set(slides, { autoAlpha: 0 });
+  gsap.set(slides[0], { autoAlpha: 1 });
+  updateDots();
+
+  function updateDots() {
+    dots.querySelectorAll('button').forEach((b, i) => {
+      b.classList.toggle('active', i === current);
+    });
+  }
+
+  function goto(idx) {
+    if (idx === current) return;
+    const from = slides[current];
+    const to = slides[idx];
+    gsap.timeline()
+      .to(from, { autoAlpha: 0, duration: 0.8, ease: 'power2.out' })
+      .fromTo(to, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, ease: 'power2.out' });
+    current = idx;
+    updateDots();
+    resetAuto();
+  }
+
+  // auto-advance
+  let autoId;
+  function startAuto() {
+    stopAuto();
+    autoId = setInterval(() => {
+      const next = (current + 1) % slides.length;
+      goto(next);
+    }, 3500);
+  }
+  function stopAuto() { if (autoId) { clearInterval(autoId); autoId = null; } }
+  function resetAuto() { startAuto(); }
+
+
+  startAuto();
+})();
