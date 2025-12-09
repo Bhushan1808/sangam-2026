@@ -64,7 +64,11 @@
   const preloader = document.querySelector("#preloader");
   if (preloader) {
     window.addEventListener("load", () => {
-      preloader.remove();
+      // Add a hidden class to allow CSS fade-out, then remove from DOM
+      preloader.classList.add('preloader--hidden');
+      setTimeout(() => {
+        if (preloader && preloader.parentNode) preloader.parentNode.removeChild(preloader);
+      }, 520);
     });
   }
 

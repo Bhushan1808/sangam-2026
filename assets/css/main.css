@@ -721,36 +721,70 @@ h6 {
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
+/* Modern preloader */
 #preloader {
   position: fixed;
   inset: 0;
   z-index: 999999;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--background-color);
-  transition: all 0.6s ease-out;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
 }
 
-#preloader:before {
-  content: "";
-  position: fixed;
-  top: calc(50% - 30px);
-  left: calc(50% - 30px);
-  border: 6px solid #ffffff;
-  border-color: var(--accent-color) transparent var(--accent-color) transparent;
+#preloader.preloader--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modern-loader {
+  text-align: center;
+  color: var(--accent-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.preloader-logo {
+  width: 64px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+}
+
+.loader-dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-dots span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--accent-color);
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: animate-preloader 1.5s linear infinite;
+  opacity: 0.8;
+  transform: translateY(0);
+  animation: preloader-bounce 0.9s infinite cubic-bezier(.2,.7,.2,1);
+}
+.loader-dots span:nth-child(2) { animation-delay: 0.12s }
+.loader-dots span:nth-child(3) { animation-delay: 0.24s }
+
+@keyframes preloader-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.6 }
+  40% { transform: translateY(-12px); opacity: 1 }
 }
 
-@keyframes animate-preloader {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+.loader-text {
+  font-size: 13px;
+  color: var(--muted-color, rgba(255,255,255,0.9));
+  letter-spacing: 0.08em;
+  opacity: 0.9;
 }
 
 /*--------------------------------------------------------------
