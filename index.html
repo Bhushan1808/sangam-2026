@@ -1437,7 +1437,20 @@
     .podium-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
     .podium-score { font-size: 0.95rem; color: #ffd36b; font-weight: 700; }
     .leaderboard-list { list-style:none; padding:0; margin: 8px 0 0 0; }
-    .leaderboard-list li { display:flex; gap:12px; align-items:center; padding:10px; border-radius:10px; margin-bottom:8px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); }
+    .leaderboard-list li {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:10px;
+      border-radius:10px;
+      margin-bottom:8px;
+      background: rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.03);
+      transition: filter .18s ease, opacity .18s ease, transform .18s ease, background .12s ease;
+          backdrop-filter: blur(12px) saturate(130%);
+      -webkit-backdrop-filter: blur(12px) saturate(130%);
+    }
+
     .leaderboard-list .rank { width:36px; font-weight:700; color:#ffd36b; }
     .leaderboard-list .name { flex:1; color:#e6e6e6; font-weight:600; }
     .leaderboard-list .score { font-weight:700; color:#fff; }
