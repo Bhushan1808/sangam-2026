@@ -7,12 +7,18 @@
   }
 
   const images = [
-    'assets/img/venue-gallery/venue-1.jpg',
-    'assets/img/venue-gallery/venue-2.jpg',
-    'assets/img/venue-gallery/venue-3.jpg',
-     'assets/img/venue-gallery/venue-4.jpg',
-    'assets/img/venue-gallery/venue-5.jpg',
-    'assets/img/venue-gallery/venue-6.jpg',
+    'assets/img/venue-gallery/main.jfif',
+    'assets/img/venue-gallery/main-2.jfif',
+    'assets/img/venue-gallery/pool.jfif',
+     'assets/img/venue-gallery/bar.jfif',
+     'assets/img/venue-gallery/dining.jfif',
+     'assets/img/venue-gallery/bar-2.jfif',
+          'assets/img/venue-gallery/dining-2.jfif',
+
+      'assets/img/venue-gallery/room.jfif',
+            'assets/img/venue-gallery/balcony.jfif',
+
+
   ];
 
   const cover = document.getElementById('venue-cover');
