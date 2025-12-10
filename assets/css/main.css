@@ -14,9 +14,9 @@
 :root {
   --background-color: #0e0e0e;
   /* Background color for the entire website, including individual sections */
-  --default-color: #f8f8ff;
+  --default-color: black;
   /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #f8f8ff;
+  --heading-color: black;
   /* Color for headings, subheadings and title throughout the website */
   --accent-color: #e2001a;
   /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
@@ -28,12 +28,9 @@
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: rgba(255,
-      255,
-      255,
-      0.65);
+  --nav-color: black;
   /* The default color of the main navmenu links */
-  --nav-hover-color: #ffffff;
+  --nav-hover-color: black;
   /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff;
   /* Used as the background color for mobile navigation menu */
@@ -618,7 +615,7 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-  color: white;
+  color: black;
   background: linear-gradient(180deg, var(--glass-bg), var(--glass-bg-2));
   backdrop-filter: blur(12px) saturate(130%);
   -webkit-backdrop-filter: blur(12px) saturate(130%);
@@ -1174,6 +1171,8 @@ section,
   box-shadow: 0 12px 40px rgba(6,10,20,0.45);
   border-radius: 14px;
   padding: 18px;
+  backdrop-filter: blur(12px) saturate(130%);
+      -webkit-backdrop-filter: blur(12px) saturate(130%);
 }
 
 .md-image {
@@ -1254,6 +1253,7 @@ section,
 --------------------------------------------------------------*/
 .schedule {
  overflow: hidden;
+ 
 }
 
 .schedule .nav-tabs {
@@ -1267,6 +1267,7 @@ section,
 .schedule .nav-tabs li {
   display: inline-block;
   padding: 10px;
+ 
 }
 
 .schedule .nav-tabs a {
@@ -1335,6 +1336,8 @@ section,
   padding-top: 15px;
   padding-bottom: 15px;
   transition: background-color ease-in-out 0.3s;
+   backdrop-filter: blur(12px) saturate(130%);
+      -webkit-backdrop-filter: blur(12px) saturate(130%);
 }
 
 .schedule .schedule-item:nth-child(odd) {
