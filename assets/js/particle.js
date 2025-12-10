@@ -92,8 +92,8 @@
 				brokenLinesLengthPercentage: 0.5,
 
 				/*** These ones have to be arrays of [min,max].  ***/
-				lightStickWidth: [0.02, 0.05],
-				lightStickHeight: [0.3, 0.7],
+				lightStickWidth: [0.5, 2],
+				lightStickHeight: [0.7, 2],
 
 				movingAwaySpeed: [20, 50],
 				movingCloserSpeed: [-150, -230],
@@ -101,11 +101,11 @@
 				/****  Anything below can be either a number or an array of [min,max] ****/
 
 				// Length of the lights. Best to be less than total length
-				carLightsLength: [400 * 0.05, 400 * 0.2],
+				carLightsLength: [800 * 0.05, 800 * 0.2],
 				// Radius of the tubes
-				carLightsRadius: [0.03, 0.08],
+				carLightsRadius: [0.03, 0.1],
 				// Width is percentage of a lane. Numbers from 0 to 1
-				carWidthPercentage: [0.1, 0.5],
+				carWidthPercentage: [0.1, 0.9],
 				// How drunk the driver is.
 				// carWidthPercentage's max + carShiftX's max -> Cannot go over 1. 
 				// Or cars start going into other lanes 
@@ -116,12 +116,12 @@
 				colors: {
 					roadColor: 0x080808,
 					islandColor: 0x0a0a0a,
-					background: 0x000000,
+					background: 0xffffff,
 					shoulderLines: 0x131318,
 					brokenLines: 0x131318,
 					/***  Only these colors can be an array ***/
 					leftCars: [0x7D0D1B, 0xA90519, 0xff102a],
-					rightCars: [0xF1EECE, 0xE6E2B1, 0xDFD98A],
+					rightCars: [0x7D0D1B, 0xA90519, 0xff102a],
 					sticks: 0xF1EECE,
 				}
 			};
