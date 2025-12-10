@@ -71,13 +71,17 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+      <!-- Theme toggle -->
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <i id="theme-toggle-icon" class="bi"></i>
+      </button>
     </div>
   </header>
 
   <div id="visual-container"></div>
   <main class="main">
     <section id="hero" class="hero section dark-background">
-      <img loading="lazy" src="assets/img/sangam-2025-theme.jpg" alt="" data-aos="fade-in" class="theme-photo" />
+      <!-- <img loading="lazy" src="assets/img/sangam-2025-theme.jpg" alt="" data-aos="fade-in" class="theme-photo" /> -->
       <img loading="lazy" src="assets/img/mobile-theme-image.jpg" alt="" data-aos="fade-in"
         class="mobile-theme-photo" />
       <style>
@@ -211,7 +215,7 @@
 
         <div class="tab-content row justify-content-center" <!-- Schdule Day 1 -->
           <div role="tabpanel" class="col-lg-10 tab-pane fade show active" id="day-1"
-            style="background-color: #101215d9; border-radius: 8px">
+            style=" border-radius: 8px">
             <div class="row align-items-center schedule-header">
               <div class="col-3 col-md-3">
                 <h3><strong>Timing</strong></h3>
@@ -321,7 +325,7 @@
 
           <!-- Schdule Day 2 -->
           <div role="tabpanel" class="col-lg-10 tab-pane fade" id="day-2"
-            style="background-color: #101215d9; border-radius: 8px">
+            style=" border-radius: 8px">
             <div class="row schedule-item align-items-center schedule-header">
               <div class="col-3 col-md-3">
                 <h3><strong>Timing</strong></h3>
@@ -538,7 +542,7 @@
           <!-- Schdule Day 3 -->
 
           <div role="tabpanel" class="col-lg-10 tab-pane fade" id="day-3"
-            style="background-color: #101215d9; border-radius: 8px">
+            style=" border-radius: 8px">
             <div class="row align-items-center schedule-header">
               <div class="col-3 col-md-3">
                 <h3><strong>Timing</strong></h3>
@@ -1297,7 +1301,7 @@
             .info-message {
               margin-top: 20px;
               padding: 10px 15px;
-              color: #f2f2f2;
+              color: gray;
               /* Light color for better contrast */
               font-size: 0.95rem;
               line-height: 1.4;
@@ -1397,26 +1401,28 @@
       text-align: center;
       position: relative;
       overflow: visible;
+          backdrop-filter: blur(12px) saturate(130%);
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
     }
 
     .leaderboard-stage { margin-bottom: 14px; }
     .podium { display: flex; align-items: flex-end; justify-content: center; gap: 14px; margin-bottom: 8px; padding: 6px 6px 0 6px; }
     .podium-item {
-      width: 130px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border-radius: 10px;
-      padding: 8px 10px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.02);
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      backdrop-filter: blur(12px) saturate(130%);
-      -webkit-backdrop-filter: blur(12px) saturate(130%);
-      border: 1px solid rgba(255,255,255,0.06);
-      overflow: hidden;
+    width: 130px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    border-radius: 10px;
+    padding: 8px 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    backdrop-filter: blur(12px) saturate(130%);
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
+    /* border: 1px solid rgba(255, 255, 255, 0.06); */
+    overflow: hidden;
     }
 
     .podium-item::before {
@@ -1434,7 +1440,7 @@
     .podium-3 { height: 110px; transform: translateY(8px); }
     .podium-rank { font-weight: 800; font-size: 22px; background: linear-gradient(90deg,#ffd36b,#ff7b7b); color: #111; padding: 6px 10px; border-radius: 999px; box-shadow: 0 8px 20px rgba(255,100,100,0.08); margin-bottom: 8px; }
     .podium-body { text-align: center; }
-    .podium-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .podium-name { font-size: 1rem; font-weight: 700; color: black; margin-bottom: 6px; }
     .podium-score { font-size: 0.95rem; color: #ffd36b; font-weight: 700; }
     .leaderboard-list { list-style:none; padding:0; margin: 8px 0 0 0; }
     .leaderboard-list li {
@@ -1449,10 +1455,11 @@
       transition: filter .18s ease, opacity .18s ease, transform .18s ease, background .12s ease;
           backdrop-filter: blur(12px) saturate(130%);
       -webkit-backdrop-filter: blur(12px) saturate(130%);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.02);
     }
 
     .leaderboard-list .rank { width:36px; font-weight:700; color:#ffd36b; }
-    .leaderboard-list .name { flex:1; color:#e6e6e6; font-weight:600; }
+    .leaderboard-list .name { flex:1; color:black; font-weight:600; }
     .leaderboard-list .score { font-weight:700; color:#fff; }
     .refresh-btn { margin-top: 12px; padding: 10px 18px; border-radius:8px; }
     @media (max-width: 800px) { .podium { gap:10px; } .podium-item { width: 30%; } .podium-1 { height: 140px; } .podium-2, .podium-3 { height: 120px; } .leaderboard { padding: 14px; } }
@@ -1629,18 +1636,18 @@
     //   start: 'top 85%'
     // });
     
-    gsap.from('.team-section .team-member', {
-      y: 30,
-      autoAlpha: 0,
-      duration: 0.8,
-      ease: 'power2.out',
-      stagger: 0.08,
-      scrollTrigger: {
-        trigger: '.team-section',
-        start: 'top 85%',
-        toggleActions: 'play none none reverse'
-      }
-    });
+    // gsap.from('.team-section .team-member', {
+    //   y: 30,
+    //   autoAlpha: 0,
+    //   duration: 0.8,
+    //   ease: 'power2.out',
+    //   stagger: 0.08,
+    //   scrollTrigger: {
+    //     trigger: '.team-section',
+    //     start: 'top 85%',
+    //     toggleActions: 'play none none reverse'
+    //   }
+    // });
     
     // // Gallery section animations
     // gsap.from('#gallery .section-title', {
