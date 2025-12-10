@@ -1381,84 +1381,47 @@
 
   <!-- Leaderboard (moved beneath game) -->
   <style>
-    /* Leaderboard Styles — podium + list */
-    .leaderboard {
-      width: 520px;
-      max-width: 96%;
-      margin: 18px auto;
-      padding: 20px;
-      /* Match glassy card used by the game form */
+    /* Dark, compact leaderboard with frosted glass container and blurred inner items */
+    .leaderboard{
+      width:560px; max-width:96%; margin:22px auto; padding:18px;
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.04);
-      color: #fff;
-      border-radius: 14px;
-      box-shadow: 0 12px 40px rgba(6,10,20,0.45);
-      font-family: "Poppins", sans-serif;
-      text-align: center;
-      position: relative;
-      overflow: visible;
+      border-radius:14px; color:#e6eef8; box-shadow:0 8px 30px rgba(4,8,20,0.6); font-family: 'Poppins', system-ui, sans-serif;
+      border:1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
     }
+    .leaderboard h2{ margin:0 0 20px 0; font-size:20px; color:#e6eef8; text-align:center }
 
-    .leaderboard-stage { margin-bottom: 14px; }
-    .podium { display: flex; align-items: flex-end; justify-content: center; gap: 14px; margin-bottom: 8px; padding: 6px 6px 0 6px; }
-    .podium-item {
-      width: 130px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      border-radius: 10px;
-      padding: 8px 10px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.02);
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      backdrop-filter: blur(12px) saturate(130%);
-      -webkit-backdrop-filter: blur(12px) saturate(130%);
-      border: 1px solid rgba(255,255,255,0.06);
-      overflow: hidden;
-    }
+    .leaderboard-stage{ margin-bottom:14px }
+    .podium{ display:flex; align-items:end; justify-content:center; gap:14px }
 
-    .podium-item::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 10px;
-      pointer-events: none;
-      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 35%, rgba(255,255,255,0) 60%);
-      mix-blend-mode: overlay;
-      opacity: 0.95;
-    }
-    .podium-1 { height: 160px; transform: translateY(-8px); }
-    .podium-2 { height: 130px; transform: translateY(4px); }
-    .podium-3 { height: 110px; transform: translateY(8px); }
-    .podium-rank { font-weight: 800; font-size: 22px; background: linear-gradient(90deg,#ffd36b,#ff7b7b); color: #111; padding: 6px 10px; border-radius: 999px; box-shadow: 0 8px 20px rgba(255,100,100,0.08); margin-bottom: 8px; }
-    .podium-body { text-align: center; }
-    .podium-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .podium-score { font-size: 0.95rem; color: #ffd36b; font-weight: 700; }
-    .leaderboard-list { list-style:none; padding:0; margin: 8px 0 0 0; }
-    .leaderboard-list li {
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:10px;
-      border-radius:10px;
-      margin-bottom:8px;
-      background: rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.03);
-      transition: filter .18s ease, opacity .18s ease, transform .18s ease, background .12s ease;
-          backdrop-filter: blur(12px) saturate(130%);
-      -webkit-backdrop-filter: blur(12px) saturate(130%);
-    }
+    /* Inner items have a subtle translucent surface and their own blur to simulate depth */
+    .podium-item{ width:150px; min-height:86px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05)); border-radius:12px; padding:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; border:1px solid rgba(255,255,255,0.04); backdrop-filter: blur(6px) saturate(120%); -webkit-backdrop-filter: blur(6px) saturate(120%); }
+    .podium-1{ transform:translateY(-10px); box-shadow:0 10px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,215,115,0.08) }
+    .podium-2{ transform:translateY(2px) }
+    .podium-3{ transform:translateY(6px) }
 
-    .leaderboard-list .rank { width:36px; font-weight:700; color:#ffd36b; }
-    .leaderboard-list .name { flex:1; color:#e6e6e6; font-weight:600; }
-    .leaderboard-list .score { font-weight:700; color:#fff; }
-    .refresh-btn { margin-top: 12px; padding: 10px 18px; border-radius:8px; }
-    @media (max-width: 800px) { .podium { gap:10px; } .podium-item { width: 30%; } .podium-1 { height: 140px; } .podium-2, .podium-3 { height: 120px; } .leaderboard { padding: 14px; } }
+    /* crown for top player */
+    .podium-1::before{ content:'👑'; position:absolute; top:-18px; left:50%; transform:translateX(-50%); font-size:20px ;}
 
-    /* Disable backdrop-filter in performance mode */
-    .performance-mode .podium-item { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+    .podium-rank{ font-weight:800; font-size:14px; color:#ffd36b; margin-bottom:6px;  }
+    .podium-name{ font-weight:700; color:#e6eef8; font-size:15px; margin-bottom:6px; text-align:center }
+    .podium-score{ font-weight:900; color:#7bf18a; text-align: center; }
+
+    .leaderboard-list{ list-style:none; padding:0; margin:12px 0 0 }
+    .leaderboard-list li{ display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-radius:12px; margin-bottom:10px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04)); border:1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px) saturate(120%); -webkit-backdrop-filter: blur(6px) saturate(120%); }
+    .leaderboard-list .left{ display:flex; align-items:center; gap:12px }
+    .leaderboard-list .rank{ min-width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.02); border-radius:50%; color:#9aa7bf; font-weight:800; border:1px solid rgba(255,255,255,0.02) }
+    .leaderboard-list .name{ font-weight:700; color:#e6eef8 }
+    .leaderboard-list .score{ font-weight:800; color:#7bf18a }
+
+    /* Performance mode: disable heavy backdrop-filters */
+    .performance-mode .leaderboard,
+    .performance-mode .podium-item,
+    .performance-mode .leaderboard-list li { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+
+    /* smaller screens */
+    @media (max-width:800px){ .podium{ gap:10px } .podium-item{ width:30% } .leaderboard{ padding:14px } }
   </style>
 
   <div class="leaderboard">
