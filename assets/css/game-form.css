@@ -110,7 +110,7 @@
 
 /* Winning section (right column) */
 .winning-section { text-align: center; }
-.winning-section h2 { color: #fff; margin-bottom: 10px; }
+.winning-section h2 { color: goldenrod; margin-bottom: 10px; }
 .winning-section .rewards { display:flex; gap:10px; justify-content:center; align-items:center; }
 .winning-section .rewards img { width: 88px; border-radius:8px; box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
 
