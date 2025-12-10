@@ -32,6 +32,17 @@ class App {
     // this.camera.rotateX(-0.4);
     this.scene = new THREE.Scene();
 
+    // Ensure the renderer and scene background match the configured color.
+    if (options && options.colors && options.colors.background !== undefined) {
+      // three.js accepts numeric hex colors
+      try {
+        this.scene.background = new THREE.Color(options.colors.background);
+        this.renderer.setClearColor(new THREE.Color(options.colors.background));
+      } catch (e) {
+        // ignore if color is invalid
+      }
+    }
+
     let fog = new THREE.Fog(
       options.colors.background,
       options.length * 0.2,
