@@ -6,6 +6,8 @@
 
 .schedule-header {
   margin-bottom: 0.75rem;
+  backdrop-filter: blur(12px) saturate(130%);
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
 }
 
 .schedule-header h3 {
@@ -27,6 +29,7 @@
   gap: 1rem;
   transition: transform 160ms ease, box-shadow 160ms ease;
   border-left: 6px solid rgba(226, 0, 26, 0.09);
+
 }
 
 .schedule .schedule-item:hover {
