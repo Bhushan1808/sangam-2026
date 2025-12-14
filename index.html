@@ -149,6 +149,7 @@
           justify-content: space-between;
           width: 100%;
           padding: 0 24px 32px 24px;
+          color: var(--default-color);
         }
 
         .hero-left-bottom {
@@ -169,7 +170,7 @@
           font-size: 20px;
           line-height: 1.1;
           margin: 0;
-          color: #cfcfcf; /* subtle gray for bottom heading */
+          color: var(--heading-color); /* theme-aware heading color */
           letter-spacing: 0.6px;
         }
 
@@ -178,8 +179,8 @@
           font-weight: 500;
           font-size: 14px;
           margin: 8px 0 0 0;
-          color: #9fa6ad; /* softer gray for venue text */
-          opacity: 0.95;
+          color: var(--default-color); /* theme-aware subtext */
+          opacity: 0.85;
         }
 
         .hero-sub {
@@ -200,7 +201,6 @@
           /* keep text transparent — gradient applied to character spans */
           color: transparent;
           position: relative;
-          text-shadow: 0 6px 18px rgba(0,0,0,0.45), 0 0 18px rgba(255,215,90,0.06);
         }
 
         /* shimmer animation across the gold gradient applied per-character */
@@ -1874,12 +1874,12 @@
       max-width: 96%;
       margin: 22px auto;
       padding: 18px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      background: linear-gradient(180deg, var(--glass-bg), var(--glass-bg-2));
       border-radius: 14px;
-      color: #e6eef8;
+      color: var(--default-color);
       box-shadow: 0 8px 30px rgba(4, 8, 20, 0.6);
       font-family: 'Poppins', system-ui, sans-serif;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--glass-border, rgba(255,255,255,0.06));
       backdrop-filter: blur(10px) saturate(140%);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
     }
@@ -1887,7 +1887,7 @@
     .leaderboard h2 {
       margin: 0 0 20px 0;
       font-size: 20px;
-      color: #e6eef8;
+      color: var(--heading-color);
       text-align: center
     }
 
@@ -1906,7 +1906,7 @@
     .podium-item {
       width: 150px;
       min-height: 86px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.05));
+      background: linear-gradient(180deg, color-mix(in srgb, var(--contrast-color), transparent 96%), color-mix(in srgb, var(--contrast-color), transparent 92%));
       border-radius: 12px;
       padding: 12px;
       display: flex;
@@ -1914,7 +1914,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border, rgba(255,255,255,0.04));
       backdrop-filter: blur(6px) saturate(120%);
       -webkit-backdrop-filter: blur(6px) saturate(120%);
     }
@@ -1952,7 +1952,7 @@
 
     .podium-name {
       font-weight: 700;
-      color: #e6eef8;
+      color: var(--default-color);
       font-size: 15px;
       margin-bottom: 6px;
       text-align: center
@@ -1960,7 +1960,7 @@
 
     .podium-score {
       font-weight: 900;
-      color: #7bf18a;
+      color: var(--accent-color);
       text-align: center;
     }
 
@@ -1977,8 +1977,8 @@
       padding: 12px 14px;
       border-radius: 12px;
       margin-bottom: 10px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.04));
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--contrast-color), transparent 98%), color-mix(in srgb, var(--contrast-color), transparent 96%));
+      border: 1px solid var(--glass-border, rgba(255,255,255,0.03));
       backdrop-filter: blur(6px) saturate(120%);
       -webkit-backdrop-filter: blur(6px) saturate(120%);
     }
@@ -1995,21 +1995,21 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.02);
+      background: color-mix(in srgb, var(--contrast-color), transparent 96%);
       border-radius: 50%;
-      color: #9aa7bf;
+      color: var(--nav-color);
       font-weight: 800;
-      border: 1px solid rgba(255, 255, 255, 0.02)
+      border: 1px solid var(--glass-border, rgba(255,255,255,0.02))
     }
 
     .leaderboard-list .name {
       font-weight: 700;
-      color: #e6eef8
+      color: var(--default-color)
     }
 
     .leaderboard-list .score {
       font-weight: 800;
-      color: #7bf18a
+      color: var(--accent-color)
     }
 
     /* Performance mode: disable heavy backdrop-filters */
