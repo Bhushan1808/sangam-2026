@@ -10,11 +10,13 @@ class App {
       };
     }
     this.container = container;
-    this.renderer = new THREE.WebGLRenderer({
-      antialias: false
-    });
+    this.renderer = new THREE.WebGLRenderer({ antialias: false });
     this.renderer.setSize(container.offsetWidth, container.offsetHeight, false);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    // Cap DPR to avoid excessive GPU load on high-DPI devices
+    const maxDPR = (options && options.maxPixelRatio) || 1.6;
+    this._dprNormal = Math.min(window.devicePixelRatio || 1, maxDPR);
+    this._dprScroll = (options && options.scrollPixelRatio) || Math.max(0.6, Math.min(1, this._dprNormal * 0.6));
+    this.renderer.setPixelRatio(this._dprNormal);
     this.composer = new POSTPROCESSING.EffectComposer(this.renderer);
     container.append(this.renderer.domElement);
 
@@ -75,31 +77,44 @@ class App {
     this.setSize = this.setSize.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
+    // Scroll-mode helpers: reduce DPR while scrolling (prevents jank but keeps animation)
+    this._inScrollMode = false;
+    this._scrollTimeout = null;
+    this._onScroll = this._onScroll.bind(this);
+    // Start listening for scroll to toggle scroll-mode
+    if (typeof window !== 'undefined') {
+      try { window.addEventListener('scroll', this._onScroll, { passive: true }); } catch (e) {}
+    }
   }
   initPasses() {
     this.renderPass = new POSTPROCESSING.RenderPass(this.scene, this.camera);
-    this.bloomPass = new POSTPROCESSING.EffectPass(
-      this.camera,
-      new POSTPROCESSING.BloomEffect({
-        luminanceThreshold: 0.2,
-        luminanceSmoothing: 0,
-        resolutionScale: 1
-      })
-    );
+    // Only enable expensive bloom on large viewports or when explicitly allowed
+    const enableBloom = (this.options && this.options.enableBloom !== false) && (window.innerWidth >= ((this.options && this.options.minBloomWidth) || 900));
+    if (enableBloom) {
+      this.bloomPass = new POSTPROCESSING.EffectPass(
+        this.camera,
+        new POSTPROCESSING.BloomEffect({
+          luminanceThreshold: 0.2,
+          luminanceSmoothing: 0,
+          resolutionScale: 1
+        })
+      );
+    }
     console.log(this.assets.smaa, this.camera);
     const smaaPass = new POSTPROCESSING.EffectPass(
       this.camera,
       new POSTPROCESSING.SMAAEffect(
         this.assets.smaa.search,
         this.assets.smaa.area,
-        POSTPROCESSING.SMAAPreset.MEDIUM
+        // Use lower SMAA preset on small viewports for performance
+        (window.innerWidth < 900) ? POSTPROCESSING.SMAAPreset.LOW : POSTPROCESSING.SMAAPreset.MEDIUM
       )
     );
     this.renderPass.renderToScreen = false;
-    this.bloomPass.renderToScreen = false;
+    if (this.bloomPass) this.bloomPass.renderToScreen = false;
     smaaPass.renderToScreen = true;
     this.composer.addPass(this.renderPass);
-    this.composer.addPass(this.bloomPass);
+    if (this.bloomPass) this.composer.addPass(this.bloomPass);
     this.composer.addPass(smaaPass);
   }
   loadAssets() {
@@ -219,6 +234,40 @@ class App {
     this.render(delta);
     this.update(delta);
     requestAnimationFrame(this.tick);
+  }
+
+  // Scroll handler: enter reduced-quality mode while user scrolls
+  _onScroll() {
+    try {
+      if (this._scrollTimeout) clearTimeout(this._scrollTimeout);
+      if (!this._inScrollMode) {
+        this._inScrollMode = true;
+        // reduce DPR
+        this.renderer.setPixelRatio(this._dprScroll);
+        // update composer size to pick up DPR change
+        const canvas = this.renderer.domElement;
+        this.setSize(canvas.clientWidth, canvas.clientHeight, false);
+      }
+      // restore after short debounce
+      this._scrollTimeout = setTimeout(() => {
+        if (this._inScrollMode) {
+          this._inScrollMode = false;
+          this.renderer.setPixelRatio(this._dprNormal);
+          const canvas = this.renderer.domElement;
+          this.setSize(canvas.clientWidth, canvas.clientHeight, false);
+        }
+      }, 180);
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  // Clean up listeners and observers when disposing
+  dispose() {
+    this.disposed = true;
+    try {
+      if (typeof window !== 'undefined' && this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    } catch (e) {}
   }
 }
 
