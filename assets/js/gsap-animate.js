@@ -87,76 +87,84 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     }
   });
 
+     gsap.from('.schedule', {
+    xPercent: 10,      opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: '.schedule',
+            start: "top 50%",
+            toggleActions: "play none none reverse"
+          }
+        });
+
+         gsap.from('.md-note-section', {
+    xPercent: -10,      opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: '.md-note-section',
+            start: "top 50%",
+            toggleActions: "play none none reverse"
+          }
+        });
+
+    // Ensure schedule items start hidden (so animations always come from below)
+    gsap.set('.schedule .schedule-item', { y: 24, autoAlpha: 0 });
+
+    // Animate schedule "rows" (.schedule-item) as they enter the viewport.
+    // Add `onEnterBack` and explicitly set the from-state to avoid layout-shift
+    // cases where the element is partially visible and the animation appears
+    // to originate from the middle.
+    ScrollTrigger.batch('.schedule .schedule-item', {
+      interval: 0.1, // time window (in seconds) for batching
+      batchMax: 8,   // maximum elements to batch at once
+      // make the trigger happen a little lower in the viewport so items
+      // are fully off-screen before they animate in (helps with fixed header overlap)
+      start: 'top 92%',
+      end: 'bottom 12%',
+      onEnter: batch => {
+        // force consistent start state then animate up
+        gsap.fromTo(batch, { y: 24, autoAlpha: 0 }, {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.7,
+          ease: 'power2.out',
+          stagger: 0.06,
+          overwrite: true
+        });
+      },
+      onEnterBack: batch => {
+        // when scrolling back up, animate in the same upward direction
+        gsap.fromTo(batch, { y: 24, autoAlpha: 0 }, {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.6,
+          ease: 'power2.out',
+          stagger: 0.04,
+          overwrite: true
+        });
+      },
+      // ensure items are reset when they leave the viewport (below)
+      onLeave: batch => {
+        gsap.set(batch, { y: 24, autoAlpha: 0, overwrite: true });
+      },
+      onLeaveBack: batch => gsap.to(batch, { y: 24, autoAlpha: 0, duration: 0.5, stagger: 0.03 }),
+    });
+
+    gsap.from('.team-section .team-member', {
+      y: 30,
+      autoAlpha: 0,
+      duration: 0.8,
+      ease: 'power2.out',
+      stagger: 0.08,
+      scrollTrigger: {
+        trigger: '.team-section',
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
   window.addEventListener('load', () => ScrollTrigger.refresh());
   window.addEventListener('resize', () => ScrollTrigger.refresh());
 }
-
-// --- Performance Mode toggle (persistent) ---
-// Creates a small floating toggle, saves choice to localStorage under 'perfMode',
-// sets `data-performance="low"|"normal"` on <html> and dispatches a `performancechange` event.
-(function () {
-  const STORAGE_KEY = 'perfMode';
-
-  function applyPerf(enabled) {
-    try {
-      document.documentElement.setAttribute('data-performance', enabled ? 'low' : 'normal');
-    } catch (e) {}
-    window.performanceModeEnabled = !!enabled;
-    window.dispatchEvent(new CustomEvent('performancechange', { detail: { enabled: !!enabled } }));
-  }
-
-  function createToggle() {
-    if (document.getElementById('perf-toggle')) return;
-    const btn = document.createElement('button');
-    btn.id = 'perf-toggle';
-    btn.type = 'button';
-    btn.title = 'Toggle Performance Mode (saves preference)';
-    btn.setAttribute('aria-pressed', 'false');
-
-    Object.assign(btn.style, {
-      position: 'fixed',
-      right: '14px',
-      top: '14px',
-      zIndex: 99999,
-      background: 'rgba(0,0,0,0.5)',
-      color: '#fff',
-      padding: '6px 10px',
-      border: 'none',
-      borderRadius: '20px',
-      cursor: 'pointer',
-      fontSize: '13px',
-      backdropFilter: 'blur(6px)'
-    });
-
-    const label = document.createElement('span');
-    label.textContent = 'Perf Mode';
-    const state = document.createElement('span');
-    state.id = 'perf-toggle-state';
-    Object.assign(state.style, { marginLeft: '8px', fontWeight: 700 });
-
-    btn.appendChild(label);
-    btn.appendChild(state);
-
-    btn.addEventListener('click', () => {
-      const enabled = !(localStorage.getItem(STORAGE_KEY) === '1');
-      localStorage.setItem(STORAGE_KEY, enabled ? '1' : '0');
-      btn.setAttribute('aria-pressed', enabled ? 'true' : 'false');
-      state.textContent = enabled ? 'ON' : 'OFF';
-      applyPerf(enabled);
-    });
-
-    document.body.appendChild(btn);
-
-    // initialize from storage
-    const stored = localStorage.getItem(STORAGE_KEY) === '1';
-    btn.setAttribute('aria-pressed', stored ? 'true' : 'false');
-    state.textContent = stored ? 'ON' : 'OFF';
-    applyPerf(stored);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', createToggle);
-  } else {
-    createToggle();
-  }
-})();

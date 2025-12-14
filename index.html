@@ -476,7 +476,7 @@
       </div> -->
       <!-- <div class="about-info mt-auto position-relative">
         <div class="container position-relative">
-          <div class="row justify-content-start align-items-center p-4 rounded shadow-md">
+          <div class=" justify-content-start align-items-center p-4 rounded shadow-md">
             <div class="col-lg-8 text-center">
               <h2 style="color: #e2001a">
                 12<sup>th</sup> ANNUAL WIN CONCLAVE
@@ -550,11 +550,65 @@
             gap: 8px;
           }
 
-          @media (max-width: 768px) {
-            .info-section {
-              padding-left: 4px;
-            }
+          @media (max-width: 992px) {
+            .location-img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
+            .location-name { font-size: 14px; }
           }
+
+          @media (max-width: 768px) {
+            .info-section { padding-left: 4px; }
+
+            /* Make each schedule row stack vertically for better readability */
+            .schedule .schedule-item {
+              display: flex !important;
+              flex-wrap: wrap !important;
+              flex-direction: column !important;
+              align-items: flex-start !important;
+              gap: 10px;
+              padding: 12px 10px;
+              scroll-margin-top: 110px; /* account for fixed header when anchored */
+            }
+
+            /* Force the column children to take full width when stacked */
+            .schedule .schedule-item > [class*="col-"] {
+              width: 100% !important;
+              max-width: 100% !important;
+              display: block !important;
+            }
+
+            .schedule .schedule-item .info-section { gap: 10px; }
+
+            .schedule .schedule-item time {
+              display: block;
+              font-weight: 700;
+              margin-bottom: 6px;
+              color: #d6d6d6;
+            }
+
+            .schedule .schedule-item h4 {
+              margin: 0 0 4px 0;
+              font-size: 1rem;
+            }
+
+            /* slightly smaller images on narrow phones to improve alignment */
+            .schedule .schedule-item .location-img { width: 36px; height: 36px; border-radius: 6px }
+
+            /* Reduce padding on the schedule container so it fits on small screens */
+            #schedule .container { padding-left: 12px; padding-right: 12px; }
+          }
+        </style>
+
+        <style>
+          /* subtle separators between schedule rows */
+          .schedule .schedule-item {
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+          }
+
+          /* agenda long-text toggle styles */
+          .agenda-toggle { background: none; border: none; color: #00aaff; cursor: pointer; padding: 0; margin-left: 6px; font-weight: 600 }
+          .agenda-full { display: none }
         </style>
 
         <div class="tab-content row justify-content-center" <!-- Schdule Day 1 -->
@@ -575,7 +629,7 @@
             </div>
 
             <!-- Replaced schedule for 09 January 2026 -->
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>08:30 - 10:30</time></div>
               <div class="col-5 col-md-6">
                 <h4>Departure from Office</h4>
@@ -586,7 +640,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>10:30 - 11:00</time></div>
               <div class="col-5 col-md-6">
                 <h4>Arrivals+Tea Break</h4>
@@ -597,7 +651,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>11:00 - 12:00</time></div>
               <div class="col-5 col-md-6">
                 <h4>Opening Note by MD</h4>
@@ -608,7 +662,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>12:00 - 12:20</time></div>
               <div class="col-5 col-md-6">
                 <h4>Sales Presentation- HMA</h4>
@@ -619,7 +673,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>12:20 - 12:40</time></div>
               <div class="col-5 col-md-6">
                 <h4>Service Presentation - HMA</h4>
@@ -630,7 +684,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>12:40 - 13:00</time></div>
               <div class="col-5 col-md-6">
                 <h4>HR & IT Presentation - HMA</h4>
@@ -641,7 +695,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>13:00 - 13:20</time></div>
               <div class="col-5 col-md-6">
                 <h4>Finance Presentation - HMA</h4>
@@ -652,7 +706,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>13:20 - 14:15</time></div>
               <div class="col-5 col-md-6">
                 <h4>Lunch</h4>
@@ -663,7 +717,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>14:15 - 14:30</time></div>
               <div class="col-5 col-md-6">
                 <h4>Group Photograph (W&H SANGAM Jackets)</h4>
@@ -674,7 +728,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>14:30 - 15:45</time></div>
               <div class="col-5 col-md-6">
                 <h4>Activities</h4>
@@ -685,7 +739,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>15:45 - 16:00</time></div>
               <div class="col-5 col-md-6">
                 <h4>Tea Break</h4>
@@ -696,7 +750,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>16:00 - 18:30</time></div>
               <div class="col-5 col-md-6">
                 <h4>Team Building/Any activity?</h4>
@@ -707,7 +761,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>18:30 - 19:00</time></div>
               <div class="col-5 col-md-6">
                 <h4>Award Ceremony</h4>
@@ -718,7 +772,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>19:00 - 20:00</time></div>
               <div class="col-5 col-md-6">
                 <h4>Talent Show</h4>
@@ -729,7 +783,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>20:00 - 23:00</time></div>
               <div class="col-5 col-md-6">
                 <h4>TBD/DJ Night</h4>
@@ -745,7 +799,7 @@
           <!-- Schdule Day 2 -->
           <div role="tabpanel" class="col-lg-10 tab-pane fade" id="day-2"
             style="background-color: #101215d9; border-radius: 8px">
-            <div class="row schedule-item align-items-center schedule-header">
+            <div class=" schedule-item align-items-center schedule-header">
               <div class="col-3 col-md-3">
                 <h3><strong>Timing</strong></h3>
               </div>
@@ -759,7 +813,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>09:00 - 10:00</time>
               </div>
@@ -773,7 +827,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>10:00- 12:00</time>
               </div>
@@ -790,7 +844,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>12:00 - 12:20</time>
               </div>
@@ -804,7 +858,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>12:20 - 12:40</time>
               </div>
@@ -818,7 +872,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>12:40 - 13:00</time>
               </div>
@@ -832,7 +886,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>13:00 - 13:20</time>
               </div>
@@ -846,7 +900,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>13:30 - 14:30</time>
               </div>
@@ -860,7 +914,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>14:30 - 15:00</time>
               </div>
@@ -874,7 +928,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>15:00 - 15:15</time>
               </div>
@@ -887,7 +941,7 @@
                 <h4 class="location">Amphitheater</h4>
               </div>
             </div>
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>15:15 - 15:30</time>
               </div>
@@ -901,7 +955,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>15:30 - 18:30</time>
               </div>
@@ -915,7 +969,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>19:00 - 19:30</time>
               </div>
@@ -929,7 +983,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>19:30 - 20:30</time>
               </div>
@@ -942,7 +996,7 @@
                 <h4 class="location">Ashoka Lawn</h4>
               </div>
             </div>
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>20:30 onwards</time>
               </div>
@@ -962,7 +1016,7 @@
 
           <div role="tabpanel" class="col-lg-10 tab-pane fade" id="day-3"
             style="background-color: #101215d9; border-radius: 8px">
-            <div class="row align-items-center schedule-header">
+            <div class=" align-items-center schedule-header">
               <div class="col-3 col-md-3">
                 <h3><strong>Timing</strong></h3>
               </div>
@@ -976,7 +1030,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>09:00 - 10:00</time>
               </div>
@@ -990,7 +1044,7 @@
               </div>
             </div>
 
-            <div class="row schedule-item align-items-center">
+            <div class=" schedule-item align-items-center">
               <div class="col-3 col-md-3">
                 <time>10:00 - 11:00</time>
               </div>
@@ -2131,77 +2185,11 @@
   <script type="module" src="assets/js/countdown.js"></script>
   <script src="https://unpkg.com/@ungap/custom-elements-builtin"></script>
   <script>
-    gsap.registerPlugin(ScrollTrigger);
     // Smooth curtain open tied to scroll
     // As user scrolls from top -> some distance, curtains slide out
 
 
-        gsap.from('.schedule', {
-    xPercent: 10,      opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: '.schedule',
-            start: "top 50%",
-            toggleActions: "play none none reverse"
-          }
-        });
-
-    // Ensure schedule items start hidden (so animations always come from below)
-    gsap.set('.schedule .schedule-item', { y: 24, autoAlpha: 0 });
-
-    // Animate schedule "rows" (.schedule-item) as they enter the viewport.
-    // Add `onEnterBack` and explicitly set the from-state to avoid layout-shift
-    // cases where the element is partially visible and the animation appears
-    // to originate from the middle.
-    ScrollTrigger.batch('.schedule .schedule-item', {
-      interval: 0.1, // time window (in seconds) for batching
-      batchMax: 8,   // maximum elements to batch at once
-      // make the trigger happen a little lower in the viewport so items
-      // are fully off-screen before they animate in (helps with fixed header overlap)
-      start: 'top 92%',
-      end: 'bottom 12%',
-      onEnter: batch => {
-        // force consistent start state then animate up
-        gsap.fromTo(batch, { y: 24, autoAlpha: 0 }, {
-          y: 0,
-          autoAlpha: 1,
-          duration: 0.7,
-          ease: 'power2.out',
-          stagger: 0.06,
-          overwrite: true
-        });
-      },
-      onEnterBack: batch => {
-        // when scrolling back up, animate in the same upward direction
-        gsap.fromTo(batch, { y: 24, autoAlpha: 0 }, {
-          y: 0,
-          autoAlpha: 1,
-          duration: 0.6,
-          ease: 'power2.out',
-          stagger: 0.04,
-          overwrite: true
-        });
-      },
-      // ensure items are reset when they leave the viewport (below)
-      onLeave: batch => {
-        gsap.set(batch, { y: 24, autoAlpha: 0, overwrite: true });
-      },
-      onLeaveBack: batch => gsap.to(batch, { y: 24, autoAlpha: 0, duration: 0.5, stagger: 0.03 }),
-    });
-
-    gsap.from('.team-section .team-member', {
-      y: 30,
-      autoAlpha: 0,
-      duration: 0.8,
-      ease: 'power2.out',
-      stagger: 0.08,
-      scrollTrigger: {
-        trigger: '.team-section',
-        start: 'top 85%',
-        toggleActions: 'play none none reverse'
-      }
-    });
+     
 
     // // Gallery section animations
     // gsap.from('#gallery .section-title', {
@@ -2250,8 +2238,20 @@
     //   start: 'top 80%'
     // });
 
-    window.addEventListener('load', () => ScrollTrigger.refresh());
-    window.addEventListener('resize', () => ScrollTrigger.refresh());
+
+    // Refresh ScrollTrigger after schedule images load to avoid layout glitches
+    (function refreshAfterScheduleImages(){
+      try {
+        const imgs = document.querySelectorAll('#schedule img');
+        if (!imgs || imgs.length === 0) return ScrollTrigger.refresh();
+        let done = 0;
+        function check(){ if (++done >= imgs.length) ScrollTrigger.refresh(); }
+        imgs.forEach(img => {
+          if (img.complete) check();
+          else { img.addEventListener('load', check); img.addEventListener('error', check); }
+        });
+      } catch (e) { ScrollTrigger.refresh(); }
+    })();
     ScrollTrigger.refresh();
   </script>
 </body>
