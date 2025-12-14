@@ -18,6 +18,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet" />
+  <!-- Hero display font: Cinzel (strong, classical/heroic feel) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
@@ -77,10 +79,190 @@
   <div id="visual-container"></div>
   <main class="main">
     <section id="hero" class="hero section dark-background">
-      <img loading="lazy" src="assets/img/sangam-2025-theme.jpg" alt="" data-aos="fade-in" class="theme-photo" />
-      <img loading="lazy" src="assets/img/mobile-theme-image.jpg" alt="" data-aos="fade-in"
-        class="mobile-theme-photo" />
+      <div class="hero-container">
+        <h4 class="hero-sub">12th Annual · WIN Conclave</h4>
+        <h1 class="hero-main">Sangam 2026</h1>
+        <img class="hero-logo" src="assets/img/logo.707040cd.png" alt="W & H logo" />
+
+      </div>
+      <div class="hero-bottom">
+        <div class="hero-left-bottom">
+          <h3>9th January 2026</h3>
+          <br>
+          <h5>Courtyard By Marriott Aravali, Gurgaon</h5>
+        </div>
+
+        <div class="hero-right-bottom">
+          <div class="countdown"> Time Remaining</div>
+          <div class="countdown-container">
+            <div id="countdown" class="countdown" aria-live="polite" aria-atomic="true"
+              aria-label="Time remaining to event">
+              <div class="countdown__container">
+                <div class="countdown__item days">
+                  <div class="countdown__number">
+                    <div id="days">00</div>
+                  </div>
+                  <div class="countdown__info">Days</div>
+                </div>
+                <div class="countdown__item hours">
+                  <div class="countdown__number">
+                    <div id="hours">00</div>
+                  </div>
+                  <div class="countdown__info">Hr</div>
+                </div>
+                <div class="countdown__item minutes">
+                  <div class="countdown__number">
+                    <div id="minutes">00</div>
+                  </div>
+                  <div class="countdown__info">Mins</div>
+                </div>
+                <div class="countdown__item seconds">
+                  <div class="countdown__number">
+                    <div id="seconds">00</div>
+                  </div>
+                  <div class="countdown__info">Sec</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <style>
+        /* Hero: larger, heroic font for main title */
+        .hero-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 72vh;
+          padding: 48px 12px;
+          text-align: center
+        }
+
+        .hero-bottom {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0 24px 32px 24px;
+        }
+
+        .hero-left-bottom {
+          text-align: center;
+          translate: none;
+          rotate: none;
+          scale: none;
+          transform: translate(0px, 0px);
+          opacity: 1;
+          visibility: inherit;
+          align-content: end;
+        }
+
+        /* Improved typography for the hero bottom area */
+        .hero-left-bottom h3 {
+          font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 1.1;
+          margin: 0;
+          color: #cfcfcf; /* subtle gray for bottom heading */
+          letter-spacing: 0.6px;
+        }
+
+        .hero-left-bottom h5 {
+          font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+          font-weight: 500;
+          font-size: 14px;
+          margin: 8px 0 0 0;
+          color: #9fa6ad; /* softer gray for venue text */
+          opacity: 0.95;
+        }
+
+        .hero-sub {
+          color: var(--accent-color, #e2001a);
+          font-weight: 700;
+          letter-spacing: 0.6px;
+          margin: 0 0 6px
+        }
+
+        .hero-main {
+          font-family: 'Cinzel', serif;
+          font-weight: 900;
+          font-size: 112px;
+          line-height: 1;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          margin: 0;
+          /* keep text transparent — gradient applied to character spans */
+          color: transparent;
+          position: relative;
+          text-shadow: 0 6px 18px rgba(0,0,0,0.45), 0 0 18px rgba(255,215,90,0.06);
+        }
+
+        /* shimmer animation across the gold gradient applied per-character */
+        @keyframes hero-shimmer {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        .hero-main .char{
+          display:inline-block; /* ensured by script too */
+          will-change:transform,opacity;
+          /* golden gradient fill on each character */
+          background: linear-gradient(90deg, #ffd36b 0%, #fff7d1 25%, #ffdf5e 50%, #ffef9b 75%, #ffd36b 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+          animation: hero-shimmer 3.5s linear infinite;
+          filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45));
+        }
+
+        .hero-logo {
+          width: 120px;
+          margin-top: 14px;
+          opacity: 0;
+          /* start hidden, animate in after title */
+        }
+
+        /* Right side: small label and countdown refinements */
+        .hero-right-bottom {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-right-bottom .countdown {
+          font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+          font-weight: 600;
+          font-size: 13px;
+          color: #bdbdbd; /* grayish label */
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 6px;
+        }
+
+        .hero-right-bottom .countdown__info {
+          font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+          font-weight: 500;
+          font-size: 12px;
+          color: #9fa6ad; /* match venue text tone */
+          margin-top: 6px;
+        }
+
+        .hero-right-bottom .countdown__number div {
+          font-family: 'Cinzel', 'Poppins', serif;
+          font-weight: 700;
+          font-size: 1.6rem;
+          color: var(--heading-color, #ffffff);
+          text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+          line-height: 1;
+        }
+
+        /* Keep existing countdown container rules (if used elsewhere) */
         .countdown-conatiner {
           display: flex;
           flex-direction: column;
@@ -90,13 +272,179 @@
           z-index: 10;
         }
 
+        /* Countdown (inline hero) styles */
+        .countdown-grid {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          justify-content: center;
+          margin-top: 8px
+        }
+
+        .countdown-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-width: 56px;
+          padding: 8px;
+          border-radius: 8px;
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.03));
+          border: 1px solid rgba(255, 255, 255, 0.04)
+        }
+
+        .countdown-number {
+          font-size: 22px;
+          font-weight: 400;
+          color: var(--heading-color, #fff)
+        }
+
+        .countdown-label {
+          font-size: 12px;
+          color: var(--muted-color, #d1d1d1);
+          margin-top: 4px
+        }
+
+        @media (max-width: 768px) {
+          .countdown-grid {
+            gap: 8px
+          }
+
+          .countdown-number {
+            font-size: 18px
+          }
+
+          .countdown-item {
+            min-width: 44px;
+            padding: 6px
+          }
+        }
+
         @media (max-width: 768px) {
           .countdown-conatiner {
             margin-top: 70%;
           }
         }
+
+        @media (max-width:900px) {
+          .hero-main {
+            font-size: 44px
+          }
+
+          .hero-logo {
+            width: 86px
+          }
+          .hero-left-bottom h3 { font-size: 18px }
+          .hero-left-bottom h5 { font-size: 13px }
+          .hero-right-bottom .countdown { font-size: 12px }
+          .hero-right-bottom .countdown__number div { font-size: 1.25rem }
+        }
+
+        /* Mobile responsive: stack hero-bottom and adjust sizes */
+        @media (max-width: 720px) {
+          .hero-container{
+            min-height: 50vh;
+          }
+
+          .hero-bottom {
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            padding: 12px 14px 20px 14px;
+          }
+
+          .hero-left-bottom,
+          .hero-right-bottom {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6px 0;
+          }
+
+          .hero-left-bottom h3 { font-size: 16px; margin-bottom: 4px }
+          .hero-left-bottom h5 { font-size: 12px; margin-top: 0 }
+
+          .hero-right-bottom { margin-top: 6px }
+          .hero-right-bottom .countdown { font-size: 12px; margin-bottom: 4px }
+          .hero-right-bottom .countdown__number div { font-size: 1.1rem }
+
+          .hero-cta { width: 100%; flex-direction: column; gap: 8px }
+          .hero-cta .btn { width: 100%; max-width: 340px; }
+
+          /* Hide decorative ornaments on small screens to reduce clutter and improve perf */
+          .hero-ornaments { display: none }
+          .hero-bg { background-image: radial-gradient(900px 220px at 50% 28%, rgba(255,215,90,0.035), transparent 18%), linear-gradient(135deg, rgba(16,18,21,0.7), rgba(30,32,36,0.56)); }
+        }
+
+        /* Extra-small phones */
+        @media (max-width: 420px) {
+          .hero-main { font-size: 36px }
+          .hero-left-bottom h3 { font-size: 15px }
+          .hero-left-bottom h5 { font-size: 11px }
+          .hero-right-bottom .countdown__number div { font-size: 1rem }
+          .hero-container { padding: 28px 10px }
+        }
       </style>
-      <div class="countdown-conatiner">
+      <script>
+        // Manual text-split + GSAP timeline so we can chain the logo animation
+        (function () {
+          function splitChars(selector) {
+            const el = document.querySelector(selector);
+            if (!el) return [];
+            const text = el.textContent || '';
+            el.textContent = '';
+            const frag = document.createDocumentFragment();
+            for (const ch of text) {
+              const span = document.createElement('span');
+              span.className = 'char';
+              span.textContent = ch === ' ' ? '\u00A0' : ch;
+              frag.appendChild(span);
+            }
+            el.appendChild(frag);
+            return Array.from(el.querySelectorAll('.char'));
+          }
+
+          // add minimal CSS for .char so transform works
+          const style = document.createElement('style');
+          style.textContent = '.hero-main .char{ display:inline-block; will-change:transform,opacity }';
+          document.head.appendChild(style);
+
+          const chars = splitChars('.hero-main');
+
+          function runAnim() {
+            console.log('[hero-anim] chars count:', chars.length);
+            if (!chars.length) { console.warn('[hero-anim] no chars found'); return; }
+            const start = function () {
+              console.log('[hero-anim] gsap available, starting timeline');
+              const tl = gsap.timeline();
+              tl.from(chars, { duration: 0.85, y: 60, autoAlpha: 0, stagger: 0.03, ease: 'power3.out' });
+              // logo appears after characters finish (use fromTo so it becomes visible even if CSS set opacity:0)
+              tl.fromTo('.hero-logo', { autoAlpha: 0, y: 18, scale: 0.96 }, { duration: 0.7, autoAlpha: 1, y: 0, scale: 1, ease: 'back.out(1.2)', delay: 0.06 }, 1);
+              tl.fromTo('.hero-sub', { autoAlpha: 0, y: 18, scale: 0.96 }, { duration: 0.7, autoAlpha: 1, y: 0, scale: 1, ease: 'back.out(1.2)', delay: 0.06 }, 1);
+              tl.fromTo('.hero-right-bottom', { autoAlpha: 0, y: 18, scale: 0.96 }, { duration: 0.7, autoAlpha: 1, y: 0, scale: 1, ease: 'back.out(1.2)', delay: 0.06 }, 2.5);
+              tl.fromTo('.hero-left-bottom', { autoAlpha: 0, y: 18, scale: 0.96 }, { duration: 0.7, autoAlpha: 1, y: 0, scale: 1, ease: 'back.out(1.2)', delay: 0.06 }, 2.5);
+
+
+            };
+
+            if (window.gsap) { start(); }
+            else {
+              console.log('[hero-anim] gsap not present yet, polling');
+              let checks = 0;
+              const id = setInterval(() => {
+                checks++;
+                if (window.gsap) { clearInterval(id); console.log('[hero-anim] gsap loaded after', checks, 'checks'); start(); }
+                if (checks > 80) { clearInterval(id); console.error('[hero-anim] gsap did not load after polling'); }
+              }, 80);
+            }
+          }
+
+          // run when DOM ready
+          if (document.readyState === 'complete' || document.readyState === 'interactive') runAnim();
+          else document.addEventListener('DOMContentLoaded', runAnim);
+        })();
+      </script>
+      <!-- <div class="countdown-conatiner">
         <div id="countdown" class="countdown" style="margin-top: 5%">
           <div class="countdown__container">
             <div class="countdown__item days">
@@ -125,8 +473,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="about-info mt-auto position-relative">
+      </div> -->
+      <!-- <div class="about-info mt-auto position-relative">
         <div class="container position-relative">
           <div class="row justify-content-start align-items-center p-4 rounded shadow-md">
             <div class="col-lg-8 text-center">
@@ -141,7 +489,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </section>
 
     <section class="md-note-section md-split" id="md-note">
@@ -175,7 +523,7 @@
       </div>
 
       <div class="container">
-        
+
 
         <style>
           .location-img {
@@ -229,92 +577,167 @@
             <!-- Replaced schedule for 09 January 2026 -->
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>08:30 - 10:30</time></div>
-              <div class="col-5 col-md-6"><h4>Departure from Office</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/office.jpg" alt="Office" /><h4 class="location">Office Parking</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Departure from Office</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/office.jpg" alt="Office" />
+                <h4 class="location">Office Parking</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>10:30 - 11:00</time></div>
-              <div class="col-5 col-md-6"><h4>Arrivals+Tea Break</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/breakfast.jpg" alt="Tea" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Arrivals+Tea Break</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/breakfast.jpg" alt="Tea" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>11:00 - 12:00</time></div>
-              <div class="col-5 col-md-6"><h4>Opening Note by MD</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/note.jpg" alt="MD" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Opening Note by MD</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/note.jpg" alt="MD" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>12:00 - 12:20</time></div>
-              <div class="col-5 col-md-6"><h4>Sales Presentation- HMA</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/presenter.jpg" alt="Sales" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Sales Presentation- HMA</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/presenter.jpg" alt="Sales" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>12:20 - 12:40</time></div>
-              <div class="col-5 col-md-6"><h4>Service Presentation - HMA</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/presenter.jpg" alt="Service" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Service Presentation - HMA</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/presenter.jpg" alt="Service" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>12:40 - 13:00</time></div>
-              <div class="col-5 col-md-6"><h4>HR & IT Presentation - HMA</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/presenter.jpg" alt="HR/IT" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>HR & IT Presentation - HMA</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/presenter.jpg" alt="HR/IT" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>13:00 - 13:20</time></div>
-              <div class="col-5 col-md-6"><h4>Finance Presentation - HMA</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/presenter.jpg" alt="Finance" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Finance Presentation - HMA</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/presenter.jpg" alt="Finance" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>13:20 - 14:15</time></div>
-              <div class="col-5 col-md-6"><h4>Lunch</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/lunch.jpg" alt="Lunch" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Lunch</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/lunch.jpg" alt="Lunch" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>14:15 - 14:30</time></div>
-              <div class="col-5 col-md-6"><h4>Group Photograph (W&H SANGAM Jackets)</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/wh-event/2024img_13.jpeg" alt="Photo" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Group Photograph (W&H SANGAM Jackets)</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/wh-event/2024img_13.jpeg" alt="Photo" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>14:30 - 15:45</time></div>
-              <div class="col-5 col-md-6"><h4>Activities</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/activities.jpg" alt="Activities" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Activities</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/activities.jpg" alt="Activities" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>15:45 - 16:00</time></div>
-              <div class="col-5 col-md-6"><h4>Tea Break</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/teaBreak.jpg" alt="Tea" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Tea Break</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/teaBreak.jpg" alt="Tea" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>16:00 - 18:30</time></div>
-              <div class="col-5 col-md-6"><h4>Team Building/Any activity?</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/team building.jpg" alt="Team Building" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Team Building/Any activity?</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/team building.jpg" alt="Team Building" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>18:30 - 19:00</time></div>
-              <div class="col-5 col-md-6"><h4>Award Ceremony</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/awards.jpg" alt="Awards" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Award Ceremony</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/awards.jpg" alt="Awards" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>19:00 - 20:00</time></div>
-              <div class="col-5 col-md-6"><h4>Talent Show</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/cultural.jpg" alt="Talent" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>Talent Show</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/cultural.jpg" alt="Talent" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
 
             <div class="row schedule-item align-items-center">
               <div class="col-3 col-md-3"><time>20:00 - 23:00</time></div>
-              <div class="col-5 col-md-6"><h4>TBD/DJ Night</h4></div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/dinner.jpg" alt="DJ Night" /><h4 class="location">TBA</h4></div>
+              <div class="col-5 col-md-6">
+                <h4>TBD/DJ Night</h4>
+              </div>
+              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/dinner.jpg" alt="DJ Night" />
+                <h4 class="location">TBA</h4>
+              </div>
             </div>
           </div>
           <!-- End Schdule Day 1 -->
@@ -624,502 +1047,507 @@
       </ul> -->
 
       <style>
-          .dot-caurosel {
-            position: relative;
-            width: 80vmin;
-            /* increased slightly to give more vertical space */
-            height: 86vmin;
-            max-height: 760px;
-            max-width: 720px;
-            overflow: hidden;
-            border-radius: 20px;
-          }
-
-      /* Desktop: make carousel landscape (wider than tall) */
-      @media (min-width: 992px) {
         .dot-caurosel {
-          /* increase desktop footprint to reduce cropping of faces */
-          width: min(92vw, 1200px);
-          /* taller on desktop to show more of the image vertically */
-          height: min(68vh, 820px);
-          max-width: 1400px;
-          max-height: 820px;
-          border-radius: 18px;
+          position: relative;
+          width: 80vmin;
+          /* increased slightly to give more vertical space */
+          height: 86vmin;
+          max-height: 760px;
+          max-width: 720px;
+          overflow: hidden;
+          border-radius: 20px;
         }
-      }
 
-    .shadow {
-      box-shadow:
-        0 2.8px 2.2px rgba(0, 0, 0, 0.02),
-        0 6.7px 5.3px rgba(0, 0, 0, 0.028),
-        0 12.5px 10px rgba(0, 0, 0, 0.035),
-        0 22.3px 17.9px rgba(0, 0, 0, 0.042),
-        0 41.8px 33.4px rgba(0, 0, 0, 0.05),
-        0 100px 80px rgba(0, 0, 0, 0.07);
-    }
+        /* Desktop: make carousel landscape (wider than tall) */
+        @media (min-width: 992px) {
+          .dot-caurosel {
+            /* increase desktop footprint to reduce cropping of faces */
+            width: min(92vw, 1200px);
+            /* taller on desktop to show more of the image vertically */
+            height: min(68vh, 820px);
+            max-width: 1400px;
+            max-height: 820px;
+            border-radius: 18px;
+          }
+        }
 
-    .image, .tabs {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+        .shadow {
+          box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+            0 12.5px 10px rgba(0, 0, 0, 0.035),
+            0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+            0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+            0 100px 80px rgba(0, 0, 0, 0.07);
+        }
 
-    .image svg,
-    .tabs svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
+        .image,
+        .tabs {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
 
-    image {
-      pointer-events: none;
-    }
+        .image svg,
+        .tabs svg {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
 
-    .border {
-      fill: white;
-      fill-opacity: 0;
-      stroke: white;
-      stroke-width: 2;
-      stroke-opacity: 0.7;
-      cursor: pointer;
-    }
+        image {
+          pointer-events: none;
+        }
 
-    .border:hover {
-      stroke-opacity: 1;
-    }
+        .border {
+          fill: white;
+          fill-opacity: 0;
+          stroke: white;
+          stroke-width: 2;
+          stroke-opacity: 0.7;
+          cursor: pointer;
+        }
 
-    text {
-      fill: white;
-      font-size: 28px;
-      stroke: black;
-      stroke-width: 1;
-      stroke-opacity: 0.75;
-    }
+        .border:hover {
+          stroke-opacity: 1;
+        }
 
-    .tabs {
-      z-index: 100;
-    }
-    /* Ensure the tabs SVG anchors to the bottom of the carousel so dots don't overflow */
-    .tabs svg {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: auto;
-      width: 100%;
-      height: 100%;
-      pointer-events: none; /* allow clicks only on the circle elements */
-    }
+        text {
+          fill: white;
+          font-size: 28px;
+          stroke: black;
+          stroke-width: 1;
+          stroke-opacity: 0.75;
+        }
 
-    .tabs svg .border {
-      pointer-events: auto; /* enable clicking the tab circles */
-    }
+        .tabs {
+          z-index: 100;
+        }
+
+        /* Ensure the tabs SVG anchors to the bottom of the carousel so dots don't overflow */
+        .tabs svg {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: auto;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          /* allow clicks only on the circle elements */
+        }
+
+        .tabs svg .border {
+          pointer-events: auto;
+          /* enable clicking the tab circles */
+        }
       </style>
       <div class="dot-caurosel container shadow">
-      <div id="imagesLayer"></div>
-      <div class="tabs" id="tabsLayer"></div>
-    </div>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+        <div id="imagesLayer"></div>
+        <div class="tabs" id="tabsLayer"></div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
 
-  <script>
-    console.clear();
-    gsap.registerPlugin(MotionPathPlugin);
+      <script>
+        console.clear();
+        gsap.registerPlugin(MotionPathPlugin);
 
-    // ------------------ DATA (same as your React code) ---------------------
+        // ------------------ DATA (same as your React code) ---------------------
 
-      const images2025 = [
-      { title: 'Sangam 2025 - 1', url: 'assets/img/sangam2025/1.jpeg' },
-      { title: 'Sangam 2025 - 2', url: 'assets/img/sangam2025/2.jpeg' },
-      { title: 'Sangam 2025 - 3', url: 'assets/img/sangam2025/3.jpeg' },
-      { title: 'Sangam 2025 - 4', url: 'assets/img/sangam2025/4.jpeg' },
-      { title: 'Sangam 2025 - 5', url: 'assets/img/sangam2025/5.jpeg' },
-            { title: 'Sangam 2025 - 5', url: 'assets/img/sangam2025/5-a.jpg' },
-      { title: 'Sangam 2025 - 6', url: 'assets/img/sangam2025/6.jpeg' },
-      { title: 'Sangam 2025 - 7', url: 'assets/img/sangam2025/7.jpeg' },
-      { title: 'Sangam 2025 - 8', url: 'assets/img/sangam2025/8.jpeg' },
-      { title: 'Sangam 2025 - 9', url: 'assets/img/sangam2025/9.jpeg' },
-    ];
+        const images2025 = [
+          { title: 'Sangam 2025 - 1', url: 'assets/img/sangam2025/1.jpeg' },
+          { title: 'Sangam 2025 - 2', url: 'assets/img/sangam2025/2.jpeg' },
+          { title: 'Sangam 2025 - 3', url: 'assets/img/sangam2025/3.jpeg' },
+          { title: 'Sangam 2025 - 4', url: 'assets/img/sangam2025/4.jpeg' },
+          { title: 'Sangam 2025 - 5', url: 'assets/img/sangam2025/5.jpeg' },
+          { title: 'Sangam 2025 - 5', url: 'assets/img/sangam2025/5-a.jpg' },
+          { title: 'Sangam 2025 - 6', url: 'assets/img/sangam2025/6.jpeg' },
+          { title: 'Sangam 2025 - 7', url: 'assets/img/sangam2025/7.jpeg' },
+          { title: 'Sangam 2025 - 8', url: 'assets/img/sangam2025/8.jpeg' },
+          { title: 'Sangam 2025 - 9', url: 'assets/img/sangam2025/9.jpeg' },
+        ];
 
-    // Use 2025 images by default
-    const images = images2025;
+        // Use 2025 images by default
+        const images = images2025;
 
-    // ------------------ CONSTANTS (from Image component) -------------------
+        // ------------------ CONSTANTS (from Image component) -------------------
 
-    const gap = 10;
-    const circle = 7;
-    const defaults = { transformOrigin: 'center center' };
-    const duration = 0.4;
-    // responsive sizing: square on small screens, larger landscape on desktop
-    const isDesktop = window.innerWidth >= 992;
-    const width = isDesktop ? 1080 : 400;
-    const height = isDesktop ? 640 : 400;
-    // scale controls how far the image expands when opened; increase for larger desktop
-    const scale = isDesktop ? 1100 : 700;
-    const bigSize = circle * scale;
-    const overlap = 0;
-    // autoplay timing (ms)
-    let autoplayInterval = 3000;
-    let autoplayTimer = null;
+        const gap = 10;
+        const circle = 7;
+        const defaults = { transformOrigin: 'center center' };
+        const duration = 0.4;
+        // responsive sizing: square on small screens, larger landscape on desktop
+        const isDesktop = window.innerWidth >= 992;
+        const width = isDesktop ? 1080 : 400;
+        const height = isDesktop ? 640 : 400;
+        // scale controls how far the image expands when opened; increase for larger desktop
+        const scale = isDesktop ? 1100 : 700;
+        const bigSize = circle * scale;
+        const overlap = 0;
+        // autoplay timing (ms)
+        let autoplayInterval = 3000;
+        let autoplayTimer = null;
 
-    // ------------------ STATE ---------------------------------------------
+        // ------------------ STATE ---------------------------------------------
 
-    let opened = 0;
-    let inPlace = 0;
-    let disabled = false;
-    let currentlyAnimating = false;
+        let opened = 0;
+        let inPlace = 0;
+        let disabled = false;
+        let currentlyAnimating = false;
 
-    const clips = []; // { id, wrapper, clip, group, isOpen }
-    const tabs = []; // store tab circle elements for visual updates
+        const clips = []; // { id, wrapper, clip, group, isOpen }
+        const tabs = []; // store tab circle elements for visual updates
 
-    const imagesLayer = document.getElementById('imagesLayer');
-    const tabsLayer = document.getElementById('tabsLayer');
-    const nextBtn = document.getElementById('nextBtn');
+        const imagesLayer = document.getElementById('imagesLayer');
+        const tabsLayer = document.getElementById('tabsLayer');
+        const nextBtn = document.getElementById('nextBtn');
 
-    // ------------------ POSITION HELPERS -----------------------------------
+        // ------------------ POSITION HELPERS -----------------------------------
 
-    const getPosSmall = (id, total) => ({
-      x: (width / 2) - ((total * ((circle * 2) + gap) - gap) / 2) + (id * ((circle * 2) + gap)),
-      y: height - 30,
-      scale: 1
-    });
+        const getPosSmall = (id, total) => ({
+          x: (width / 2) - ((total * ((circle * 2) + gap) - gap) / 2) + (id * ((circle * 2) + gap)),
+          y: height - 30,
+          scale: 1
+        });
 
-    const getPosSmallAbove = (id, total) => ({
-      x: (width / 2) - ((total * ((circle * 2) + gap) - gap) / 2) + (id * ((circle * 2) + gap)),
-      y: height / 2,
-      scale: 1
-    });
+        const getPosSmallAbove = (id, total) => ({
+          x: (width / 2) - ((total * ((circle * 2) + gap) - gap) / 2) + (id * ((circle * 2) + gap)),
+          y: height / 2,
+          scale: 1
+        });
 
-    const getPosCenter = () => ({
-      x: width / 2,
-      y: height / 2,
-      scale: 7
-    });
+        const getPosCenter = () => ({
+          x: width / 2,
+          y: height / 2,
+          scale: 7
+        });
 
-    // Downscale images on the client to reduce texture size and improve animation perf
-    function downscaleImage(url, maxDim = 1000, quality = 0.75) {
-      return new Promise((resolve) => {
-        try {
-          const img = new Image();
-          img.onload = () => {
-            const srcW = img.naturalWidth || img.width;
-            const srcH = img.naturalHeight || img.height;
-            const maxSrc = Math.max(srcW, srcH);
-            const scale = maxSrc > maxDim ? (maxDim / maxSrc) : 1;
-            const w = Math.max(1, Math.round(srcW * scale));
-            const h = Math.max(1, Math.round(srcH * scale));
-            const canvas = document.createElement('canvas');
-            canvas.width = w;
-            canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, w, h);
+        // Downscale images on the client to reduce texture size and improve animation perf
+        function downscaleImage(url, maxDim = 1000, quality = 0.75) {
+          return new Promise((resolve) => {
             try {
-              const dataUrl = canvas.toDataURL('image/jpeg', quality);
-              resolve(dataUrl);
+              const img = new Image();
+              img.onload = () => {
+                const srcW = img.naturalWidth || img.width;
+                const srcH = img.naturalHeight || img.height;
+                const maxSrc = Math.max(srcW, srcH);
+                const scale = maxSrc > maxDim ? (maxDim / maxSrc) : 1;
+                const w = Math.max(1, Math.round(srcW * scale));
+                const h = Math.max(1, Math.round(srcH * scale));
+                const canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                try {
+                  const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                  resolve(dataUrl);
+                } catch (e) {
+                  // fallback to original url if toDataURL fails
+                  resolve(url);
+                }
+              };
+              img.onerror = () => resolve(url);
+              img.src = url;
             } catch (e) {
-              // fallback to original url if toDataURL fails
               resolve(url);
             }
-          };
-          img.onerror = () => resolve(url);
-          img.src = url;
-        } catch (e) {
-          resolve(url);
+          });
         }
-      });
-    }
 
-    const getPosEnd = () => ({
-      x: width / 2 - bigSize + overlap,
-      y: height / 2,
-      scale: scale
-    });
-
-    const getPosStart = () => ({
-      x: width / 2 + bigSize - overlap,
-      y: height / 2,
-      scale: scale
-    });
-
-    const getTabPosX = (i) =>
-      (width / 2) - ((images.length * ((circle * 2) + gap) - gap) / 2) + (i * ((circle * 2) + gap));
-
-    const getTabPosY = () => height - 30;
-
-    // ------------------ DOM CREATION ---------------------------------------
-
-    function createImages() {
-      const svgNS = 'http://www.w3.org/2000/svg';
-      const xlinkNS = 'http://www.w3.org/1999/xlink';
-
-      images.forEach((img, i) => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'image';
-        wrapper.style.zIndex = (inPlace === i) ? i : images.length + 1;
-
-        const svg = document.createElementNS(svgNS, 'svg');
-        svg.setAttribute('xmlns', svgNS);
-        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-        svg.setAttribute('preserveAspectRatio', 'xMidYMax slice');
-
-        const defs = document.createElementNS(svgNS, 'defs');
-
-        const cp1 = document.createElementNS(svgNS, 'clipPath');
-        cp1.setAttribute('id', `${i}_circleClip`);
-        const circleEl = document.createElementNS(svgNS, 'circle');
-        circleEl.classList.add('clip');
-        circleEl.setAttribute('cx', '0');
-        circleEl.setAttribute('cy', '0');
-        circleEl.setAttribute('r', String(circle));
-        cp1.appendChild(circleEl);
-
-        const cp2 = document.createElementNS(svgNS, 'clipPath');
-        cp2.setAttribute('id', `${i}_squareClip`);
-        const rectEl = document.createElementNS(svgNS, 'rect');
-        rectEl.classList.add('clip');
-        rectEl.setAttribute('width', String(width));
-        rectEl.setAttribute('height', String(height));
-        cp2.appendChild(rectEl);
-
-        defs.appendChild(cp1);
-        defs.appendChild(cp2);
-        svg.appendChild(defs);
-
-        const g = document.createElementNS(svgNS, 'g');
-        g.setAttribute('clip-path', `url(#${i}${inPlace === i ? '_squareClip' : '_circleClip'})`);
-
-        const imageEl = document.createElementNS(svgNS, 'image');
-        imageEl.setAttribute('width', String(width));
-        imageEl.setAttribute('height', String(height));
-        imageEl.setAttribute('preserveAspectRatio', 'xMidYMin slice');
-        // set initial src to original URL (will be replaced by downscaled dataURL when ready)
-        try { imageEl.setAttributeNS(xlinkNS, 'xlink:href', img.url); } catch(e) { imageEl.setAttribute('href', img.url); }
-
-        g.appendChild(imageEl);
-        svg.appendChild(g);
-        wrapper.appendChild(svg);
-        imagesLayer.appendChild(wrapper);
-
-        const clip = circleEl;
-        const group = g;
-
-        // Set all circles initially at their small-tab positions
-        gsap.set(clip, { ...defaults, ...getPosSmall(i, images.length) });
-
-        clips[i] = {
-          id: i,
-          wrapper,
-          clip,
-          group,
-          isOpen: (i === opened)
-        };
-
-        // Downscale image asynchronously and replace href with smaller dataURL
-        downscaleImage(img.url, isDesktop ? 1200 : 800, 0.75).then((dataUrl) => {
-          try { imageEl.setAttributeNS(xlinkNS, 'xlink:href', dataUrl); } catch (e) { imageEl.setAttribute('href', dataUrl); }
-        }).catch(() => {
-          // ignore and keep original src
+        const getPosEnd = () => ({
+          x: width / 2 - bigSize + overlap,
+          y: height / 2,
+          scale: scale
         });
-      });
-    }
 
-    function createTabs() {
-      const svgNS = 'http://www.w3.org/2000/svg';
-      const svg = document.createElementNS(svgNS, 'svg');
-      svg.setAttribute('xmlns', svgNS);
-      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-      svg.setAttribute('preserveAspectRatio', 'xMidYMax slice');
+        const getPosStart = () => ({
+          x: width / 2 + bigSize - overlap,
+          y: height / 2,
+          scale: scale
+        });
 
-      images.forEach((img, i) => {
-        const c = document.createElementNS(svgNS, 'circle');
-        c.classList.add('border');
-        c.setAttribute('cx', getTabPosX(i));
-        c.setAttribute('cy', getTabPosY());
-        c.setAttribute('r', circle + 2);
-        c.addEventListener('click', () => {
-          onClick(i);
-          // user interaction pauses autoplay, then restart after two intervals
+        const getTabPosX = (i) =>
+          (width / 2) - ((images.length * ((circle * 2) + gap) - gap) / 2) + (i * ((circle * 2) + gap));
+
+        const getTabPosY = () => height - 30;
+
+        // ------------------ DOM CREATION ---------------------------------------
+
+        function createImages() {
+          const svgNS = 'http://www.w3.org/2000/svg';
+          const xlinkNS = 'http://www.w3.org/1999/xlink';
+
+          images.forEach((img, i) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'image';
+            wrapper.style.zIndex = (inPlace === i) ? i : images.length + 1;
+
+            const svg = document.createElementNS(svgNS, 'svg');
+            svg.setAttribute('xmlns', svgNS);
+            svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+            svg.setAttribute('preserveAspectRatio', 'xMidYMax slice');
+
+            const defs = document.createElementNS(svgNS, 'defs');
+
+            const cp1 = document.createElementNS(svgNS, 'clipPath');
+            cp1.setAttribute('id', `${i}_circleClip`);
+            const circleEl = document.createElementNS(svgNS, 'circle');
+            circleEl.classList.add('clip');
+            circleEl.setAttribute('cx', '0');
+            circleEl.setAttribute('cy', '0');
+            circleEl.setAttribute('r', String(circle));
+            cp1.appendChild(circleEl);
+
+            const cp2 = document.createElementNS(svgNS, 'clipPath');
+            cp2.setAttribute('id', `${i}_squareClip`);
+            const rectEl = document.createElementNS(svgNS, 'rect');
+            rectEl.classList.add('clip');
+            rectEl.setAttribute('width', String(width));
+            rectEl.setAttribute('height', String(height));
+            cp2.appendChild(rectEl);
+
+            defs.appendChild(cp1);
+            defs.appendChild(cp2);
+            svg.appendChild(defs);
+
+            const g = document.createElementNS(svgNS, 'g');
+            g.setAttribute('clip-path', `url(#${i}${inPlace === i ? '_squareClip' : '_circleClip'})`);
+
+            const imageEl = document.createElementNS(svgNS, 'image');
+            imageEl.setAttribute('width', String(width));
+            imageEl.setAttribute('height', String(height));
+            imageEl.setAttribute('preserveAspectRatio', 'xMidYMin slice');
+            // set initial src to original URL (will be replaced by downscaled dataURL when ready)
+            try { imageEl.setAttributeNS(xlinkNS, 'xlink:href', img.url); } catch (e) { imageEl.setAttribute('href', img.url); }
+
+            g.appendChild(imageEl);
+            svg.appendChild(g);
+            wrapper.appendChild(svg);
+            imagesLayer.appendChild(wrapper);
+
+            const clip = circleEl;
+            const group = g;
+
+            // Set all circles initially at their small-tab positions
+            gsap.set(clip, { ...defaults, ...getPosSmall(i, images.length) });
+
+            clips[i] = {
+              id: i,
+              wrapper,
+              clip,
+              group,
+              isOpen: (i === opened)
+            };
+
+            // Downscale image asynchronously and replace href with smaller dataURL
+            downscaleImage(img.url, isDesktop ? 1200 : 800, 0.75).then((dataUrl) => {
+              try { imageEl.setAttributeNS(xlinkNS, 'xlink:href', dataUrl); } catch (e) { imageEl.setAttribute('href', dataUrl); }
+            }).catch(() => {
+              // ignore and keep original src
+            });
+          });
+        }
+
+        function createTabs() {
+          const svgNS = 'http://www.w3.org/2000/svg';
+          const svg = document.createElementNS(svgNS, 'svg');
+          svg.setAttribute('xmlns', svgNS);
+          svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+          svg.setAttribute('preserveAspectRatio', 'xMidYMax slice');
+
+          images.forEach((img, i) => {
+            const c = document.createElementNS(svgNS, 'circle');
+            c.classList.add('border');
+            c.setAttribute('cx', getTabPosX(i));
+            c.setAttribute('cy', getTabPosY());
+            c.setAttribute('r', circle + 2);
+            c.addEventListener('click', () => {
+              onClick(i);
+              // user interaction pauses autoplay, then restart after two intervals
+              stopAutoplay();
+              setTimeout(() => startAutoplay(), autoplayInterval * 2);
+            });
+            // keep reference for updates
+            tabs[i] = c;
+            svg.appendChild(c);
+          });
+
+          tabsLayer.appendChild(svg);
+          // initialize visual state for tabs
+          updateTabs(opened);
+        }
+
+        // Highlight active tab by filling the circle white (instead of enlarging)
+        function updateTabs(activeIndex) {
+          tabs.forEach((tabEl, idx) => {
+            if (!tabEl) return;
+            if (idx === activeIndex) {
+              // fill whole circle with white and emphasize stroke
+              gsap.to(tabEl, { fillOpacity: 1, duration: 0.25, ease: 'power2.out' });
+              gsap.to(tabEl, { attr: { 'stroke-width': 3 }, duration: 0.25 });
+              gsap.to(tabEl, { strokeOpacity: 0.9, duration: 0.25 });
+            } else {
+              // remove fill for inactive tabs and return stroke to normal
+              gsap.to(tabEl, { fillOpacity: 0, duration: 0.25, ease: 'power2.out' });
+              gsap.to(tabEl, { attr: { 'stroke-width': 2 }, duration: 0.25 });
+              gsap.to(tabEl, { strokeOpacity: 0.7, duration: 0.25 });
+            }
+          });
+        }
+
+        // ------------------ ANIMATION LOGIC ------------------------------------
+
+        function onInPlaceCallback(id) {
+          inPlace = id;
+          disabled = false;
+          currentlyAnimating = false;
+
+          // Update z-index and clipPath based on inPlace
+          clips.forEach(({ wrapper, group, id: idx }) => {
+            wrapper.style.zIndex = (inPlace === idx) ? idx : images.length + 1;
+            const clipId = `${idx}${inPlace === idx ? '_squareClip' : '_circleClip'}`;
+            group.setAttribute('clip-path', `url(#${clipId})`);
+          });
+          // update tab visuals to highlight active
+          if (typeof updateTabs === 'function') updateTabs(inPlace);
+        }
+
+        function animateOpen(id) {
+          const item = clips[id];
+          if (!item || !item.clip) return;
+
+          const clipEl = item.clip;
+          const total = images.length;
+          const flipDuration = duration;
+          const upDuration = 0.2;
+          const delay = 0; // no special first-load delay
+
+          gsap.timeline()
+            .set(clipEl, { ...defaults, ...getPosSmall(id, total) })
+            .to(clipEl, {
+              ...defaults,
+              ...getPosCenter(),
+              duration: upDuration,
+              delay,
+              ease: 'power3.inOut'
+            })
+            .to(clipEl, {
+              ...defaults,
+              ...getPosEnd(),
+              duration: flipDuration,
+              ease: 'power4.in',
+              onComplete: () => onInPlaceCallback(id)
+            });
+        }
+
+        function animateClose(id) {
+          const item = clips[id];
+          if (!item || !item.clip) return;
+
+          const clipEl = item.clip;
+          const total = images.length;
+          const flipDuration = duration;
+          const bounceDuration = 1;
+          const delay = 0.2 + duration; // matches the "up" + "flip" feel
+
+          gsap.timeline({ overwrite: true })
+            .set(clipEl, { ...defaults, ...getPosStart() })
+            .to(clipEl, {
+              ...defaults,
+              ...getPosCenter(),
+              delay,
+              duration: flipDuration,
+              ease: 'power4.out'
+            })
+            .to(clipEl, {
+              ...defaults,
+              motionPath: [getPosSmallAbove(id, total), getPosSmall(id, total)],
+              duration: bounceDuration,
+              ease: 'bounce.out'
+            });
+        }
+
+        function updateOpenState(prevOpened, newOpened) {
+          // Close previous
+          if (prevOpened !== null && prevOpened !== undefined) {
+            clips[prevOpened].isOpen = false;
+            animateClose(prevOpened);
+          }
+
+          // Open new
+          clips[newOpened].isOpen = true;
+          animateOpen(newOpened);
+        }
+
+        // ------------------ INTERACTION ----------------------------------------
+
+        function onClick(index) {
+          if (disabled || currentlyAnimating || index === opened) return;
+
+          currentlyAnimating = true;
+          disabled = true;
+
+          const prev = opened;
+          opened = index;
+
+          // keep clipPath square on the current inPlace until new onInPlace
+          updateOpenState(prev, opened);
+        }
+
+        function next() {
+          let nextIndex = opened + 1;
+          if (nextIndex >= images.length) nextIndex = 0;
+          onClick(nextIndex);
+        }
+
+        // ------------------ INIT -----------------------------------------------
+
+        createImages();
+        createTabs();
+
+        // Set initial clipPath state
+        clips.forEach(({ group, id }) => {
+          const clipId = `${id}${inPlace === id ? '_squareClip' : '_circleClip'}`;
+          group.setAttribute('clip-path', `url(#${clipId})`);
+        });
+
+        // Start with first image fully opened
+        // (no fancy first-load logic; just normal open animation)
+        onClick(0);
+
+        // --- Autoplay controls ---
+        function startAutoplay() {
           stopAutoplay();
-          setTimeout(() => startAutoplay(), autoplayInterval * 2);
-        });
-        // keep reference for updates
-        tabs[i] = c;
-        svg.appendChild(c);
-      });
-
-      tabsLayer.appendChild(svg);
-      // initialize visual state for tabs
-      updateTabs(opened);
-    }
-
-    // Highlight active tab by filling the circle white (instead of enlarging)
-    function updateTabs(activeIndex) {
-      tabs.forEach((tabEl, idx) => {
-        if (!tabEl) return;
-        if (idx === activeIndex) {
-          // fill whole circle with white and emphasize stroke
-          gsap.to(tabEl, { fillOpacity: 1, duration: 0.25, ease: 'power2.out' });
-          gsap.to(tabEl, { attr: { 'stroke-width': 3 }, duration: 0.25 });
-          gsap.to(tabEl, { strokeOpacity: 0.9, duration: 0.25 });
-        } else {
-          // remove fill for inactive tabs and return stroke to normal
-          gsap.to(tabEl, { fillOpacity: 0, duration: 0.25, ease: 'power2.out' });
-          gsap.to(tabEl, { attr: { 'stroke-width': 2 }, duration: 0.25 });
-          gsap.to(tabEl, { strokeOpacity: 0.7, duration: 0.25 });
+          autoplayTimer = setInterval(() => {
+            next();
+          }, autoplayInterval);
         }
-      });
-    }
 
-    // ------------------ ANIMATION LOGIC ------------------------------------
+        function stopAutoplay() {
+          if (autoplayTimer) {
+            clearInterval(autoplayTimer);
+            autoplayTimer = null;
+          }
+        }
 
-    function onInPlaceCallback(id) {
-      inPlace = id;
-      disabled = false;
-      currentlyAnimating = false;
+        // Pause autoplay when hovering the carousel, resume on leave
+        // const carouselEl = document.querySelector('.dot-caurosel');
+        // if (carouselEl) {
+        //   carouselEl.addEventListener('mouseenter', () => stopAutoplay());
+        //   carouselEl.addEventListener('mouseleave', () => startAutoplay());
+        // }
 
-      // Update z-index and clipPath based on inPlace
-      clips.forEach(({ wrapper, group, id: idx }) => {
-        wrapper.style.zIndex = (inPlace === idx) ? idx : images.length + 1;
-        const clipId = `${idx}${inPlace === idx ? '_squareClip' : '_circleClip'}`;
-        group.setAttribute('clip-path', `url(#${clipId})`);
-      });
-      // update tab visuals to highlight active
-      if (typeof updateTabs === 'function') updateTabs(inPlace);
-    }
+        // Safe-guard next button listener (if present)
+        if (nextBtn) nextBtn.addEventListener('click', next);
 
-    function animateOpen(id) {
-      const item = clips[id];
-      if (!item || !item.clip) return;
-
-      const clipEl = item.clip;
-      const total = images.length;
-      const flipDuration = duration;
-      const upDuration = 0.2;
-      const delay = 0; // no special first-load delay
-
-      gsap.timeline()
-        .set(clipEl, { ...defaults, ...getPosSmall(id, total) })
-        .to(clipEl, {
-          ...defaults,
-          ...getPosCenter(),
-          duration: upDuration,
-          delay,
-          ease: 'power3.inOut'
-        })
-        .to(clipEl, {
-          ...defaults,
-          ...getPosEnd(),
-          duration: flipDuration,
-          ease: 'power4.in',
-          onComplete: () => onInPlaceCallback(id)
-        });
-    }
-
-    function animateClose(id) {
-      const item = clips[id];
-      if (!item || !item.clip) return;
-
-      const clipEl = item.clip;
-      const total = images.length;
-      const flipDuration = duration;
-      const bounceDuration = 1;
-      const delay = 0.2 + duration; // matches the "up" + "flip" feel
-
-      gsap.timeline({ overwrite: true })
-        .set(clipEl, { ...defaults, ...getPosStart() })
-        .to(clipEl, {
-          ...defaults,
-          ...getPosCenter(),
-          delay,
-          duration: flipDuration,
-          ease: 'power4.out'
-        })
-        .to(clipEl, {
-          ...defaults,
-          motionPath: [getPosSmallAbove(id, total), getPosSmall(id, total)],
-          duration: bounceDuration,
-          ease: 'bounce.out'
-        });
-    }
-
-    function updateOpenState(prevOpened, newOpened) {
-      // Close previous
-      if (prevOpened !== null && prevOpened !== undefined) {
-        clips[prevOpened].isOpen = false;
-        animateClose(prevOpened);
-      }
-
-      // Open new
-      clips[newOpened].isOpen = true;
-      animateOpen(newOpened);
-    }
-
-    // ------------------ INTERACTION ----------------------------------------
-
-    function onClick(index) {
-      if (disabled || currentlyAnimating || index === opened) return;
-
-      currentlyAnimating = true;
-      disabled = true;
-
-      const prev = opened;
-      opened = index;
-
-      // keep clipPath square on the current inPlace until new onInPlace
-      updateOpenState(prev, opened);
-    }
-
-    function next() {
-      let nextIndex = opened + 1;
-      if (nextIndex >= images.length) nextIndex = 0;
-      onClick(nextIndex);
-    }
-
-    // ------------------ INIT -----------------------------------------------
-
-    createImages();
-    createTabs();
-
-    // Set initial clipPath state
-    clips.forEach(({ group, id }) => {
-      const clipId = `${id}${inPlace === id ? '_squareClip' : '_circleClip'}`;
-      group.setAttribute('clip-path', `url(#${clipId})`);
-    });
-
-    // Start with first image fully opened
-    // (no fancy first-load logic; just normal open animation)
-    onClick(0);
-
-    // --- Autoplay controls ---
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayTimer = setInterval(() => {
-        next();
-      }, autoplayInterval);
-    }
-
-    function stopAutoplay() {
-      if (autoplayTimer) {
-        clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-    }
-
-    // Pause autoplay when hovering the carousel, resume on leave
-    // const carouselEl = document.querySelector('.dot-caurosel');
-    // if (carouselEl) {
-    //   carouselEl.addEventListener('mouseenter', () => stopAutoplay());
-    //   carouselEl.addEventListener('mouseleave', () => startAutoplay());
-    // }
-
-    // Safe-guard next button listener (if present)
-    if (nextBtn) nextBtn.addEventListener('click', next);
-
-    // Start autoplay after initial open
-    setTimeout(() => startAutoplay(), autoplayInterval);
-  </script>
+        // Start autoplay after initial open
+        setTimeout(() => startAutoplay(), autoplayInterval);
+      </script>
 
 
       <script>
@@ -1191,9 +1619,8 @@
       </style>
 
       <div class="throwback-video">
-        <iframe class="throwback-video-style" loading="lazy"
-          src="https://www.youtube.com/embed/" title="YouTube video player"
-          frameborder="0"
+        <iframe class="throwback-video-style" loading="lazy" src="https://www.youtube.com/embed/"
+          title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
@@ -1204,15 +1631,15 @@
 
     <section id="venue" class="venue section">
       <!-- Section Title -->
-        
 
-        <!-- Venue cover slideshow -->
-        
-        <div class="container section-title" style="margin-top: 8%">
-          <h2>Event Venue<br /></h2>
-        </div>
 
-        <div id="venue-cover" aria-hidden="false"></div>
+      <!-- Venue cover slideshow -->
+
+      <div class="container section-title" style="margin-top: 8%">
+        <h2>Event Venue<br /></h2>
+      </div>
+
+      <div id="venue-cover" aria-hidden="false"></div>
 
     </section>
 
@@ -1272,12 +1699,14 @@
         <div class="form-content">
           <div class="form-info">
             <h2>Want to Win Some Prizes?</h2>
-            <p class="intro">Enter your official email to join the event game, climb the leaderboard and win rewards.</p>
+            <p class="intro">Enter your official email to join the event game, climb the leaderboard and win rewards.
+            </p>
           </div>
           <form id="user-info-form" class="game-form" novalidate>
             <div class="input-group">
               <div class="icon">@</div>
-              <input type="email" id="email" name="email" required placeholder="your.name@wuh-group.com" aria-describedby="email-feedback" />
+              <input type="email" id="email" name="email" required placeholder="your.name@wuh-group.com"
+                aria-describedby="email-feedback" />
             </div>
             <div id="email-feedback" class="input-error" aria-live="polite"></div>
             <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
@@ -1317,7 +1746,7 @@
       </div>
     </div>
     <!-- Game Section -->
-    
+
 
     <div id="game-content" class="hidden">
       <div style="display: flex; align-items: center; justify-content: center">
@@ -1348,7 +1777,7 @@
         <div class="game-section">
           <!-- style for leader board design -->
           <div id="leaderboard-modal">
-            
+
           </div>
         </div>
         <script>
@@ -1382,55 +1811,198 @@
   <!-- Leaderboard (moved beneath game) -->
   <style>
     /* Dark, compact leaderboard with frosted glass container and blurred inner items */
-    .leaderboard{
-      width:560px; max-width:96%; margin:22px auto; padding:18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border-radius:14px; color:#e6eef8; box-shadow:0 8px 30px rgba(4,8,20,0.6); font-family: 'Poppins', system-ui, sans-serif;
-      border:1px solid rgba(255,255,255,0.06);
+    .leaderboard {
+      width: 560px;
+      max-width: 96%;
+      margin: 22px auto;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      border-radius: 14px;
+      color: #e6eef8;
+      box-shadow: 0 8px 30px rgba(4, 8, 20, 0.6);
+      font-family: 'Poppins', system-ui, sans-serif;
+      border: 1px solid rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(10px) saturate(140%);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
     }
-    .leaderboard h2{ margin:0 0 20px 0; font-size:20px; color:#e6eef8; text-align:center }
 
-    .leaderboard-stage{ margin-bottom:14px }
-    .podium{ display:flex; align-items:end; justify-content:center; gap:14px }
+    .leaderboard h2 {
+      margin: 0 0 20px 0;
+      font-size: 20px;
+      color: #e6eef8;
+      text-align: center
+    }
+
+    .leaderboard-stage {
+      margin-bottom: 14px
+    }
+
+    .podium {
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      gap: 14px
+    }
 
     /* Inner items have a subtle translucent surface and their own blur to simulate depth */
-    .podium-item{ width:150px; min-height:86px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05)); border-radius:12px; padding:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; border:1px solid rgba(255,255,255,0.04); backdrop-filter: blur(6px) saturate(120%); -webkit-backdrop-filter: blur(6px) saturate(120%); }
-    .podium-1{ transform:translateY(-10px); box-shadow:0 10px 30px rgba(0,0,0,0.6); border:1px solid rgba(255,215,115,0.08) }
-    .podium-2{ transform:translateY(2px) }
-    .podium-3{ transform:translateY(6px) }
+    .podium-item {
+      width: 150px;
+      min-height: 86px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.05));
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(6px) saturate(120%);
+      -webkit-backdrop-filter: blur(6px) saturate(120%);
+    }
+
+    .podium-1 {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 215, 115, 0.08)
+    }
+
+    .podium-2 {
+      transform: translateY(2px)
+    }
+
+    .podium-3 {
+      transform: translateY(6px)
+    }
 
     /* crown for top player */
-    .podium-1::before{ content:'👑'; position:absolute; top:-18px; left:50%; transform:translateX(-50%); font-size:20px ;}
+    .podium-1::before {
+      content: '👑';
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+    }
 
-    .podium-rank{ font-weight:800; font-size:14px; color:#ffd36b; margin-bottom:6px;  }
-    .podium-name{ font-weight:700; color:#e6eef8; font-size:15px; margin-bottom:6px; text-align:center }
-    .podium-score{ font-weight:900; color:#7bf18a; text-align: center; }
+    .podium-rank {
+      font-weight: 800;
+      font-size: 14px;
+      color: #ffd36b;
+      margin-bottom: 6px;
+    }
 
-    .leaderboard-list{ list-style:none; padding:0; margin:12px 0 0 }
-    .leaderboard-list li{ display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-radius:12px; margin-bottom:10px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04)); border:1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px) saturate(120%); -webkit-backdrop-filter: blur(6px) saturate(120%); }
-    .leaderboard-list .left{ display:flex; align-items:center; gap:12px }
-    .leaderboard-list .rank{ min-width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.02); border-radius:50%; color:#9aa7bf; font-weight:800; border:1px solid rgba(255,255,255,0.02) }
-    .leaderboard-list .name{ font-weight:700; color:#e6eef8 }
-    .leaderboard-list .score{ font-weight:800; color:#7bf18a }
+    .podium-name {
+      font-weight: 700;
+      color: #e6eef8;
+      font-size: 15px;
+      margin-bottom: 6px;
+      text-align: center
+    }
+
+    .podium-score {
+      font-weight: 900;
+      color: #7bf18a;
+      text-align: center;
+    }
+
+    .leaderboard-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0
+    }
+
+    .leaderboard-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(6px) saturate(120%);
+      -webkit-backdrop-filter: blur(6px) saturate(120%);
+    }
+
+    .leaderboard-list .left {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .leaderboard-list .rank {
+      min-width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 50%;
+      color: #9aa7bf;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.02)
+    }
+
+    .leaderboard-list .name {
+      font-weight: 700;
+      color: #e6eef8
+    }
+
+    .leaderboard-list .score {
+      font-weight: 800;
+      color: #7bf18a
+    }
 
     /* Performance mode: disable heavy backdrop-filters */
     .performance-mode .leaderboard,
     .performance-mode .podium-item,
-    .performance-mode .leaderboard-list li { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+    .performance-mode .leaderboard-list li {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
 
     /* smaller screens */
-    @media (max-width:800px){ .podium{ gap:10px } .podium-item{ width:30% } .leaderboard{ padding:14px } }
+    @media (max-width:800px) {
+      .podium {
+        gap: 10px
+      }
+
+      .podium-item {
+        width: 30%
+      }
+
+      .leaderboard {
+        padding: 14px
+      }
+    }
   </style>
 
   <div class="leaderboard">
     <h2>Winners Board</h2>
     <div class="leaderboard-stage" id="leaderboard-stage">
       <div class="podium">
-        <div class="podium-item podium-2" data-pos="2"><div class="podium-rank">2</div><div class="podium-body"><div class="podium-name">—</div><div class="podium-score">0</div></div></div>
-        <div class="podium-item podium-1" data-pos="1"><div class="podium-rank">1</div><div class="podium-body"><div class="podium-name">—</div><div class="podium-score">0</div></div></div>
-        <div class="podium-item podium-3" data-pos="3"><div class="podium-rank">3</div><div class="podium-body"><div class="podium-name">—</div><div class="podium-score">0</div></div></div>
+        <div class="podium-item podium-2" data-pos="2">
+          <div class="podium-rank">2</div>
+          <div class="podium-body">
+            <div class="podium-name">—</div>
+            <div class="podium-score">0</div>
+          </div>
+        </div>
+        <div class="podium-item podium-1" data-pos="1">
+          <div class="podium-rank">1</div>
+          <div class="podium-body">
+            <div class="podium-name">—</div>
+            <div class="podium-score">0</div>
+          </div>
+        </div>
+        <div class="podium-item podium-3" data-pos="3">
+          <div class="podium-rank">3</div>
+          <div class="podium-body">
+            <div class="podium-name">—</div>
+            <div class="podium-score">0</div>
+          </div>
+        </div>
       </div>
     </div>
     <ul class="leaderboard-list" id="leaderboard-list"></ul>
@@ -1445,7 +2017,7 @@
         .then(res => { if (!res.ok) throw new Error('Network response was not ok'); return res.json(); })
         .then(data => {
           const entries = Array.isArray(data.data) ? data.data.slice() : [];
-          entries.sort((a,b) => (b.score||0) - (a.score||0));
+          entries.sort((a, b) => (b.score || 0) - (a.score || 0));
 
           const p1Name = document.querySelector('.podium-1 .podium-name');
           const p1Score = document.querySelector('.podium-1 .podium-score');
@@ -1469,7 +2041,7 @@
             else {
               const raw = entry.email || entry.name || 'Player';
               nameEl.textContent = prettyName(raw);
-              scoreEl.textContent = (entry.score||0).toLocaleString();
+              scoreEl.textContent = (entry.score || 0).toLocaleString();
             }
           }
 
@@ -1480,7 +2052,7 @@
           const listEl = document.getElementById('leaderboard-list');
           if (!listEl) return;
           const rest = entries.slice(3);
-          listEl.innerHTML = rest.length ? rest.map((e,i) => `\n              <li>\n                <span class="rank">${i+4}</span>\n                <span class="name">${prettyName(e.email||e.name||'Player')}</span>\n                <span class="score">${(e.score||0).toLocaleString()}</span>\n              </li>`).join('') : '<li style="opacity:.7">No more players yet</li>';
+          listEl.innerHTML = rest.length ? rest.map((e, i) => `\n              <li>\n                <span class="rank">${i + 4}</span>\n                <span class="name">${prettyName(e.email || e.name || 'Player')}</span>\n                <span class="score">${(e.score || 0).toLocaleString()}</span>\n              </li>`).join('') : '<li style="opacity:.7">No more players yet</li>';
         })
         .catch(err => console.error('Leaderboard fetch failed:', err));
     }
@@ -1564,17 +2136,17 @@
     // As user scrolls from top -> some distance, curtains slide out
 
 
-//     gsap.from('.schedule', {
-// xPercent: 10,      opacity: 0,
-//       duration: 0.9,
-//       ease: "power3.out",
-//       scrollTrigger: {
-//         trigger: '.schedule',
-//         start: "top 50%",
-//         toggleActions: "play none none reverse"
-//       }
-//     });
-    
+    //     gsap.from('.schedule', {
+    // xPercent: 10,      opacity: 0,
+    //       duration: 0.9,
+    //       ease: "power3.out",
+    //       scrollTrigger: {
+    //         trigger: '.schedule',
+    //         start: "top 50%",
+    //         toggleActions: "play none none reverse"
+    //       }
+    //     });
+
     // Animate schedule "rows" (.schedule-item) as they enter the viewport.
     // ScrollTrigger.batch('.schedule .schedule-item', {
     //   interval: 0.1, // time window (in seconds) for batching
@@ -1591,7 +2163,7 @@
     //   onLeaveBack: batch => gsap.to(batch, { y: 24, autoAlpha: 0, duration: 0.5, stagger: 0.03 }),
     //   start: 'top 85%'
     // });
-    
+
     gsap.from('.team-section .team-member', {
       y: 30,
       autoAlpha: 0,
@@ -1604,7 +2176,7 @@
         toggleActions: 'play none none reverse'
       }
     });
-    
+
     // // Gallery section animations
     // gsap.from('#gallery .section-title', {
     //   y: 20,
@@ -1617,7 +2189,7 @@
     //     toggleActions: 'play none none reverse'
     //   }
     // });
-    
+
     // Gallery nav tabs animation
     // gsap.from('.nav-tabs .nav-link', {
     //   y: 15,
@@ -1631,7 +2203,7 @@
     //     toggleActions: 'play none none reverse'
     //   }
     // });
-    
+
     // // Carousel items entrance animation with stagger
     // ScrollTrigger.batch('.carousel__slider__item', {
     //   interval: 0.1,

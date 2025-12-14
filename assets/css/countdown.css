@@ -25,7 +25,7 @@
   color: #ffffff;
   position: relative;
   perspective: 700px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 /* inner digit block that flips */
@@ -65,10 +65,26 @@
 
 /* small-screen adjustments */
 @media (max-width:768px){
-  .countdown__number{ width:84px; height:84px; font-size:1.6rem }
+  .countdown__number{ width:64px; height:64px; font-size:1.6rem }
 }
 
 @media (max-width:480px){
   #countdown .countdown__container{ gap:0.6rem }
   .countdown__number{ width:70px; height:70px; font-size:1.2rem }
+}
+
+/* Smaller countdown specifically for hero section to avoid oversized digits */
+.hero-right-bottom #countdown .countdown__number {
+  width: 64px;
+  height: 64px;
+  font-size: 1.6rem;
+}
+
+@media (min-width: 1200px) {
+  /* Slightly increase on very large screens while keeping it reasonable */
+  .hero-right-bottom #countdown .countdown__number {
+    width: 96px;
+    height: 96px;
+    font-size: 1.8rem;
+  }
 }
