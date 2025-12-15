@@ -170,7 +170,6 @@
           font-size: 20px;
           line-height: 1.1;
           margin: 0;
-          color: var(--heading-color); /* theme-aware heading color */
           letter-spacing: 0.6px;
         }
 
@@ -179,9 +178,16 @@
           font-weight: 500;
           font-size: 14px;
           margin: 8px 0 0 0;
-          color: var(--default-color); /* theme-aware subtext */
           opacity: 0.85;
         }
+
+        [data-theme="dark"] .hero-left-bottom h5, .hero-left-bottom h3 {
+          color: #b0b0b0;
+        }
+
+        [data-theme="light"] .hero-left-bottom h5, .hero-left-bottom h3 {
+color: #bdbdbd;        }
+
 
         .hero-sub {
           color: var(--accent-color, #e2001a);
@@ -586,6 +592,7 @@
               display: block;
               font-weight: 700;
               margin-bottom: 6px;
+              color: #d6d6d6;
             }
 
             .schedule .schedule-item h4 {
