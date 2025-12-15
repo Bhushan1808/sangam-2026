@@ -214,7 +214,7 @@
     if (!initial) {
       // Respect OS preference if no saved value
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      initial = prefersDark ? 'dark' : 'light';
+      initial = prefersDark ? 'light' : 'dark';
     }
     applyTheme(initial);
 

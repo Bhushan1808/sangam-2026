@@ -138,7 +138,7 @@
 				}
 				const attr = document.documentElement.getAttribute('data-theme');
 				if (attr) return attr;
-				return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+				return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'light' : 'dark';
 			}
 			const selectedTheme = readSavedTheme();
 			const options = (selectedTheme === 'dark') ? darkThemeOptions : lightThemeOptions;
