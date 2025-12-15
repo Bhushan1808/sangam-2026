@@ -124,7 +124,7 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       onLeaveBack: batch => gsap.to(batch, { y: 24, autoAlpha: 0, duration: 0.5, stagger: 0.03 }),
     });
 
-    gsap.from('.team-section .team-member', {
+    gsap.from('.team-section', {
       y: 30,
       autoAlpha: 0,
       duration: 0.8,
