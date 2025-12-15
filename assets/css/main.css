@@ -520,6 +520,11 @@ h6 {
     top: 6px
   }
 
+  
+  .theme-toggle{
+    margin-top: 12px;
+  }
+
   /* Animated hamburger icon: create 3 bars using pseudo-elements and
      animate into an X when `is-active` is present. We hide the icon font
      glyph (Bootstrap Icons) and draw our own bars for a smooth CSS-only
@@ -889,7 +894,7 @@ h6 {
 
 .scroll-top i {
   font-size: 24px;
-  color: var(--contrast-color);
+  color: white;
   line-height: 0;
 }
 

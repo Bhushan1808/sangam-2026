@@ -137,6 +137,28 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       }
     });
 
+     gsap.from('.gallery', {
+    xPercent: -10,      opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: '.gallery',
+            start: "top 40%",
+            toggleActions: "play none none reverse"
+          }
+        });
+
+        gsap.from('.venue', {
+    yPercent: 20,      opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: '.venue',
+            start: "top 35%",
+            toggleActions: "play none none reverse"
+          }
+        });
+
   window.addEventListener('load', () => ScrollTrigger.refresh());
   window.addEventListener('resize', () => ScrollTrigger.refresh());
 }
