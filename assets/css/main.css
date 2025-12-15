@@ -128,14 +128,14 @@
 [data-theme="light"] footer.dark-background,
 [data-theme="light"] footer.dark-background .copyright,
 [data-theme="light"] footer.dark-background .copyright * {
-  color: var(--default-color) !important;
+  color:  black !important;
 }
 
 [data-theme="dark"] .hero.dark-background .hero-bottom,
 [data-theme="dark"] footer.dark-background,
 [data-theme="dark"] footer.dark-background .copyright,
 [data-theme="dark"] footer.dark-background .copyright * {
-  color: var(--default-color) !important;
+  color:  white !important;
 }
 
 /* Smooth scroll */
@@ -301,10 +301,6 @@ h6 {
 }
 
 /* Ensure nav links inside the header follow the theme's nav color */
-.header .navmenu a,
-.header .navmenu a:focus {
-  color: var(--nav-color);
-}
 
 .header .cta-btn,
 .header .cta-btn:focus {
@@ -586,7 +582,6 @@ h6 {
     margin: 0;
     border-radius: 10px;
     /* Use theme-aware background for mobile nav */
-    background: var(--nav-mobile-background-color, linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)));
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
@@ -1422,22 +1417,22 @@ section,
   [data-theme="dark"] .navmenu a,
   [data-theme="dark"] .navmenu a:focus,
   [data-theme="dark"] .navmenu a:hover {
-    color: rgba(255,255,255,0.95) !important;
+    color: rgba(255,255,255,0.95);
   }
   [data-theme="dark"] .navmenu li:hover>a,
   [data-theme="dark"] .navmenu .active {
-    color: var(--nav-hover-color) !important;
+    color: red !important;
   }
 
-  [data-theme="light"] .header .navmenu a,
+ [data-theme="light"] .header .navmenu a,
   [data-theme="light"] .navmenu a,
   [data-theme="light"] .navmenu a:focus,
   [data-theme="light"] .navmenu a:hover {
-    color: rgba(0,0,0,0.95) !important;
+    color: rgba(0,0,0,0.95);
   }
   [data-theme="light"] .navmenu li:hover>a,
   [data-theme="light"] .navmenu .active {
-    color: var(--nav-hover-color) !important;
+    color: red !important;
   }
 
 @media (max-width: 991px) {
