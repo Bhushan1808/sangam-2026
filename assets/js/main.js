@@ -203,6 +203,10 @@
       if (icon) {
         icon.className = 'bi ' + (theme === 'dark' ? 'bi-moon-fill' : 'bi-sun-fill');
       }
+      const iconMobile = document.getElementById('theme-toggle-icon-mobile');
+      if (iconMobile) {
+        iconMobile.className = 'bi ' + (theme === 'dark' ? 'bi-moon-fill' : 'bi-sun-fill');
+      }
     } catch (e) {
       console.error('applyTheme error', e);
     }
@@ -214,13 +218,15 @@
     if (!initial) {
       // Respect OS preference if no saved value
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      initial = prefersDark ? 'light' : 'dark';
+      initial = prefersDark ? 'dark' : 'light';
     }
     applyTheme(initial);
 
     const btn = document.getElementById('theme-toggle');
-    if (!btn) return;
-    btn.addEventListener('click', () => {
+    const mobileBtn = document.getElementById('theme-toggle-mobile');
+    if (!btn && !mobileBtn) return;
+
+    function onToggleClick() {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       const next = current === 'dark' ? 'light' : 'dark';
       // persist the selection and reload so dependent modules (particles, etc.) re-init
@@ -233,7 +239,10 @@
       }
       // short delay to ensure DOM updates/localStorage complete, then reload
       setTimeout(() => { window.location.reload(); }, 5);
-    });
+    }
+
+    if (btn) btn.addEventListener('click', onToggleClick);
+    if (mobileBtn) mobileBtn.addEventListener('click', onToggleClick);
   }
 
   // initialize theme toggle on load

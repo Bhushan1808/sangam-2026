@@ -603,6 +603,18 @@ h6 {
   /* Active state: rotate one bar and show the other to form an X */
   .mobile-nav-toggle.is-active::before {
     transform: rotate(45deg) translateY(-0.5px);
+  
+  /* Mobile-only theme toggle inside nav */
+  .mobile-theme-item { display: none; }
+  
+  /* Hide header theme toggle on mobile to avoid duplicate controls */
+  .header .theme-toggle { display: inline-flex; }
+  
+  @media (max-width: 1199px) {
+    .mobile-theme-item { display: block; padding: 10px 20px; }
+    .mobile-theme-item .theme-toggle { width: 100%; justify-content: flex-start; }
+    .header .theme-toggle { display: none; }
+  }
     box-shadow: none;
   }
 
@@ -632,7 +644,7 @@ h6 {
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
-    height: 345px;
+    height: 400px;
 
   }
 
