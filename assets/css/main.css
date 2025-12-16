@@ -64,7 +64,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
+  gap: 8px;
   height: 40px;
   margin-left: 12px;
   border-radius: 8px;
@@ -81,7 +81,7 @@
 }
 
 /* Ensure the icon color adapts to theme */
-[data-theme="light"] .theme-toggle { color: var(--default-color); border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .theme-toggle { color: darkorange; border-color: rgba(0,0,0,0.08); }
 [data-theme="dark"] .theme-toggle { color: var(--default-color); border-color: rgba(255,255,255,0.06); }
 
 
@@ -1470,7 +1470,7 @@ section,
   [data-theme="light"] .navmenu a,
   [data-theme="light"] .navmenu a:focus,
   [data-theme="light"] .navmenu a:hover {
-    color: rgba(0,0,0,0.95);
+color: darkgray;
   }
   [data-theme="light"] .navmenu li:hover>a,
   [data-theme="light"] .navmenu .active {
