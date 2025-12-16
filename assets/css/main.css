@@ -138,6 +138,13 @@
   color:  white !important;
 }
 
+[data-theme="light"] .hero-right-bottom .countdown__number div {
+  color: gray;
+}
+
+[data-theme="dark"] .hero-right-bottom .countdown__number div {
+  color: white;}
+
 /* Smooth scroll */
 :root {
   scroll-behavior: smooth;
@@ -1818,7 +1825,3 @@ section,
   filter: none !important;
 }
 
-/* When in performance mode, we also reduce shadow blurs that can cost GPU */
-.performance-mode * {
-  box-shadow: none !important;
-}
