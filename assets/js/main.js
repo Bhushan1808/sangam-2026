@@ -238,4 +238,36 @@
 
   // initialize theme toggle on load
   window.addEventListener('load', initThemeToggle);
+
+  /* Hero video initialization: ensure video plays when allowed and
+     pauses/hides when Performance Mode is enabled or on small screens. */
+  function setupHeroVideo() {
+    try {
+      const vid = document.getElementById('hero-video');
+      if (!vid) return;
+      const isPerfMode = () => {
+        return (document.documentElement.getAttribute('data-performance') === 'low') ||
+          localStorage.getItem('perfMode') === '1' ||
+          window.performanceModeEnabled === true;
+      };
+
+      if (isPerfMode()) {
+        vid.pause();
+        vid.style.display = 'none';
+        return;
+      }
+
+      vid.muted = true;
+      vid.playsInline = true;
+
+      const tryPlay = () => { vid.play().catch(() => {}); };
+      tryPlay();
+
+      window.addEventListener('performancechange', () => {
+        if (isPerfMode()) { vid.pause(); vid.style.display = 'none'; }
+        else { vid.style.display = 'block'; tryPlay(); }
+      });
+    } catch (e) { /* swallow errors */ }
+  }
+  window.addEventListener('load', setupHeroVideo);
 })();

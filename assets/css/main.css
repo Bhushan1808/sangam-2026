@@ -179,6 +179,39 @@ canvas {
   height: 100%;
 }
 
+/* Hero background video styling */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* keep visual-container (three.js) behind video if present */
+#visual-container {
+  z-index: -3;
+}
+
+/* Hide heavy video on small screens to save bandwidth */
+@media (max-width: 768px) {
+  .hero-video { display: none !important; }
+}
+
+/* Respect Performance Mode: hide video when performance hint is set */
+[data-performance="low"] .hero-video,
+[data-performance="1"] .hero-video {
+  display: none !important;
+}
+
 a {
   color: var(--accent-color);
   text-decoration: none;
