@@ -139,7 +139,7 @@
 }
 
 [data-theme="light"] .hero-right-bottom .countdown__number div {
-  color: gray;
+  color: white;
 }
 
 [data-theme="dark"] .hero-right-bottom .countdown__number div {
@@ -201,10 +201,7 @@ canvas {
   z-index: -3;
 }
 
-/* Hide heavy video on small screens to save bandwidth */
-@media (max-width: 768px) {
-  .hero-video { display: none !important; }
-}
+
 
 /* Respect Performance Mode: hide video when performance hint is set */
 [data-performance="low"] .hero-video,
