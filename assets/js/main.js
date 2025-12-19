@@ -189,4 +189,94 @@
   }
   window.addEventListener("load", navmenuScrollspy);
   document.addEventListener("scroll", navmenuScrollspy);
+
+  /**
+   * Theme toggle (light / dark) — persists to localStorage and uses
+   * `data-theme` attribute on <html> for CSS variable switching.
+   */
+  function applyTheme(theme) {
+    try {
+      if (!theme) return;
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('site-theme', theme);
+      const icon = document.getElementById('theme-toggle-icon');
+      if (icon) {
+        icon.className = 'bi ' + (theme === 'dark' ? 'bi-moon-fill' : 'bi-sun-fill');
+      }
+      const iconMobile = document.getElementById('theme-toggle-icon-mobile');
+      if (iconMobile) {
+        iconMobile.className = 'bi ' + (theme === 'dark' ? 'bi-moon-fill' : 'bi-sun-fill');
+      }
+    } catch (e) {
+      console.error('applyTheme error', e);
+    }
+  }
+
+  function initThemeToggle() {
+    const saved = localStorage.getItem('site-theme');
+    let initial = saved;
+    if (!initial) {
+      // Respect OS preference if no saved value
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      initial = prefersDark ? 'dark' : 'light';
+    }
+    applyTheme(initial);
+
+    const btn = document.getElementById('theme-toggle');
+    const mobileBtn = document.getElementById('theme-toggle-mobile');
+    if (!btn && !mobileBtn) return;
+
+    function onToggleClick() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      // persist the selection and reload so dependent modules (particles, etc.) re-init
+      applyTheme(next);
+      try {
+        // ensure theme is stored then reload
+        localStorage.setItem('site-theme', next);
+      } catch (e) {
+        console.warn('Could not write theme to localStorage', e);
+      }
+      // short delay to ensure DOM updates/localStorage complete, then reload
+      setTimeout(() => { window.location.reload(); }, 5);
+    }
+
+    if (btn) btn.addEventListener('click', onToggleClick);
+    if (mobileBtn) mobileBtn.addEventListener('click', onToggleClick);
+  }
+
+  // initialize theme toggle on load
+  window.addEventListener('load', initThemeToggle);
+
+  /* Hero video initialization: ensure video plays when allowed and
+     pauses/hides when Performance Mode is enabled or on small screens. */
+  function setupHeroVideo() {
+    try {
+      const vid = document.getElementById('hero-video');
+      if (!vid) return;
+      const isPerfMode = () => {
+        return (document.documentElement.getAttribute('data-performance') === 'low') ||
+          localStorage.getItem('perfMode') === '1' ||
+          window.performanceModeEnabled === true;
+      };
+
+      if (isPerfMode()) {
+        vid.pause();
+        vid.style.display = 'none';
+        return;
+      }
+
+      vid.muted = true;
+      vid.playsInline = true;
+
+      const tryPlay = () => { vid.play().catch(() => {}); };
+      tryPlay();
+
+      window.addEventListener('performancechange', () => {
+        if (isPerfMode()) { vid.pause(); vid.style.display = 'none'; }
+        else { vid.style.display = 'block'; tryPlay(); }
+      });
+    } catch (e) { /* swallow errors */ }
+  }
+  window.addEventListener('load', setupHeroVideo);
 })();

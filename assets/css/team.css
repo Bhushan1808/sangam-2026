@@ -10,7 +10,7 @@
 
 .team-section .team-member {
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.04);
+  border: 1px solid rgba(219, 114, 114, 0.04);
   /* Use flex-basis to avoid conflicts with other stylesheets that set width */
   width: auto !important;
   flex: 0 0 220px;
@@ -20,10 +20,12 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
   transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease, background 0.35s ease;
   position: relative;
   overflow: hidden;
+      backdrop-filter: blur(12px) saturate(130%);
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
 }
 
 .team-section .team-member img {
@@ -32,15 +34,15 @@
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid rgba(255,255,255,0.06);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
   transition: transform 0.45s ease;
   display: block;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
 }
 
 .team-section .team-member h3 {
   margin: 0;
   font-size: 1rem;
-  color: #fff;
+  color: gray;
   text-align: center;
 }
 
@@ -66,7 +68,7 @@
   top: 10px;
   right: 10px;
   background: rgba(0,0,0,0.45);
-  color: #fff;
+  color: gray;
   font-size: 0.7rem;
   padding: 6px 8px;
   border-radius: 8px;

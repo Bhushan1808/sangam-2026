@@ -14,9 +14,9 @@
 :root {
   --background-color: #0e0e0e;
   /* Background color for the entire website, including individual sections */
-  --default-color: #f8f8ff;
+  --default-color: black;
   /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #f8f8ff;
+  --heading-color: black;
   /* Color for headings, subheadings and title throughout the website */
   --accent-color: #e2001a;
   /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
@@ -26,14 +26,70 @@
   /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
 
+/* Theme variants: light and dark. The site uses `data-theme` on the <html> element to switch. */
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --default-color: #111111;
+  --heading-color: #111111;
+  --accent-color: #e2001a;
+  --surface-color: #ffffff;
+  --contrast-color: #000000;
+  --nav-color: rgba(0,0,0,0.75);
+  --nav-hover-color: #000000;
+  --nav-mobile-background-color: rgba(255,255,255,0.98);
+  --nav-dropdown-background-color: rgba(255,255,255,0.98);
+  --glass-border: rgba(0,0,0,0.06);
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-bg-2: rgba(255,255,255,0.02);
+}
+
+[data-theme="dark"] {
+  --background-color: #0e0e0e;
+  --default-color: #f8f8ff;
+  --heading-color: #f8f8ff;
+  --accent-color: #e2001a;
+  --surface-color: #0e0e0e;
+  --contrast-color: #ffffff;
+  --nav-color: rgba(255,255,255,0.65);
+  --nav-hover-color: #ffffff;
+  --nav-mobile-background-color: rgba(8,8,10,0.72);
+  --nav-dropdown-background-color: rgba(12,12,14,0.85);
+  --glass-border: rgba(255,255,255,0.06);
+  --glass-bg: rgba(255,255,255,0.03);
+  --glass-bg-2: rgba(255,255,255,0.01);
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  margin-left: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  color: var(--default-color);
+  cursor: pointer;
+}
+.theme-toggle .bi {
+  font-size: 18px;
+}
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+/* Ensure the icon color adapts to theme */
+[data-theme="light"] .theme-toggle { color: darkorange; border-color: rgba(0,0,0,0.08); }
+[data-theme="dark"] .theme-toggle { color: var(--default-color); border-color: rgba(255,255,255,0.06); }
+
+
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: rgba(255,
-      255,
-      255,
-      0.65);
+  --nav-color: red;
   /* The default color of the main navmenu links */
-  --nav-hover-color: #ffffff;
+  --nav-hover-color: black;
   /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff;
   /* Used as the background color for mobile navigation menu */
@@ -63,6 +119,31 @@
   --surface-color: #001553;
   --contrast-color: #ffffff;
 }
+
+/* Fix: ensure hero-bottom and footer text follow site theme (not section-level dark-background)
+   When a section uses the `dark-background` utility, it sets --default-color locally which
+   can force white text even when the site is in light theme. These rules explicitly
+   set visible text color for hero-bottom and footer according to the active theme. */
+[data-theme="light"] .hero.dark-background .hero-bottom,
+[data-theme="light"] footer.dark-background,
+[data-theme="light"] footer.dark-background .copyright,
+[data-theme="light"] footer.dark-background .copyright * {
+  color:  black !important;
+}
+
+[data-theme="dark"] .hero.dark-background .hero-bottom,
+[data-theme="dark"] footer.dark-background,
+[data-theme="dark"] footer.dark-background .copyright,
+[data-theme="dark"] footer.dark-background .copyright * {
+  color:  white !important;
+}
+
+[data-theme="light"] .hero-right-bottom .countdown__number div {
+  color: white;
+}
+
+[data-theme="dark"] .hero-right-bottom .countdown__number div {
+  color: white;}
 
 /* Smooth scroll */
 :root {
@@ -96,6 +177,36 @@ body {
 canvas {
   width: 100%;
   height: 100%;
+}
+
+/* Hero background video styling */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* keep visual-container (three.js) behind video if present */
+#visual-container {
+  z-index: -3;
+}
+
+
+
+/* Respect Performance Mode: hide video when performance hint is set */
+[data-performance="low"] .hero-video,
+[data-performance="1"] .hero-video {
+  display: none !important;
 }
 
 a {
@@ -204,11 +315,11 @@ h6 {
 --------------------------------------------------------------*/
 .header {
   --background-color: rgba(0, 0, 0, 0);
-  --heading-color: #ffffff;
   color: var(--default-color);
   background-color: var(--background-color);
   transition: all 0.5s;
   z-index: 997;
+  justify-content: right;
 }
 
 .header .logo {
@@ -226,6 +337,8 @@ h6 {
   font-weight: 700;
   color: var(--heading-color);
 }
+
+/* Ensure nav links inside the header follow the theme's nav color */
 
 .header .cta-btn,
 .header .cta-btn:focus {
@@ -437,12 +550,17 @@ h6 {
 /* Mobile Navigation */
 @media (max-width: 1199px) {
   .mobile-nav-toggle {
-    color: var(--nav-color);
+    color: white;
     font-size: 28px;
     line-height: 0;
     cursor: pointer;
     transition: color 0.3s;
     top: 6px
+  }
+
+  
+  .theme-toggle{
+    margin-top: 12px;
   }
 
   /* Animated hamburger icon: create 3 bars using pseudo-elements and
@@ -485,6 +603,18 @@ h6 {
   /* Active state: rotate one bar and show the other to form an X */
   .mobile-nav-toggle.is-active::before {
     transform: rotate(45deg) translateY(-0.5px);
+  
+  /* Mobile-only theme toggle inside nav */
+  .mobile-theme-item { display: none; }
+  
+  /* Hide header theme toggle on mobile to avoid duplicate controls */
+  .header .theme-toggle { display: inline-flex; }
+  
+  @media (max-width: 1199px) {
+    .mobile-theme-item { display: block; padding: 10px 20px; }
+    .mobile-theme-item .theme-toggle { width: 100%; justify-content: flex-start; }
+    .header .theme-toggle { display: none; }
+  }
     box-shadow: none;
   }
 
@@ -506,8 +636,7 @@ h6 {
     padding: 10px 0;
     margin: 0;
     border-radius: 10px;
-    /* Frosted glass background (improved) */
-    background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+    /* Use theme-aware background for mobile nav */
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     border: 1px solid var(--glass-border, rgba(255,255,255,0.08));
@@ -515,7 +644,7 @@ h6 {
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
-    height: 345px;
+    height: 400px;
 
   }
 
@@ -618,11 +747,11 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-  color: white;
+  color: var(--default-color);
   background: linear-gradient(180deg, var(--glass-bg), var(--glass-bg-2));
   backdrop-filter: blur(12px) saturate(130%);
   -webkit-backdrop-filter: blur(12px) saturate(130%);
-  border-top: 1px solid rgba(255,255,255,0.04);
+  border-top: 1px solid var(--glass-border, rgba(255,255,255,0.04));
   font-size: 14px;
   position: relative;
 }
@@ -815,7 +944,7 @@ h6 {
 
 .scroll-top i {
   font-size: 24px;
-  color: var(--contrast-color);
+  color: white;
   line-height: 0;
 }
 
@@ -1055,9 +1184,11 @@ section,
   align-items: center;
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
   border: 1px solid rgba(255,255,255,0.04);
-  box-shadow: 0 12px 40px rgba(6,10,20,0.45);
+    box-shadow: 0 4px 20px rgba(6, 10, 20, 0.45);
   border-radius: 14px;
   padding: 18px;
+  backdrop-filter: blur(12px) saturate(130%);
+      -webkit-backdrop-filter: blur(12px) saturate(130%);
 }
 
 .md-image {
@@ -1138,6 +1269,7 @@ section,
 --------------------------------------------------------------*/
 .schedule {
  overflow: hidden;
+ 
 }
 
 .schedule .nav-tabs {
@@ -1151,6 +1283,7 @@ section,
 .schedule .nav-tabs li {
   display: inline-block;
   padding: 10px;
+ 
 }
 
 .schedule .nav-tabs a {
@@ -1219,6 +1352,8 @@ section,
   padding-top: 15px;
   padding-bottom: 15px;
   transition: background-color ease-in-out 0.3s;
+   backdrop-filter: blur(12px) saturate(130%);
+      -webkit-backdrop-filter: blur(12px) saturate(130%);
 }
 
 .schedule .schedule-item:nth-child(odd) {
@@ -1330,6 +1465,30 @@ section,
   transform: translateY(-2px);
   box-shadow: 0 16px 56px rgba(6,10,20,0.55), 0 0 64px rgba(255,200,80,0.26);
 }
+
+  /* Theme-scoped overrides to ensure nav link text matches the active theme.
+     These use higher specificity and !important to override legacy rules. */
+  [data-theme="dark"] .header .navmenu a,
+  [data-theme="dark"] .navmenu a,
+  [data-theme="dark"] .navmenu a:focus,
+  [data-theme="dark"] .navmenu a:hover {
+    color: rgba(255,255,255,0.95);
+  }
+  [data-theme="dark"] .navmenu li:hover>a,
+  [data-theme="dark"] .navmenu .active {
+    color: red !important;
+  }
+
+ [data-theme="light"] .header .navmenu a,
+  [data-theme="light"] .navmenu a,
+  [data-theme="light"] .navmenu a:focus,
+  [data-theme="light"] .navmenu a:hover {
+color: darkgray;
+  }
+  [data-theme="light"] .navmenu li:hover>a,
+  [data-theme="light"] .navmenu .active {
+    color: red !important;
+  }
 
 @media (max-width: 991px) {
   .gallery .nav-tabs a {
@@ -1709,7 +1868,3 @@ section,
   filter: none !important;
 }
 
-/* When in performance mode, we also reduce shadow blurs that can cost GPU */
-.performance-mode * {
-  box-shadow: none !important;
-}

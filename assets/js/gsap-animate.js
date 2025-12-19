@@ -52,40 +52,12 @@
 // MD's Note: orchestrated reveal — image as cover first, then section, then description
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   // prepare initial hidden states — make the md section enter from the left
-  gsap.set('.md-note', { autoAlpha: 0, x: -60 });
-  gsap.set('.md-note .md-note-content', { autoAlpha: 0, x: -38 });
-  gsap.set('.md-note .md-name', { autoAlpha: 0, x: -24 });
+ 
 
-  const mdTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.md-note-section',
-      start: 'top 60%',
-      toggleActions: 'play none none reverse'
-    }
-  });
+
 
   // show image prominently (cover-like pop)
-  mdTl.fromTo('.md-image', { scale: 1.08, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.65, ease: 'power2.out' });
 
-  // reveal the container (text area) sliding in from the left
-  mdTl.to('.md-note', { autoAlpha: 1, x: 0, duration: 0.7, ease: 'power3.out' }, '>-0.12');
-
-  // reveal description then name (also slide in)
-  mdTl.to('.md-note .md-note-content', { autoAlpha: 1, x: 0, duration: 0.6, ease: 'power2.out' }, '>-0.06');
-  mdTl.to('.md-note .md-name', { autoAlpha: 1, x: 0, duration: 0.45, ease: 'power2.out' }, '>-0.04');
-
-  // subtle parallax tilt for image while scrolling the section
-  gsap.to('.md-image', {
-    rotationY: 6,
-    y: -8,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.md-note-section',
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 0.6
-    }
-  });
 
      gsap.from('.schedule', {
     xPercent: 10,      opacity: 0,
@@ -152,7 +124,7 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       onLeaveBack: batch => gsap.to(batch, { y: 24, autoAlpha: 0, duration: 0.5, stagger: 0.03 }),
     });
 
-    gsap.from('.team-section .team-member', {
+    gsap.from('.team-section', {
       y: 30,
       autoAlpha: 0,
       duration: 0.8,
@@ -164,6 +136,28 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         toggleActions: 'play none none reverse'
       }
     });
+
+     gsap.from('.gallery', {
+    xPercent: -10,      opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: '.gallery',
+            start: "top 40%",
+            toggleActions: "play none none reverse"
+          }
+        });
+
+        gsap.from('.venue', {
+    yPercent: 20,      opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: '.venue',
+            start: "top 35%",
+            toggleActions: "play none none reverse"
+          }
+        });
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
   window.addEventListener('resize', () => ScrollTrigger.refresh());
