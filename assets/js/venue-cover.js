@@ -85,8 +85,8 @@
     resetAuto();
   }
 
-  // auto-advance
-  let autoId;
+  // auto-advance (controlled by visibility to avoid jank)
+  let autoId = null;
   function startAuto() {
     stopAuto();
     autoId = setInterval(() => {
@@ -95,8 +95,43 @@
     }, 3500);
   }
   function stopAuto() { if (autoId) { clearInterval(autoId); autoId = null; } }
-  function resetAuto() { startAuto(); }
+  function resetAuto() { if (isInView && !document.hidden) startAuto(); }
 
+  // Pause auto-advance while the section is off-screen or the page is hidden.
+  let isInView = false;
+  function ensureImagesLoaded() {
+    // preload background images to avoid flicker when animation runs
+    slides.forEach(s => {
+      const bg = (s.style.backgroundImage || '').replace(/url\((?:"|')?(.*?)(?:"|')?\)/, '$1');
+      if (bg) {
+        const im = new Image();
+        im.src = bg;
+      }
+    });
+  }
 
-  startAuto();
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+          isInView = true;
+          ensureImagesLoaded();
+          startAuto();
+        } else {
+          isInView = false;
+          stopAuto();
+        }
+      });
+    }, { threshold: [0.25] });
+    obs.observe(cover);
+  } else {
+    // fallback: start immediately
+    ensureImagesLoaded();
+    startAuto();
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAuto();
+    else if (isInView) startAuto();
+  });
 })();
