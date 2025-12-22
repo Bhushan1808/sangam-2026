@@ -93,7 +93,7 @@
         <!-- Add additional <source> tags here for webm/ogg if available -->
       </video>
       <div class="hero-container">
-        <h4 class="hero-sub">12th Annual · WIN Conclave</h4>
+        <h1 class="hero-sub">12th Annual · WIN Conclave</h1>
         <h1 class="hero-main">Sangam 2026</h1>
         <img class="hero-logo" src="assets/img/logo.707040cd.png" alt="W & H logo" />
 
@@ -192,12 +192,23 @@
 
 
         .hero-sub {
-          color: var(--accent-color, #e2001a);
-          font-weight: 700;
+          font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+          font-weight: 800;
           letter-spacing: 0.6px;
           margin: 0 0 6px;
-          padding: 4px;
-    background-color: orange;
+          padding: 6px 12px;
+          display: inline-block;
+          color: red;
+          /* outline effect for characters */
+          -webkit-text-stroke: 0.9px rgba(0,0,0,0.6);
+          text-stroke: 0.9px rgba(0,0,0,0.6);
+          /* depth shadow */
+          text-shadow:
+            0 1px 0 rgba(0,0,0,0.65),
+            0 6px 18px rgba(0,0,0,0.45);
+          /* subtle glassy box behind text for emphasis */
+          border-radius: 10px;
+          backdrop-filter: blur(4px);
         }
 
         .hero-main {
