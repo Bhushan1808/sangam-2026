@@ -20,6 +20,8 @@
     rel="stylesheet" />
   <!-- Hero display font: Cinzel (strong, classical/heroic feel) -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- Damion display font (for MD's note) -->
+  <link href="https://fonts.googleapis.com/css2?family=Damion&display=swap" rel="stylesheet">
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
@@ -43,8 +45,48 @@
   <!-- Game form styles -->
   <link href="assets/css/game-form.css" rel="stylesheet" />
 
+  <link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap" rel="stylesheet" />
   <style>
     @import url("https://fonts.cdnfonts.com/css/digital-numbers");
+
+    /* Section titles: use BBH Bartle decorative display font */
+    .section-title h2,
+    .container.section-title h2 {
+      font-family: 'BBH Bartle', serif;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      font-size: 2.2rem;
+      margin: 0 0 0.6rem;
+      line-height: 1.05;
+    }
+    /* Underline animation that grows from center -> edges */
+    .section-title h2,
+    .container.section-title h2 {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 8px;
+    }
+
+    .section-title h2::after,
+    .container.section-title h2::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: var(--accent-color, #e2001a);
+      border-radius: 3px;
+    }
+
+    /* MD's Note: decorative display font */
+    .md-note-content {
+      font-family: 'Damion', cursive;
+      font-size: 1.8rem;
+      line-height: 1.2;
+      margin: 0 0 0.4rem;
+    }
+
   </style>
 </head>
 
@@ -520,7 +562,7 @@
     <section class="md-note-section md-split" id="md-note">
       <!-- Heading -->
       <div class="container section-title">
-        <h2>MD's Note</h2>
+        <h2 class="md-section-title">MD's Note</h2>
       </div>
       <!-- Content Container -->
       <div class="md-note-container">

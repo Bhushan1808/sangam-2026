@@ -1129,18 +1129,6 @@ section,
   }
 }
 
-.section-title h2:after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 120px;
-  height: 3px;
-  background: var(--accent-color);
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-}
 
 .section-title p {
   margin-bottom: 0;
