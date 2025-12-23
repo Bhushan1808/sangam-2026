@@ -1166,10 +1166,27 @@
           pointer-events: auto;
           /* enable clicking the tab circles */
         }
+
+        /* fullscreen button inside carousel */
+        .gallery-fullscreen {
+          position: absolute;
+          right: 12px;
+          top: 12px;
+          z-index: 150;
+          background: rgba(0,0,0,0.6);
+          color: white;
+          border: none;
+          padding: 8px 10px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 16px;
+        }
+
       </style>
-      <div class="dot-caurosel container shadow">
+      <div class="dot-caurosel container shadow" style="position:relative;">
         <div id="imagesLayer"></div>
         <div class="tabs" id="tabsLayer"></div>
+        <button id="galleryFullscreenBtn" class="gallery-fullscreen" title="Open gallery">⤢</button>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
@@ -2209,6 +2226,111 @@
       } catch (e) { ScrollTrigger.refresh(); }
     })();
     ScrollTrigger.refresh();
+  </script>
+  <!-- Internal lightweight gallery modal (safe, non-destructive) -->
+  <style>
+    /* simple modal styles */
+    #sgModal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.85); z-index: 2000; }
+    #sgModal.open { display: flex; }
+    #sgModal .sgContent { position: relative; max-width: 92vw; max-height: 92vh; display: flex; align-items: center; }
+    #sgModal img { max-width: 100%; max-height: 100%; display:block; border-radius:6px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+    #sgModal .sgBtn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.45); color: white; border: none; width:48px; height:48px; display:flex; align-items:center; justify-content:center; cursor:pointer; border-radius:50%; box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+    #sgModal .sgBtn svg { width:20px; height:20px; fill: white; }
+    #sgModal #sgPrev { left: -64px; }
+    #sgModal #sgNext { right: -64px; }
+    #sgModal #sgClose { position: absolute; right: 8px; top: 8px; background: white; font-size: 20px; color: #111; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:none; box-shadow: 0 6px 18px rgba(0,0,0,0.35); }
+    #sgModal #sgClose svg{ width:18px; height:18px; fill: #111; }
+    @media(max-width:900px){ #sgModal #sgPrev, #sgModal #sgNext { left:auto; right:auto; display:flex; } #sgModal #sgPrev{ left:10px } #sgModal #sgNext{ right:10px } }
+    @media(max-width:700px){ #sgModal .sgBtn{ display:none } #sgModal #sgClose{ right: 12px; top: 12px } }
+  </style>
+
+  <div id="sgModal" aria-hidden="true">
+    <div class="sgContent" role="dialog" aria-modal="true">
+      <button id="sgPrev" class="sgBtn" aria-label="Previous">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+      <img id="sgImg" src="" alt="" />
+      <button id="sgNext" class="sgBtn" aria-label="Next">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </button>
+      <button id="sgClose" aria-label="Close" style="color:white;border:none;">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.71L12 12l6.3 6.29-1.41 1.41L10.59 13.4 4.29 19.71 2.88 18.3 9.18 12 2.88 5.71 4.29 4.29 10.59 10.6 16.88 4.29z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      function getHref(el){ return el.getAttribute('href') || el.getAttribute('xlink:href') || el.getAttributeNS('http://www.w3.org/1999/xlink','href'); }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const imagesLayer = document.getElementById('imagesLayer');
+        if (!imagesLayer) return;
+
+        // Capture references to the existing svg <image> nodes (do NOT replace or clone wrappers)
+        const svgImages = Array.from(imagesLayer.querySelectorAll('svg image'));
+        const wrappers = Array.from(imagesLayer.querySelectorAll('.image'));
+        wrappers.forEach((w,i)=> { try{ w.dataset.sgIndex = i; }catch(e){} });
+
+        const modal = document.getElementById('sgModal');
+        const imgEl = modal.querySelector('#sgImg');
+        const btnPrev = modal.querySelector('#sgPrev');
+        const btnNext = modal.querySelector('#sgNext');
+        const btnClose = modal.querySelector('#sgClose');
+        let current = 0;
+
+        function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow = ''; }
+
+        // animate image change using GSAP (fade + slight scale)
+        function setImageWithAnim(url){
+          if (!window.gsap) { imgEl.src = url; return; }
+          gsap.killTweensOf(imgEl);
+          // fade out current
+          gsap.to(imgEl, {duration: 0.22, autoAlpha: 0, scale: 0.98, ease: 'power1.in', onComplete: ()=>{
+            imgEl.src = url;
+            imgEl.onload = ()=>{ gsap.fromTo(imgEl, {autoAlpha:0, scale:1.02}, {duration:0.45, autoAlpha:1, scale:1, ease:'power2.out'}); };
+          }});
+        }
+
+        function openAt(i){
+          if (!svgImages || svgImages.length === 0) return;
+          current = ((i % svgImages.length) + svgImages.length) % svgImages.length;
+          const url = getHref(svgImages[current]) || '';
+          modal.classList.add('open');
+          modal.setAttribute('aria-hidden','false');
+          document.body.style.overflow = 'hidden';
+          setImageWithAnim(url);
+        }
+
+        // Click on gallery images (delegated) — non-destructive
+        imagesLayer.addEventListener('click', (ev) => {
+          const w = ev.target.closest('.image');
+          if (!w) return;
+          const idx = Number(w.dataset.sgIndex);
+          if (!Number.isNaN(idx)) { openAt(idx); }
+        });
+
+        // Global fullscreen button (if present) opens at `inPlace` index (falls back to 0)
+        const fullBtn = document.getElementById('galleryFullscreenBtn');
+        if (fullBtn) fullBtn.addEventListener('click', (e) => { e.stopPropagation(); const start = (typeof inPlace !== 'undefined') ? inPlace : 0; openAt(start); });
+
+        // Modal controls
+        btnPrev.addEventListener('click', (e)=>{ e.stopPropagation(); openAt(current-1); });
+        btnNext.addEventListener('click', (e)=>{ e.stopPropagation(); openAt(current+1); });
+        btnClose.addEventListener('click', (e)=>{ e.stopPropagation(); close(); });
+
+        // Click background to close
+        modal.addEventListener('click', (e)=>{ if (e.target === modal) close(); });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e)=>{
+          if (!modal.classList.contains('open')) return;
+          if (e.key === 'Escape') return close();
+          if (e.key === 'ArrowLeft') return openAt(current-1);
+          if (e.key === 'ArrowRight') return openAt(current+1);
+        });
+      });
+    })();
   </script>
 </body>
 
