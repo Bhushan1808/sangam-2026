@@ -17,6 +17,6 @@ jobs:
           # Provide a Firebase service account JSON as a repository secret.
           # Create a secret named `FIREBASE_SERVICE_ACCOUNT` in your repo settings
           # and paste the full JSON key for a service account with Hosting permissions.
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_wnh_sangam2026 }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SANGAM2026_82474 }}
           channelId: live
           projectId: wnh-sangam2026
