@@ -86,7 +86,26 @@
       line-height: 1.2;
       margin: 0 0 0.4rem;
     }
+    
+    /* Mobile: reduce section title size so headers fit smaller screens */
+    @media (max-width: 576px) {
+      .section-title h2,
+      .container.section-title h2 {
+        font-size: 1.4rem;
+        letter-spacing: 0.01em;
+        line-height: 1.05;
+        margin-bottom: 0.35rem;
+      }
 
+      .section-title h2::after,
+      .container.section-title h2::after {
+        height: 2px;
+      }
+
+      .md-note-content {
+        font-size: 1.4rem;
+      }
+    }
   </style>
 </head>
 
@@ -687,6 +706,9 @@
 
             /* Reduce padding on the schedule container so it fits on small screens */
             #schedule .container { padding-left: 12px; padding-right: 12px; }
+
+            /* Hide schedule header on mobile to save vertical space */
+            .schedule .schedule-header { display: none !important; }
           }
 
           /* On medium+ screens, visually reorder columns so Presenter appears before Location
