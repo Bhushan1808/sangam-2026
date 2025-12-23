@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "wnh-sangam2026"
-  }
+    "default": "wnh-sangam2026",
+    "wnh-sangam2026": "wnh-sangam2026"
+  },
+  "targets": {},
+  "etags": {}
 }
