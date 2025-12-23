@@ -617,6 +617,29 @@
             gap: 8px;
           }
 
+          /* inside the info column, split into location + presenter */
+          .info-section .location { flex: 1 1 50%; margin: 0 }
+          .info-section .presenter { flex: 1 1 50%; margin: 0; color: var(--muted-color, #d1d1d1); font-size: 0.95rem }
+
+          /* Layout for Location / Presenter split */
+          .info-columns {
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .schedule .schedule-item .info-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+          }
+
+          .schedule .presenter {
+            margin-left: 8px;
+            font-size: 0.95rem;
+          }
+
           @media (max-width: 992px) {
             .location-img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
             .location-name { font-size: 14px; }
@@ -657,12 +680,37 @@
               font-size: 1rem;
             }
 
+           
+
             /* slightly smaller images on narrow phones to improve alignment */
             .schedule .schedule-item .location-img { width: 36px; height: 36px; border-radius: 6px }
 
             /* Reduce padding on the schedule container so it fits on small screens */
             #schedule .container { padding-left: 12px; padding-right: 12px; }
           }
+
+          /* On medium+ screens, visually reorder columns so Presenter appears before Location
+             without changing HTML for every row. This keeps Location as the last column. */
+          @media (min-width: 768px) {
+            .schedule .schedule-item,
+            .schedule .schedule-header {
+              display: flex;
+              align-items: center;
+            }
+
+            /* The presenter column (plain .col-2) should come before the location info-section */
+            .schedule .schedule-item > .col-2 { order: 3; }
+            .schedule .schedule-item > .col-2.info-section { order: 4; }
+
+            /* Header ordering (first .col-2 is location, second is presenter) */
+           
+            .schedule .schedule-header > .col-2:first-of-type { order: 4; } /* location header -> last */
+            .schedule .schedule-header > .col-2:last-of-type { order: 3; }  /* presenter header -> before location */
+          }
+
+           .location{
+              color: gray;
+            }
         </style>
 
         <style>
@@ -678,455 +726,237 @@
           .agenda-full { display: none }
         </style>
 
-        <div class="tab-content row justify-content-center" <!-- Schdule Day 1 -->
+        <div class="tab-content row justify-content-center" >
           <div role="tabpanel" class="col-lg-10 tab-pane fade show active" id="day-1"
             style=" border-radius: 8px">
             <div class="row align-items-center schedule-header">
-              <div class="col-3 col-md-3">
+              <div class="col-3 col-md-2">
                 <h3><strong>Timing</strong></h3>
               </div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h3><strong>Agenda</strong></h3>
               </div>
-              <div class="col-3 col-md-3">
-                <h3 class="location">
-                  <strong>Location/ Presenter</strong>
-                </h3>
+              <div class="col-2 col-md-3">
+                <h3 class="presenter"><strong>Presenter</strong></h3>
+              </div>
+              <div class="col-2 col-md-2">
+                <h3 class="location"><strong>Location</strong></h3>
               </div>
             </div>
 
             <!-- Replaced schedule for 09 January 2026 -->
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>08:30 - 10:30</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Departure from Office</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/office.jpg" alt="Office" />
                 <h4 class="location">Office Parking</h4>
               </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
+              </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>10:30 - 11:00</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Arrivals+Tea Break</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/breakfast.jpg" alt="Tea" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Banquet Porch</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>11:00 - 12:00</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Opening Note by MD</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/note.jpg" alt="MD" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Ballroom</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>12:00 - 12:20</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Sales Presentation- HMA</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/presenter.jpg" alt="Sales" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">	Sapphire Ballroom</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter">TBA</h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>12:20 - 12:40</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Service Presentation - HMA</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/presenter.jpg" alt="Service" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Ballroom</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter">TBA</h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>12:40 - 13:00</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>HR & IT Presentation - HMA</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/presenter.jpg" alt="HR/IT" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Ballroom</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter">TBA</h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>13:00 - 13:20</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Finance Presentation - HMA</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/presenter.jpg" alt="Finance" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Ballroom</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter">TBA</h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>13:20 - 14:15</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Lunch</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/lunch.jpg" alt="Lunch" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Ballroom-PFA</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>14:15 - 14:30</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Group Photograph (W&H SANGAM Jackets)</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
-                  src="assets/img/wh-event/2024img_13.jpeg" alt="Photo" />
-                <h4 class="location">TBA</h4>
+                <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/group-photo.png" alt="Photo" />
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>14:30 - 15:45</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Activities</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
-                  src="assets/img/schedule-img/activities.jpg" alt="Activities" />
-                <h4 class="location">TBA</h4>
+                <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/team building.jpg" alt="Activities" />
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>15:45 - 16:00</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Tea Break</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/teaBreak.jpg" alt="Tea" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>16:00 - 18:30</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Team Building/Any activity?</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/team building.jpg" alt="Team Building" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>18:30 - 19:00</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Award Ceremony</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/awards.jpg" alt="Awards" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>19:00 - 20:00</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>Talent Show</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/cultural.jpg" alt="Talent" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
 
-            <div class=" schedule-item align-items-center">
+            <div class="row align-items-center schedule-item">
               <div class="col-3 col-md-3"><time>20:00 - 23:00</time></div>
-              <div class="col-5 col-md-6">
+              <div class="col-5 col-md-5">
                 <h4>TBD/DJ Night</h4>
               </div>
-              <div class="col-3 col-md-3 info-section"><img loading="lazy" class="location-img mb-2"
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
                   src="assets/img/schedule-img/dinner.jpg" alt="DJ Night" />
-                <h4 class="location">TBA</h4>
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
               </div>
             </div>
           </div>
           <!-- End Schdule Day 1 -->
 
-          <!-- Schdule Day 2 -->
-          <div role="tabpanel" class="col-lg-10 tab-pane fade" id="day-2"
-            style="background-color: #101215d9; border-radius: 8px">
-            <div class=" schedule-item align-items-center schedule-header">
-              <div class="col-3 col-md-3">
-                <h3><strong>Timing</strong></h3>
-              </div>
-              <div class="col-5 col-md-6">
-                <h3><strong>Agenda</strong></h3>
-              </div>
-              <div class="col-3 col-md-3">
-                <h3 class="location">
-                  <strong>Location/ Presenter</strong>
-                </h3>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>09:00 - 10:00</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Breakfast</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/breakfast.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Shamiana</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>10:00- 12:00</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Opening Note and HMA Strategy Presentation</h4>
-              </div>
-
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/note.jpg"
-                  alt="Location Image" />
-                <h4 class="location">
-                  Philipp Hupka, Shri Gupta, Dr. Kai Lugger
-                </h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>12:00 - 12:20</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Tea Break</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/teaBreak.jpg"
-                  alt="Location Image" />
-                <h4 class="location">PFA Bargad Hall</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>12:20 - 12:40</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Sales Presentation</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/anuj.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Anuj Sahni</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>12:40 - 13:00</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Service Presentation</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/kashif.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Kashif Baig</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>13:00 - 13:20</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Academy Presentation</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/olaf.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Olaf Heymann-Riedel</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>13:30 - 14:30</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Lunch</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/lunch.jpg"
-                  alt="Location Image" />
-                <h4 class="location">PFA Bargad Hall</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>14:30 - 15:00</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Team Building Activity</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/team building.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Ashoka Ground</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>15:00 - 15:15</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Group Photo</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/wh-event-2/2023img_9.jpeg"
-                  alt="Location Image" />
-                <h4 class="location">Amphitheater</h4>
-              </div>
-            </div>
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>15:15 - 15:30</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Tea Break</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/teaBreak.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Ashoka Ground</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>15:30 - 18:30</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Sports Event</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/cricket.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Ashoka Ground</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>19:00 - 19:30</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Awards and Recognition</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/awards.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Ashoka Lawn</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>19:30 - 20:30</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Rockband</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/rockband.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Ashoka Lawn</h4>
-              </div>
-            </div>
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>20:30 onwards</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>DJ and Dinner</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/dinner.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Ashoka Lawn</h4>
-              </div>
-            </div>
-          </div>
-          <!-- End Schdule Day 2 -->
-
-          <!-- Schdule Day 3 -->
-
-          <div role="tabpanel" class="col-lg-10 tab-pane fade" id="day-3"
-            style="background-color: #101215d9; border-radius: 8px">
-            <div class=" align-items-center schedule-header">
-              <div class="col-3 col-md-3">
-                <h3><strong>Timing</strong></h3>
-              </div>
-              <div class="col-5 col-md-6">
-                <h3><strong>Agenda</strong></h3>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <h3 class="location">
-                  <strong>Location/ Presenter</strong>
-                </h3>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>09:00 - 10:00</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Breakfast</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/breakfast.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Shamiana</h4>
-              </div>
-            </div>
-
-            <div class=" schedule-item align-items-center">
-              <div class="col-3 col-md-3">
-                <time>10:00 - 11:00</time>
-              </div>
-              <div class="col-5 col-md-6">
-                <h4>Checkout</h4>
-              </div>
-              <div class="col-3 col-md-3 info-section">
-                <img loading="lazy" class="location-img mb-2" src="assets/img/schedule-img/checkout.jpg"
-                  alt="Location Image" />
-                <h4 class="location">Reception</h4>
-              </div>
-            </div>
-
-            <!-- End Schdule Day 3 -->
-          </div>
         </div>
       </div>
 
@@ -1794,10 +1624,6 @@
           <div class="team-member">
             <img loading="lazy" src="assets/img/kunal.jpg" alt="Kunal Kohli" />
             <h3>Kunal Kohli</h3>
-          </div>
-          <div class="team-member">
-            <img loading="lazy" src="assets/img/rakshit.jpg" alt="Rakshit Joshi" />
-            <h3>Rakshit Joshi</h3>
           </div>
           <div class="team-member">
             <img loading="lazy" src="assets/img/utkarsh.jpg" alt="Uttkarsh Singh" />
