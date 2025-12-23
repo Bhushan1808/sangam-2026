@@ -698,7 +698,6 @@
               margin: 0 0 4px 0;
               font-size: 1rem;
             }
-
            
 
             /* slightly smaller images on narrow phones to improve alignment */
@@ -733,6 +732,10 @@
            .location{
               color: gray;
             }
+
+          .next-day {
+            text-align: center;
+          }
         </style>
 
         <style>
@@ -976,9 +979,56 @@
                 <h4 class="presenter"></h4>
               </div>
             </div>
+
+            <div class="row align-items-center schedule-item">
+              <div class="col-12">
+                <h4 class="next-day"><strong>Next Day — 10 January 2026</strong></h4>
+              </div>
+            </div>
+
+            <div class="row align-items-center schedule-item">
+              <div class="col-3 col-md-3"><time>9:00 - 10:00</time></div>
+              <div class="col-5 col-md-5">
+                <h4>Breakfast</h4>
+              </div>
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/dinner.jpg" alt="DJ Night" />
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
+              </div>
+            </div>
+
+            <div class="row align-items-center schedule-item">
+              <div class="col-3 col-md-3"><time>10:00 - 10:30</time></div>
+              <div class="col-5 col-md-5">
+                <h4>Checkout</h4>
+              </div>
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/dinner.jpg" alt="DJ Night" />
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
+              </div>
+            </div>
+
+            <div class="row align-items-center schedule-item">
+              <div class="col-3 col-md-3"><time>10:30 - 10:45</time></div>
+              <div class="col-5 col-md-5">
+                <h4>Departure</h4>
+              </div>
+              <div class="col-2 col-md-2 info-section"><img loading="lazy" class="location-img mb-2"
+                  src="assets/img/schedule-img/dinner.jpg" alt="DJ Night" />
+                <h4 class="location">Sapphire Lawn</h4>
+              </div>
+              <div class="col-2 col-md-2">
+                <h4 class="presenter"></h4>
+              </div>
+            </div>
           </div>
           <!-- End Schdule Day 1 -->
-
         </div>
       </div>
 
@@ -1508,12 +1558,12 @@
           }
         }
 
-        // Pause autoplay when hovering the carousel, resume on leave
-        // const carouselEl = document.querySelector('.dot-caurosel');
-        // if (carouselEl) {
-        //   carouselEl.addEventListener('mouseenter', () => stopAutoplay());
-        //   carouselEl.addEventListener('mouseleave', () => startAutoplay());
-        // }
+        //Pause autoplay when hovering the carousel, resume on leave
+        const carouselEl = document.querySelector('.dot-caurosel');
+        if (carouselEl) {
+          carouselEl.addEventListener('mouseenter', () => stopAutoplay());
+          carouselEl.addEventListener('mouseleave', () => startAutoplay());
+        }
 
         // Safe-guard next button listener (if present)
         if (nextBtn) nextBtn.addEventListener('click', next);
