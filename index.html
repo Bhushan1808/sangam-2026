@@ -2241,21 +2241,29 @@
     #sgModal #sgClose { position: absolute; right: 8px; top: 8px; background: white; font-size: 20px; color: #111; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:none; box-shadow: 0 6px 18px rgba(0,0,0,0.35); }
     #sgModal #sgClose svg{ width:18px; height:18px; fill: #111; }
     @media(max-width:900px){ #sgModal #sgPrev, #sgModal #sgNext { left:auto; right:auto; display:flex; } #sgModal #sgPrev{ left:10px } #sgModal #sgNext{ right:10px } }
-    @media(max-width:700px){ #sgModal .sgBtn{ display:none } #sgModal #sgClose{ right: 12px; top: 12px } }
+    /* Mobile: stack image then controls */
+    @media(max-width:700px){
+      #sgModal .sgContent{ flex-direction: column; gap:12px; align-items: center; }
+      #sgModal .sgControls{ display:flex; gap:12px; justify-content:center; }
+      #sgModal .sgBtn{ position: static; transform: none; width:44px; height:44px; }
+      #sgModal #sgClose{ right: 12px; top: 12px }
+    }
   </style>
 
   <div id="sgModal" aria-hidden="true">
+    <button id="sgClose" aria-label="Close" style="color:white;border:none;">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.71L12 12l6.3 6.29-1.41 1.41L10.59 13.4 4.29 19.71 2.88 18.3 9.18 12 2.88 5.71 4.29 4.29 10.59 10.6 16.88 4.29z"/></svg>
+    </button>
     <div class="sgContent" role="dialog" aria-modal="true">
-      <button id="sgPrev" class="sgBtn" aria-label="Previous">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-      </button>
       <img id="sgImg" src="" alt="" />
-      <button id="sgNext" class="sgBtn" aria-label="Next">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
-      </button>
-      <button id="sgClose" aria-label="Close" style="color:white;border:none;">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.71L12 12l6.3 6.29-1.41 1.41L10.59 13.4 4.29 19.71 2.88 18.3 9.18 12 2.88 5.71 4.29 4.29 10.59 10.6 16.88 4.29z"/></svg>
-      </button>
+      <div class="sgControls">
+        <button id="sgPrev" class="sgBtn" aria-label="Previous">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button id="sgNext" class="sgBtn" aria-label="Next">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 
