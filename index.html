@@ -1182,11 +1182,37 @@
           font-size: 16px;
         }
 
+        /* Gallery Prev/Next controls */
+        .dot-caurosel .gallery-control {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          border: none;
+          background: rgba(0,0,0,0.42);
+          color: #fff;
+          font-size: 22px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          line-height: 1;
+          cursor: pointer;
+          z-index: 200;
+        }
+        .dot-caurosel .gallery-prev { left: 12px; }
+        .dot-caurosel .gallery-next { right: 12px; }
+        .dot-caurosel .gallery-control:hover { background: rgba(0,0,0,0.55); }
+
       </style>
       <div class="dot-caurosel container shadow" style="position:relative;">
         <div id="imagesLayer"></div>
         <div class="tabs" id="tabsLayer"></div>
         <button id="galleryFullscreenBtn" class="gallery-fullscreen" title="Open gallery">⤢</button>
+        <button id="prevBtn" class="gallery-control gallery-prev" aria-label="Previous">‹</button>
+        <button id="nextBtn" class="gallery-control gallery-next" aria-label="Next">›</button>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
@@ -1545,6 +1571,12 @@
           onClick(nextIndex);
         }
 
+        function prev() {
+          let prevIndex = opened - 1;
+          if (prevIndex < 0) prevIndex = images.length - 1;
+          onClick(prevIndex);
+        }
+
         // ------------------ INIT -----------------------------------------------
 
         createImages();
@@ -1582,8 +1614,11 @@
           carouselEl.addEventListener('mouseleave', () => startAutoplay());
         }
 
-        // Safe-guard next button listener (if present)
-        if (nextBtn) nextBtn.addEventListener('click', next);
+        // Safe-guard prev/next button listeners (if present)
+        const prevBtnEl = document.getElementById('prevBtn');
+        const nextBtnEl = document.getElementById('nextBtn');
+        if (prevBtnEl) prevBtnEl.addEventListener('click', prev);
+        if (nextBtnEl) nextBtnEl.addEventListener('click', next);
 
         // Start autoplay after initial open
         setTimeout(() => startAutoplay(), autoplayInterval);
