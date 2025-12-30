@@ -28,13 +28,17 @@
   align-items: center;
   gap: 1rem;
   transition: transform 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
   border-left: 6px solid rgba(226, 0, 26, 0.09);
 
 }
 
-.schedule .schedule-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(12, 20, 34, 0.12);
+/* Only apply hover lift on devices that actually support hover (avoid touch jump on mobile) */
+@media (hover: hover) and (pointer: fine) {
+  .schedule .schedule-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(12, 20, 34, 0.12);
+  }
 }
 
 .schedule .schedule-item time {
