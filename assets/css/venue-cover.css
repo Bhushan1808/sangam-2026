@@ -85,6 +85,33 @@
 }
 #venue-cover .vc-dots button.active { background: #fff; }
 
+/* Prev/Next buttons */
+#venue-cover .vc-prev,
+#venue-cover .vc-next {
+     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.45);
+    color: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    font-size: x-large;
+}
+#venue-cover .vc-prev { left: 12px; }
+#venue-cover .vc-next { right: 12px; }
+#venue-cover .vc-prev:hover, #venue-cover .vc-next:hover { background: rgba(0,0,0,0.55); }
+
+@media (max-width: 480px) {
+  #venue-cover .vc-prev, #venue-cover .vc-next { width: 36px; height: 36px; font-size: 18px; }
+}
+
 @media (max-width: 768px) {
   #venue-cover { height: 45vh; }
 }

@@ -81,35 +81,35 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
           }
         });
 
-    // More robust per-item ScrollTrigger approach:
-    // - Do not hide items on leave (avoids disappearing rows during fast scroll)
-    // - Animate each item on enter/enterBack with a simple gsap.to
-    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
-    const smallViewport = window.innerWidth < 768;
+    // // More robust per-item ScrollTrigger approach:
+    // // - Do not hide items on leave (avoids disappearing rows during fast scroll)
+    // // - Animate each item on enter/enterBack with a simple gsap.to
+    // const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+    // const smallViewport = window.innerWidth < 768;
 
-    const scheduleEls = gsap.utils.toArray('.schedule .schedule-item');
+    // const scheduleEls = gsap.utils.toArray('.schedule .schedule-item');
 
-    if (isTouch || smallViewport) {
-      // on touch/small screens, disable entrance animation to avoid layout issues
-      gsap.set(scheduleEls, { y: 0, autoAlpha: 1 });
-    } else {
-      // set initial hidden state
-      gsap.set(scheduleEls, { y: 24, autoAlpha: 0 });
+    // if (isTouch || smallViewport) {
+    //   // on touch/small screens, disable entrance animation to avoid layout issues
+    //   gsap.set(scheduleEls, { y: 0, autoAlpha: 1 });
+    // } else {
+    //   // set initial hidden state
+    //   gsap.set(scheduleEls, { y: 24, autoAlpha: 0 });
 
-      scheduleEls.forEach((el, i) => {
-        ScrollTrigger.create({
-          trigger: el,
-          start: 'top 92%',
-          onEnter: () => {
-            gsap.to(el, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' });
-          },
-          onEnterBack: () => {
-            gsap.to(el, { y: 0, autoAlpha: 1, duration: 0.5, ease: 'power2.out' });
-          }
-          // intentionally no onLeave/onLeaveBack so items are not hidden again
-        });
-      });
-    }
+    //   scheduleEls.forEach((el, i) => {
+    //     ScrollTrigger.create({
+    //       trigger: el,
+    //       start: 'top 92%',
+    //       onEnter: () => {
+    //         gsap.to(el, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' });
+    //       },
+    //       onEnterBack: () => {
+    //         gsap.to(el, { y: 0, autoAlpha: 1, duration: 0.5, ease: 'power2.out' });
+    //       }
+    //       // intentionally no onLeave/onLeaveBack so items are not hidden again
+    //     });
+    //   });
+    // }
 
     gsap.from('.team-section', {
       y: 30,

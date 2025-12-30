@@ -59,6 +59,21 @@
     dots.appendChild(btn);
   });
 
+  // Prev / Next controls
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'vc-prev';
+  prevBtn.setAttribute('aria-label', 'Previous slide');
+  prevBtn.innerHTML = '‹';
+  prevBtn.addEventListener('click', () => goto((current - 1 + slides.length) % slides.length));
+  cover.appendChild(prevBtn);
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'vc-next';
+  nextBtn.setAttribute('aria-label', 'Next slide');
+  nextBtn.innerHTML = '›';
+  nextBtn.addEventListener('click', () => goto((current + 1) % slides.length));
+  cover.appendChild(nextBtn);
+
   let current = 0;
   const t = gsap.timeline({ paused: true });
 
