@@ -81,48 +81,35 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
           }
         });
 
-    // Ensure schedule items start hidden (so animations always come from below)
-    gsap.set('.schedule .schedule-item', { y: 24, autoAlpha: 0 });
+    // More robust per-item ScrollTrigger approach:
+    // - Do not hide items on leave (avoids disappearing rows during fast scroll)
+    // - Animate each item on enter/enterBack with a simple gsap.to
+    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+    const smallViewport = window.innerWidth < 768;
 
-    // Animate schedule "rows" (.schedule-item) as they enter the viewport.
-    // Add `onEnterBack` and explicitly set the from-state to avoid layout-shift
-    // cases where the element is partially visible and the animation appears
-    // to originate from the middle.
-    ScrollTrigger.batch('.schedule .schedule-item', {
-      interval: 0.1, // time window (in seconds) for batching
-      batchMax: 8,   // maximum elements to batch at once
-      // make the trigger happen a little lower in the viewport so items
-      // are fully off-screen before they animate in (helps with fixed header overlap)
-      start: 'top 92%',
-      end: 'bottom 12%',
-      onEnter: batch => {
-        // force consistent start state then animate up
-        gsap.fromTo(batch, { y: 24, autoAlpha: 0 }, {
-          y: 0,
-          autoAlpha: 1,
-          duration: 0.7,
-          ease: 'power2.out',
-          stagger: 0.06,
-          overwrite: true
+    const scheduleEls = gsap.utils.toArray('.schedule .schedule-item');
+
+    if (isTouch || smallViewport) {
+      // on touch/small screens, disable entrance animation to avoid layout issues
+      gsap.set(scheduleEls, { y: 0, autoAlpha: 1 });
+    } else {
+      // set initial hidden state
+      gsap.set(scheduleEls, { y: 24, autoAlpha: 0 });
+
+      scheduleEls.forEach((el, i) => {
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 92%',
+          onEnter: () => {
+            gsap.to(el, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power2.out' });
+          },
+          onEnterBack: () => {
+            gsap.to(el, { y: 0, autoAlpha: 1, duration: 0.5, ease: 'power2.out' });
+          }
+          // intentionally no onLeave/onLeaveBack so items are not hidden again
         });
-      },
-      onEnterBack: batch => {
-        // when scrolling back up, animate in the same upward direction
-        gsap.fromTo(batch, { y: 24, autoAlpha: 0 }, {
-          y: 0,
-          autoAlpha: 1,
-          duration: 0.6,
-          ease: 'power2.out',
-          stagger: 0.04,
-          overwrite: true
-        });
-      },
-      // ensure items are reset when they leave the viewport (below)
-      onLeave: batch => {
-        gsap.set(batch, { y: 24, autoAlpha: 0, overwrite: true });
-      },
-      onLeaveBack: batch => gsap.to(batch, { y: 24, autoAlpha: 0, duration: 0.5, stagger: 0.03 }),
-    });
+      });
+    }
 
     gsap.from('.team-section', {
       y: 30,
