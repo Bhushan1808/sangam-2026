@@ -2252,19 +2252,19 @@
 
 
     // Refresh ScrollTrigger after schedule images load to avoid layout glitches
-    (function refreshAfterScheduleImages(){
-      try {
-        const imgs = document.querySelectorAll('#schedule img');
-        if (!imgs || imgs.length === 0) return ScrollTrigger.refresh();
-        let done = 0;
-        function check(){ if (++done >= imgs.length) ScrollTrigger.refresh(); }
-        imgs.forEach(img => {
-          if (img.complete) check();
-          else { img.addEventListener('load', check); img.addEventListener('error', check); }
-        });
-      } catch (e) { ScrollTrigger.refresh(); }
-    })();
-    ScrollTrigger.refresh();
+    // (function refreshAfterScheduleImages(){
+    //   try {
+    //     const imgs = document.querySelectorAll('#schedule img');
+    //     if (!imgs || imgs.length === 0) return ScrollTrigger.refresh();
+    //     let done = 0;
+    //     function check(){ if (++done >= imgs.length) ScrollTrigger.refresh(); }
+    //     imgs.forEach(img => {
+    //       if (img.complete) check();
+    //       else { img.addEventListener('load', check); img.addEventListener('error', check); }
+    //     });
+    //   } catch (e) { ScrollTrigger.refresh(); }
+    // })();
+    // ScrollTrigger.refresh();
   </script>
   <!-- Internal lightweight gallery modal (safe, non-destructive) -->
   <style>

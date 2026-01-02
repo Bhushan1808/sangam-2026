@@ -1,4 +1,4 @@
-//  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 //   //  // Welcome text gentle rise & fade (parallax feel)
 //   //  gsap.from(".intro .title", {
 //   //    y: 200, opacity:0, duration:1.2, ease:"power3.out",
