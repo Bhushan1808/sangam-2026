@@ -27,7 +27,6 @@ function updateTimer() {
 
   if (time.time <= 0) {
     clearInterval(countdownTicRef);
-    document.getElementById("countdown").style.display = "none";
     handleResize();
     window.addEventListener("resize", handleResize);
     return;
@@ -82,7 +81,7 @@ function updateDigitWithFlip(id, newValue) {
 function handleResize() {
   const countdownElement = document.getElementById("hero");
   if (window.matchMedia("(max-width: 768px)").matches) {
-    countdownElement.style.minHeight = "60vh";
+    countdownElement.style.minHeight = "100vh";
   } else {
     countdownElement.style.minHeight = "100vh";
   }
